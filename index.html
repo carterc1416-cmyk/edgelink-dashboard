@@ -237,7 +237,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
   <button class="tab-btn" onclick="switchTab('coaches',this)">🎯 COACHES</button>
   <button class="tab-btn" onclick="switchTab('managers',this)">📋 MANAGERS</button>
   <button class="tab-btn" onclick="switchTab('actuals',this)" id="tab-btn-actuals">📈 ACTUALS TRACKER</button>
-  <button class="tab-btn" onclick="switchTab('airtable',this)" style="color:#00e676;border-bottom:2px solid transparent">🔴 LIVE DATA</button>
+  <button class="tab-btn" onclick="switchTab('airtable',this)" style="color:#00e676">🔴 LIVE DATA</button>
 </nav>
 
 <!-- ═══════════════ TAB 1: SCORECARD ═══════════════ -->
@@ -435,73 +435,40 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
   </div>
 </div>
 
-<!-- ═══════════════ AIRTABLE LIVE CONNECT ═══════════════ -->
+<!-- AIRTABLE LIVE DATA TAB -->
 <div class="tab-panel" id="tab-airtable">
-  <div class="sl mb">AIRTABLE LIVE CONNECTION &mdash; REAL-TIME DATA FROM MANAGER CHECK-INS</div>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-bottom:20px">
-    <div style="background:var(--gd);border:1px solid var(--gb);border-radius:8px;padding:16px 20px">
-      <div style="font-family:'Bebas Neue';font-size:14px;letter-spacing:2px;color:var(--green);margin-bottom:8px">HOW IT WORKS</div>
-      <div style="font-size:12px;line-height:1.9;color:var(--t)">
-        Managers submit an <strong>Airtable Form</strong> at 1PM, 4PM, and 7PM each day.<br>
-        Data lands in your Airtable base instantly.<br>
-        Hit <strong>LOAD LIVE DATA</strong> below — this dashboard reads it and updates every KPI, every store, every call script.
+  <div class="sl mb">AIRTABLE LIVE CONNECTION</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;max-width:900px">
+    <div style="background:var(--s);border:1px solid var(--b2);border-radius:8px;padding:18px">
+      <div style="font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:var(--gold);margin-bottom:10px">PASTE YOUR CREDENTIALS</div>
+      <div style="font-size:11px;color:var(--td);margin-bottom:10px">API Token (from airtable.com/create/tokens):</div>
+      <input type="text" id="at-key-input" placeholder="patXXXXXXXXXXXXXX..." style="width:100%;background:var(--bg3);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;color:var(--t);font-family:'Space Mono';font-size:11px;margin-bottom:8px;">
+      <div style="font-size:11px;color:var(--td);margin-bottom:6px">Base ID (from your Airtable URL: airtable.com/appXXXXXX/...):</div>
+      <input type="text" id="at-base-input" placeholder="appXXXXXXXXXXXXXX" style="width:100%;background:var(--bg3);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;color:var(--t);font-family:'Space Mono';font-size:11px;margin-bottom:8px;">
+      <div style="font-size:11px;color:var(--td);margin-bottom:6px">Table name:</div>
+      <input type="text" id="at-table-input" value="Submissions" style="width:100%;background:var(--bg3);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;color:var(--t);font-family:'Space Mono';font-size:11px;margin-bottom:12px;">
+      <div style="display:flex;gap:8px">
+        <button onclick="saveATConfig()" style="background:var(--mg);border:none;border-radius:6px;color:#fff;font-family:'Bebas Neue';font-size:12px;letter-spacing:2px;padding:9px 20px;cursor:pointer;">SAVE & CONNECT</button>
+        <button onclick="loadATData()" style="background:var(--gd);border:1px solid var(--gb);border-radius:6px;color:var(--green);font-family:'Bebas Neue';font-size:12px;letter-spacing:2px;padding:9px 20px;cursor:pointer;">&#8635; LOAD LIVE DATA</button>
       </div>
+      <div id="at-err" style="font-size:11px;color:#FF8A80;margin-top:8px;font-family:'Space Mono'"></div>
     </div>
-    <div style="background:var(--s);border:1px solid var(--b2);border-radius:8px;padding:16px 20px">
-      <div style="font-family:'Bebas Neue';font-size:14px;letter-spacing:2px;color:var(--gold);margin-bottom:8px">CONNECTION STATUS</div>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+    <div style="background:var(--s);border:1px solid var(--b2);border-radius:8px;padding:18px">
+      <div style="font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:var(--gold);margin-bottom:10px">CONNECTION STATUS</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
         <div id="at-dot" style="width:10px;height:10px;border-radius:50%;background:var(--tm);flex-shrink:0"></div>
         <div id="at-status" style="font-size:12px;color:var(--td)">Not connected</div>
       </div>
       <div id="at-last" style="font-size:10px;color:var(--tm);font-family:'Space Mono'">—</div>
-    </div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
-    <div style="background:var(--s);border:1px solid var(--b2);border-radius:8px;padding:16px 20px">
-      <div style="font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:var(--gold);margin-bottom:10px">STEP 1 &mdash; YOUR AIRTABLE CREDENTIALS</div>
-      <div style="font-size:11px;color:var(--td);margin-bottom:8px;line-height:1.8">
-        Go to <strong style="color:var(--t)">airtable.com/account</strong> → Developer Hub → Personal access tokens → Create token (scope: data.records:read)
-      </div>
-      <input type="text" id="at-key-input" placeholder="patXXXXXXXXXXXXXX (API Token)"
-        style="width:100%;background:var(--bg3);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;color:var(--t);font-family:'Space Mono';font-size:11px;margin-bottom:6px;">
-      <input type="text" id="at-base-input" placeholder="appXXXXXXXXXXXXXX (Base ID from URL)"
-        style="width:100%;background:var(--bg3);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;color:var(--t);font-family:'Space Mono';font-size:11px;margin-bottom:6px;">
-      <input type="text" id="at-table-input" placeholder="Table name (default: Submissions)" value="Submissions"
-        style="width:100%;background:var(--bg3);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;color:var(--t);font-family:'Space Mono';font-size:11px;">
-    </div>
-    <div style="background:var(--s);border:1px solid var(--b2);border-radius:8px;padding:16px 20px">
-      <div style="font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:var(--gold);margin-bottom:10px">STEP 2 &mdash; AIRTABLE TABLE FIELDS</div>
-      <div style="font-size:11px;color:var(--td);line-height:2">
-        Create a table called <strong style="color:var(--t)">Submissions</strong> with these fields:<br>
-        <span style="color:var(--cyan)">Store</span> — Single line text<br>
-        <span style="color:var(--cyan)">CheckIn</span> — Single select (1PM Check-In / 4PM Check-In / 7PM Close)<br>
-        <span style="color:var(--cyan)">Date</span> — Date<br>
-        <span style="color:var(--cyan)">Voice, BTS, HSI, Reacts, Upgrades, ACC, Magenta</span> — Number<br>
-        <span style="color:var(--cyan)">Boxes</span> — Formula: <code style="background:var(--bg3);padding:1px 4px;border-radius:3px">{Voice}+{BTS}+{Upgrades}</code>
+      <div style="margin-top:14px;font-size:11px;color:var(--td);line-height:1.9">
+        <strong style="color:var(--t)">How it works:</strong><br>
+        1. Reps submit the Airtable form at 1PM, 4PM, 7PM<br>
+        2. Data lands in your Airtable base instantly<br>
+        3. Hit LOAD LIVE DATA — all KPIs update<br>
+        4. Scorecard, All Stores, Call Scripts all reflect live numbers
       </div>
     </div>
   </div>
-
-  <div style="background:var(--s);border:1px solid var(--b2);border-radius:8px;padding:16px 20px;margin-bottom:20px">
-    <div style="font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:var(--gold);margin-bottom:10px">STEP 3 &mdash; MANAGER FORM</div>
-    <div style="font-size:12px;color:var(--td);line-height:1.9">
-      In Airtable → your Submissions table → click <strong style="color:var(--t)">Forms</strong> → <strong style="color:var(--t)">Create a form</strong> → name it <strong style="color:var(--t)">Edge Link — Daily Check-In</strong><br>
-      Add all fields. Set Store as a dropdown with all 34 store names. Set CheckIn with three options: 1PM Check-In, 4PM Check-In, 7PM Close.<br>
-      Click <strong style="color:var(--t)">Share form</strong> → copy the link → send to all 34 managers. They fill it out at 1PM, 4PM, 7PM. Done in 60 seconds.
-    </div>
-  </div>
-
-  <div style="display:flex;gap:10px">
-    <button onclick="saveAirtableConfig()" style="background:var(--mg);border:none;border-radius:8px;color:#fff;font-family:'Bebas Neue';font-size:14px;letter-spacing:3px;padding:12px 28px;cursor:pointer;">
-      SAVE &amp; CONNECT
-    </button>
-    <button onclick="loadAirtableData()" style="background:var(--gd);border:1px solid var(--gb);border-radius:8px;color:var(--green);font-family:'Bebas Neue';font-size:14px;letter-spacing:3px;padding:12px 28px;cursor:pointer;">
-      &#8635; LOAD LIVE DATA
-    </button>
-  </div>
-  <div id="at-error" style="margin-top:10px;font-size:11px;color:#FF8A80;font-family:'Space Mono'"></div>
 </div>
 
 <div class="footer">EDGE LINK INC · APRIL 2026 · BUILT MARCH 30, 2026 · CONFIDENTIAL — JIM LANE</div>
@@ -983,103 +950,77 @@ function renderStaff(){
 
 renderStaff();
 
-// ─── AIRTABLE LIVE CONNECTION ───
-function getAirtableCfg(){
-  return{
-    key: localStorage.getItem('at_key')||'',
-    base: localStorage.getItem('at_base')||'',
-    table: localStorage.getItem('at_table')||'Submissions'
-  };
+// ─── AIRTABLE LIVE DATA ───────────────────────────────
+function getATCfg(){return{key:localStorage.getItem('at_key')||'',base:localStorage.getItem('at_base')||'',table:localStorage.getItem('at_table')||'Submissions'};}
+
+function saveATConfig(){
+  const key=document.getElementById('at-key-input')?.value?.trim();
+  const base=document.getElementById('at-base-input')?.value?.trim();
+  const table=document.getElementById('at-table-input')?.value?.trim()||'Submissions';
+  if(!key||!base){document.getElementById('at-err').textContent='Fill in both API Token and Base ID.';return;}
+  localStorage.setItem('at_key',key);localStorage.setItem('at_base',base);localStorage.setItem('at_table',table);
+  document.getElementById('at-err').textContent='Saved! Loading...';
+  loadATData();
 }
 
-function saveAirtableConfig(){
-  const key = document.getElementById('at-key-input')?.value?.trim();
-  const base = document.getElementById('at-base-input')?.value?.trim();
-  const table = document.getElementById('at-table-input')?.value?.trim()||'Submissions';
-  if(!key||!base){ document.getElementById('at-error').textContent='Please fill in both API Token and Base ID.'; return; }
-  localStorage.setItem('at_key', key);
-  localStorage.setItem('at_base', base);
-  localStorage.setItem('at_table', table);
-  document.getElementById('at-error').textContent='';
-  loadAirtableData();
-}
-
-async function loadAirtableData(){
-  const cfg = getAirtableCfg();
-  if(!cfg.key||!cfg.base){
-    document.getElementById('at-status').textContent='Not configured — fill in credentials above';
-    return;
-  }
-  setAtStatus(false,'Loading from Airtable...');
+async function loadATData(){
+  const cfg=getATCfg();
+  if(!cfg.key||!cfg.base){document.getElementById('at-status').textContent='Enter credentials above first.';return;}
+  const dot=document.getElementById('at-dot');const st=document.getElementById('at-status');
+  if(dot)dot.style.background='var(--yellow)';if(st){st.textContent='Loading...';st.style.color='var(--yellow)';}
   try{
-    const today = new Date().toISOString().split('T')[0];
-    const url = `https://api.airtable.com/v0/${cfg.base}/${encodeURIComponent(cfg.table)}?maxRecords=100`;
-    const resp = await fetch(url,{headers:{Authorization:`Bearer ${cfg.key}`}});
-    if(!resp.ok){ const e=await resp.json(); throw new Error(e.error?.message||'HTTP '+resp.status); }
-    const data = await resp.json();
-
-    // Parse records into actuals tracker format
-    const storeData = {};
+    const url=`https://api.airtable.com/v0/${cfg.base}/${encodeURIComponent(cfg.table)}?maxRecords=500`;
+    const resp=await fetch(url,{headers:{Authorization:`Bearer ${cfg.key}`}});
+    if(!resp.ok){const e=await resp.json();throw new Error(e.error?.message||'HTTP '+resp.status);}
+    const data=await resp.json();
+    
+    const storeMap={};
     data.records.forEach(rec=>{
-      const f = rec.fields;
-      const store = f.Store||'';
-      if(!store) return;
-      const ci = (f.CheckIn||'7pm').toLowerCase();
-      const isLatest = ci.includes('7')||(!storeData[store]);
-      const voice=f.Voice||0, bts=f.BTS||0, upg=f.Upgrades||0;
-      const entry = {
-        voice, bts, hsi:f.HSI||0, reacts:f.Reacts||0,
-        upgrades:upg, acc:f.ACC||0, magenta:f.Magenta||0,
-        boxes:f.Boxes||(voice+bts+upg), checkin:ci
-      };
-      if(!storeData[store]) storeData[store] = {};
-      if(ci.includes('1')) storeData[store].pm1 = entry;
-      else if(ci.includes('4')) storeData[store].pm4 = entry;
-      else storeData[store].pm7 = entry;
-      storeData[store].latest = storeData[store].pm7||storeData[store].pm4||storeData[store].pm1;
+      const f=rec.fields;
+      const store=(f.Store||'').trim();
+      if(!store)return;
+      const ci=(f.CheckIn||'').toLowerCase();
+      const key=ci.includes('1')?'pm1':ci.includes('4')?'pm4':'pm7';
+      const voice=Number(f.Voice)||0,bts=Number(f.BTS)||0,upg=Number(f.Upgrades)||0;
+      const acc=Number(f.ACC||f.Acc||f['Accessory Revenue $']||f['Accessory Revenue'])||0;
+      const hsi=Number(f.HSI)||0,reacts=Number(f.Reacts)||0,magenta=Number(f.Magenta)||0;
+      const boxes=voice+bts+upg;
+      if(!storeMap[store])storeMap[store]={};
+      if(!storeMap[store][key])storeMap[store][key]={voice,bts,hsi,reacts,upgrades:upg,acc,magenta,boxes};
+      storeMap[store].latest=storeMap[store].pm7||storeMap[store].pm4||storeMap[store].pm1||null;
     });
 
-    // Push into actuals tracker localStorage so existing tabs update
-    const dayNum = new Date().getDate();
-    Object.entries(storeData).forEach(([storeName, data])=>{
-      const latest = data.latest||{};
-      const lk = 'el_actuals_'+dayNum+'_'+storeName;
-      localStorage.setItem(lk, JSON.stringify({
-        voice:latest.voice||0, bts:latest.bts||0, hsi:latest.hsi||0,
-        reacts:latest.reacts||0, upgrades:latest.upgrades||0,
-        acc:latest.acc||0, magenta:latest.magenta||0
+    // Inject into actuals tracker (current day)
+    const dayNum=new Date().getDate();
+    Object.entries(storeMap).forEach(([storeName,sdata])=>{
+      const latest=sdata.latest||{};
+      localStorage.setItem('el_actuals_'+dayNum+'_'+storeName,JSON.stringify({
+        voice:latest.voice||0,bts:latest.bts||0,hsi:latest.hsi||0,
+        reacts:latest.reacts||0,upgrades:latest.upgrades||0,
+        acc:latest.acc||0,magenta:latest.magenta||0
       }));
     });
 
-    const count = Object.keys(storeData).length;
-    setAtStatus(true, `Live — ${count} stores loaded · ${new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})}`);
-    document.getElementById('at-last').textContent = 'Last sync: '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-    document.getElementById('at-error').textContent='';
-
-    // Switch to actuals tracker and refresh
-    if(typeof selectDay === 'function') selectDay(new Date().getDate());
-    if(typeof updateMTD === 'function') updateMTD();
-
-    // Show success
-    const btn = document.querySelector('[onclick="loadAirtableData()"]');
-    if(btn){ const orig=btn.textContent; btn.textContent='✅ '+count+' STORES LOADED'; setTimeout(()=>btn.textContent=orig,3000); }
-
+    const count=Object.keys(storeMap).length;
+    if(dot)dot.style.background='var(--green)';
+    if(st){st.textContent=`Live — ${count} stores loaded · ${new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})}`;st.style.color='var(--green)';}
+    const last=document.getElementById('at-last');if(last)last.textContent='Last sync: '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    document.getElementById('at-err').textContent='';
+    
+    // Refresh actuals tracker if open
+    if(typeof selectDay==='function')selectDay(new Date().getDate());
+    if(typeof updateMTD==='function')updateMTD();
+    
   }catch(err){
-    setAtStatus(false,'Load failed: '+err.message);
-    document.getElementById('at-error').textContent='Error: '+err.message+' — Check your API token and Base ID.';
+    if(dot)dot.style.background='var(--red)';
+    if(st){st.textContent='Load failed: '+err.message;st.style.color='#FF8A80';}
+    const errEl=document.getElementById('at-err');if(errEl)errEl.textContent='Error: '+err.message;
   }
 }
 
-function setAtStatus(live, txt){
-  const dot = document.getElementById('at-dot');
-  const status = document.getElementById('at-status');
-  if(dot) dot.style.background = live ? 'var(--green)' : '#FF8A80';
-  if(status){ status.textContent = txt; status.style.color = live ? 'var(--green)' : '#FF8A80'; }
-}
-
-// Auto-populate inputs if already saved
-const atCfg = getAirtableCfg();
-if(atCfg.key){ 
+// Auto-fill saved credentials
+const atCfg=getATCfg();
+if(atCfg.key){
   const ki=document.getElementById('at-key-input');if(ki)ki.value=atCfg.key;
   const bi=document.getElementById('at-base-input');if(bi)bi.value=atCfg.base;
   const ti=document.getElementById('at-table-input');if(ti)ti.value=atCfg.table;
