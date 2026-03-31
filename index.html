@@ -1013,7 +1013,7 @@ async function loadAirtableData(){
   setAtStatus(false,'Loading from Airtable...');
   try{
     const today = new Date().toISOString().split('T')[0];
-    const url = `https://api.airtable.com/v0/${cfg.base}/${encodeURIComponent(cfg.table)}?filterByFormula=IS_SAME({Date},'${today}','day')&pageSize=200`;
+    const url = `https://api.airtable.com/v0/${cfg.base}/${encodeURIComponent(cfg.table)}?maxRecords=100`;
     const resp = await fetch(url,{headers:{Authorization:`Bearer ${cfg.key}`}});
     if(!resp.ok){ const e=await resp.json(); throw new Error(e.error?.message||'HTTP '+resp.status); }
     const data = await resp.json();
