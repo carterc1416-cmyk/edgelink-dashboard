@@ -158,7 +158,7 @@ tfoot td{font-weight:600;font-size:11px;padding:9px 10px;}
   </div>
   <div class="nav-tabs">
     <div class="ntab active" onclick="showTab('scorecard',this)">SCORECARD</div>
-    <div class="ntab" onclick="showTab('checkins',this)">1PM · 3PM · 7PM</div>
+    <div class="ntab" onclick="showTab('checkins',this)">1PM · 4PM · 7PM</div>
     <div class="ntab" onclick="showTab('stores',this)">ALL STORES</div>
     <div class="ntab" onclick="showTab('coaches',this)">COACHES</div>
     <div class="ntab" onclick="showTab('calls',this)">CALL SCRIPTS</div>
@@ -190,16 +190,16 @@ tfoot td{font-weight:600;font-size:11px;padding:9px 10px;}
 
 <!-- CHECK-INS -->
 <div class="panel" id="panel-checkins">
-  <div class="shdr">CHECK-IN TRACKER &mdash; 1PM · 3PM · 7PM</div>
+  <div class="shdr">CHECK-IN TRACKER &mdash; 1PM · 4PM · 7PM</div>
   <div class="timeline" id="timeline">
     <div class="tl-slot" id="tl-1pm">
       <div class="tl-label">1PM CHECK-IN</div>
       <div class="tl-time" id="tl-1pm-v" style="color:var(--td)">0</div>
       <div class="tl-count">stores submitted</div>
     </div>
-    <div class="tl-slot" id="tl-3pm">
-      <div class="tl-label">3PM CHECK-IN</div>
-      <div class="tl-time" id="tl-3pm-v" style="color:var(--td)">0</div>
+    <div class="tl-slot" id="tl-4pm">
+      <div class="tl-label">4PM CHECK-IN</div>
+      <div class="tl-time" id="tl-4pm-v" style="color:var(--td)">0</div>
       <div class="tl-count">stores submitted</div>
     </div>
     <div class="tl-slot" id="tl-7pm">
@@ -258,7 +258,7 @@ tfoot td{font-weight:600;font-size:11px;padding:9px 10px;}
         Go to <strong>forms.microsoft.com</strong> &rarr; New Form &rarr; name it <strong>Edge Link — Daily Store Report</strong><br><br>
         Add these fields in order:<br>
         1. <strong>Store Name</strong> (Dropdown — all 34 stores)<br>
-        2. <strong>Check-In Time</strong> (Choice: 1PM Check-In / 3PM Check-In / 7PM Close)<br>
+        2. <strong>Check-In Time</strong> (Choice: 1PM Check-In / 4PM Check-In / 7PM Close)<br>
         3. <strong>New Voice</strong> (Number)<br>
         4. <strong>BTS Tablets</strong> (Number)<br>
         5. <strong>HSI / HINT</strong> (Number)<br>
@@ -296,7 +296,7 @@ tfoot td{font-weight:600;font-size:11px;padding:9px 10px;}
       <div class="step-title" style="color:var(--green)">HOW IT ALL CONNECTS</div>
       <div class="step-body" style="color:var(--t)">
         Manager submits form &rarr; Power Automate writes to ACTUALS sheet &rarr; You hit REFRESH on this dashboard &rarr; Dashboard reads latest ACTUALS &rarr; All KPIs, check-ins, call scripts update instantly.<br><br>
-        <strong>Manager experience:</strong> Open form link on phone. Fill 7 numbers. Hit Submit. Done in 60 seconds. They do this at 1PM, 3PM, and 7PM every day.
+        <strong>Manager experience:</strong> Open form link on phone. Fill 7 numbers. Hit Submit. Done in 60 seconds. They do this at 1PM, 4PM, and 7PM every day.
       </div>
     </div>
   </div>
@@ -375,7 +375,7 @@ async function loadData(){
         }
         
         const ci = (row['CheckIn'] || row['checkin'] || row['Check-In Time'] || '').toLowerCase();
-        const key = ci.includes('1') ? 'pm1' : ci.includes('3') ? 'pm3' : ci.includes('7') ? 'pm7' : 'pm7';
+        const key = ci.includes('1') ? 'pm1' : ci.includes('4') ? 'pm3' : ci.includes('7') ? 'pm7' : 'pm7';
         
         const v  = n=>typeof n==='number'?n:parseInt(n)||0;
         const voice = v(row['Voice']||row['voice']||row['New Voice']);
@@ -463,7 +463,7 @@ function renderKPIs(){
     {l:'BTS TODAY',v:totBts||'—',c:'var(--green)',s:`Monthly target: ${TOTAL_BTS.toLocaleString()}`,bar:'var(--green)'},
     {l:'MIMS TODAY',v:totMag||'—',c:'var(--pink)',s:`Magenta in Metro · Monthly: ${TOTAL_MAG.toLocaleString()}`,bar:'var(--pink)'},
     {l:'HSI TODAY',v:totHsi||'—',c:'var(--cyan)',s:`Monthly target: ${TOTAL_HSI.toLocaleString()}`,bar:'var(--cyan)'},
-    {l:'CHECK-INS TODAY',v:`${c7} closed`,c:c7>=28?'var(--green)':c7>=20?'var(--yellow)':'var(--td)',s:`1PM: ${c1} · 3PM: ${c3} · 7PM: ${c7}`,bar:'var(--green)'},
+    {l:'CHECK-INS TODAY',v:`${c7} closed`,c:c7>=28?'var(--green)':c7>=20?'var(--yellow)':'var(--td)',s:`1PM: ${c1} · 4PM: ${c3} · 7PM: ${c7}`,bar:'var(--green)'},
   ];
   document.getElementById('kgrid').innerHTML=kpis.map(k=>`
     <div class="kcard">
@@ -501,10 +501,10 @@ function renderCheckins(){
   const c7=STORES.filter(s=>actuals[s.name]?.pm7).length;
   const none=34-Math.max(c1,c3,c7);
   document.getElementById('tl-1pm-v').textContent=c1;
-  document.getElementById('tl-3pm-v').textContent=c3;
+  document.getElementById('tl-4pm-v').textContent=c3;
   document.getElementById('tl-7pm-v').textContent=c7;
   document.getElementById('tl-none-v').textContent=Math.max(0,34-c1);
-  ['tl-1pm-v','tl-3pm-v','tl-7pm-v'].forEach((id,i)=>{
+  ['tl-1pm-v','tl-4pm-v','tl-7pm-v'].forEach((id,i)=>{
     const vals=[c1,c3,c7];
     const el=document.getElementById(id);
     el.style.color=vals[i]>=30?'var(--green)':vals[i]>=20?'var(--yellow)':vals[i]>0?'var(--mg)':'var(--td)';
@@ -550,7 +550,7 @@ function renderCheckins(){
         </div>
       </div>
       <div class="ci-times">
-        ${slot(a1,'1PM')}${slot(a3,'3PM')}${slot(a7,'7PM')}
+        ${slot(a1,'1PM')}${slot(a3,'4PM')}${slot(a7,'7PM')}
       </div>
     </div>`;
   }).join('');
@@ -566,7 +566,7 @@ function renderStores(){
     {l:'STORE',k:'name',c:'var(--t)'},{l:'BOXES',k:'boxes',c:'var(--mg)'},{l:'PACE',k:'pace',c:'var(--yellow)'},
     {l:'GAP',k:'gap',c:'var(--red)'},{l:'ACC $',k:'acc',c:'var(--gold)'},{l:'UPGRADES',k:'upgrades',c:'var(--purple)'},
     {l:'BTS',k:'bts',c:'var(--green)'},{l:'HSI',k:'hsi',c:'var(--cyan)'},{l:'MIMS',k:'magenta',c:'var(--pink)'},
-    {l:'1PM',k:'pm1',c:'var(--td)'},{l:'3PM',k:'pm3',c:'var(--td)'},{l:'STATUS',k:'status',c:'var(--t)'},
+    {l:'1PM',k:'pm1',c:'var(--td)'},{l:'4PM',k:'pm3',c:'var(--td)'},{l:'STATUS',k:'status',c:'var(--t)'},
   ];
   document.getElementById('store-thead').innerHTML=hdrs.map(h=>`
     <th onclick="sortBy('${h.k}')" style="color:${sortCol===h.k?'var(--mg)':h.c}">${h.l}${sortCol===h.k?(sortDir>0?' &#8593;':' &#8595;'):''}</th>`).join('');
@@ -651,7 +651,7 @@ function renderCoaches(){
         <div class="cavatar" style="background:${coach.color}20;border:2px solid ${coach.color};color:${coach.color}">${ini}</div>
         <div>
           <div class="cname" style="color:${coach.color}">${coach.name}</div>
-          <div class="csub">${coach.stores.length} stores · 1PM:${c1} 3PM:${c3} 7PM:${c7}</div>
+          <div class="csub">${coach.stores.length} stores · 1PM:${c1} 4PM:${c3} 7PM:${c7}</div>
         </div>
         <div style="margin-left:auto;text-align:right">
           <div style="font-family:'Bebas Neue';font-size:22px;color:${pc}">${tb||'—'}</div>
@@ -686,13 +686,13 @@ function renderCalls(){
   const morning=tb===0?[
     `Good morning. Today is Day ${new Date().getDate()} of 30.`,
     `Network daily target: <strong>${Math.ceil(TOTAL_DAILY)} boxes.</strong>`,
-    `<strong>1PM check-in is mandatory.</strong> Every manager submits their numbers at 1, 3, and 7. No exceptions.`,
+    `<strong>1PM check-in is mandatory.</strong> Every manager submits their numbers at 1, 4, and 7. No exceptions.`,
     `Today's focus: Voice + BTS + Upgrades + MIMS on every transaction.`,
     `1PM check-ins received so far: <strong>${c1t} of 34.</strong>`
   ]:[
     `Morning. Network running at ${ps}.`,
     `<strong>${tb} boxes</strong> entered. Daily target: ${Math.ceil(TOTAL_DAILY)}.`,
-    `1PM: ${c1t} stores · 3PM: ${c3t} stores · 7PM: ${c7t} stores submitted.`,
+    `1PM: ${c1t} stores · 4PM: ${c3t} stores · 7PM: ${c7t} stores submitted.`,
     onPace.length?`Leading: <span class="ok">${onPace.slice(0,3).join(', ')}${onPace.length>3?' +'+(onPace.length-3)+' more':''}</span>.`:`No stores at pace yet.`,
     `Non-negotiable today: full solution every transaction.`
   ];
@@ -708,7 +708,7 @@ function renderCalls(){
     tm>0?`MIMS: <strong style="color:var(--pink)">${tm}</strong> today.`:`<span class="danger">0 MIMS — Magenta in Metro needs attention.</span>`,
     ta>0?`Acc $: <strong style="color:var(--gold)">$${ta.toLocaleString()}</strong>.`:`<span class="danger">No accessories entered.</span>`,
     behind.length?`<span class="danger">Behind: ${behind.slice(0,3).join(', ')}${behind.length>3?' +'+(behind.length-3)+' more':''}. Call them now.</span>`:``,
-    `3PM check-in due. Every manager submits again at 3.`
+    `4PM check-in due. Every manager submits again at 4.`
   ].filter(Boolean);
 
   const close=tb===0?[
@@ -726,7 +726,7 @@ function renderCalls(){
 
   document.getElementById('callgrid').innerHTML=[
     {t:'1PM MORNING CALL',cls:'g',color:'var(--green)',lines:morning},
-    {t:'3PM HALFTIME',cls:'y',color:'var(--yellow)',lines:halftime},
+    {t:'4PM HALFTIME',cls:'y',color:'var(--yellow)',lines:halftime},
     {t:'7PM CLOSE',cls:'',color:'var(--mg)',lines:close},
   ].map(c=>`
     <div class="callcard ${c.cls}">
