@@ -997,7 +997,539 @@ function applyRaw(){
 applyRaw();
 
 // ─── STAFFING TAB ───
-const SCHEDULE = [{"label":"AR-COLONEL GLENN","code":"EL70857034","employees":[{"name":"Brenda Serna","shifts":{"Mon 3/30":"09:30 AM-07:00 PM","Tue 3/31":"09:30 AM-07:00 PM","Wed 4/1":"09:30 AM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"09:30 AM-07:00 PM","Sat 4/4":"09:30 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Kevin Martinez","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"09:30 AM-07:00 PM","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":1},{"name":"Jasmine Griffin","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"10:45 AM-05:00 PM"},"daysWorking":1}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"AR-RADIO GEYER","code":"EL70857035","employees":[{"name":"Brenda Serna","shifts":{"Mon 3/30":"11:00 AM-07:00 PM","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":1},{"name":"Karmina Mendoza","shifts":{"Mon 3/30":"OFF","Tue 3/31":"09:30 AM-02:30 PM","Wed 4/1":"09:30 AM-07:00 PM","Thu 4/2":"09:30 AM-07:00 PM","Fri 4/3":"09:30 AM-07:00 PM","Sat 4/4":"09:30 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Kevin Martinez","shifts":{"Mon 3/30":"09:30 AM-03:00 PM","Tue 3/31":"09:30 AM-07:00 PM","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"10:00 AM-07:00 PM","Sat 4/4":"09:30 AM-07:00 PM","Sun 4/5":"10:45 AM-05:00 PM"},"daysWorking":5},{"name":"Jasmine Griffin","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"09:30 AM-02:00 PM","Thu 4/2":"09:30 AM-06:00 PM","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":2}],"totalReps":4,"activeThisWeek":4,"repsForApril1":3},{"label":"MA-HOLYOKE","code":"EL70857036","employees":[{"name":"Carlos Davila","shifts":{"Mon 3/30":"11:00 AM-08:00 PM","Tue 3/31":"10:00 AM-07:00 PM","Wed 4/1":"11:00 AM-08:00 PM","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"11:00 AM-09:00 PM","Sun 4/5":"11:00 AM-06:00 PM"},"daysWorking":5},{"name":"Hector Torres","shifts":{"Mon 3/30":"OFF","Tue 3/31":"11:00 AM-08:00 PM","Wed 4/1":"10:00 AM-07:00 PM","Thu 4/2":"11:00 AM-08:00 PM","Fri 4/3":"10:00 AM-08:00 PM","Sat 4/4":"03:00 PM-08:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Armando Perez","shifts":{"Mon 3/30":"10:00 AM-07:00 PM","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"10:00 AM-07:00 PM","Fri 4/3":"11:00 AM-09:00 PM","Sat 4/4":"10:00 AM-05:00 PM","Sun 4/5":"11:00 AM-06:00 PM"},"daysWorking":5}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"CT-NORWICH","code":"EL70857037","employees":[{"name":"James Garcia","shifts":{"Mon 3/30":"OFF","Tue 3/31":"03:45 PM-07:15 PM","Wed 4/1":"OFF","Thu 4/2":"03:45 PM-07:15 PM","Fri 4/3":"03:45 PM-07:15 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":3},{"name":"Brendaliz Oliver Rodriguez","shifts":{"Mon 3/30":"11:00 AM-07:15 PM","Tue 3/31":"OFF","Wed 4/1":"09:30 AM-05:00 PM","Thu 4/2":"09:30 AM-07:15 PM","Fri 4/3":"09:30 AM-05:00 PM","Sat 4/4":"OFF","Sun 4/5":"10:45 AM-05:15 PM"},"daysWorking":5},{"name":"Josh Landry","shifts":{"Mon 3/30":"09:30 AM-04:00 PM","Tue 3/31":"09:30 AM-05:00 PM","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":2},{"name":"Rashia Oates","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"01:00 PM-07:15 PM","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"09:30 AM-07:15 PM","Sun 4/5":"OFF"},"daysWorking":2}],"totalReps":4,"activeThisWeek":4,"repsForApril1":3},{"label":"CT-BUCKLAND HILLS","code":"EL70857038","employees":[{"name":"nereida rodriguez","shifts":{"Mon 3/30":"12:30 PM-08:00 PM","Tue 3/31":"12:30 PM-08:00 PM","Wed 4/1":"12:30 PM-08:00 PM","Thu 4/2":"12:30 PM-08:00 PM","Fri 4/3":"OFF","Sat 4/4":"01:30 PM-09:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"GAMALY GONZALEZ","shifts":{"Mon 3/30":"09:30 AM-04:00 PM","Tue 3/31":"OFF","Wed 4/1":"09:30 AM-04:00 PM","Thu 4/2":"OFF","Fri 4/3":"02:00 PM-09:00 PM","Sat 4/4":"09:30 AM-03:00 PM","Sun 4/5":"OFF"},"daysWorking":4},{"name":"Alishabeth Gonzalez","shifts":{"Mon 3/30":"OFF","Tue 3/31":"09:30 AM-03:30 PM","Wed 4/1":"OFF","Thu 4/2":"09:30 AM-04:00 PM","Fri 4/3":"09:30 AM-05:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":3}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"MA-STATE STREET","code":"EL70857039","employees":[{"name":"ALMA CEDENO","shifts":{"Mon 3/30":"10:00 AM-04:00 PM","Tue 3/31":"10:00 AM-04:00 PM","Wed 4/1":"09:45 AM-03:00 PM","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"09:45 AM-03:00 PM","Sun 4/5":"OFF"},"daysWorking":4},{"name":"Jessica Retamar","shifts":{"Mon 3/30":"09:45 AM-07:15 PM","Tue 3/31":"09:45 AM-07:15 PM","Wed 4/1":"09:45 AM-07:15 PM","Thu 4/2":"09:45 AM-07:15 PM","Fri 4/3":"09:45 AM-07:15 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Divante Lacy","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"12:00 PM-07:15 PM","Fri 4/3":"10:00 AM-07:15 PM","Sat 4/4":"10:00 AM-07:15 PM","Sun 4/5":"11:00 AM-05:15 PM"},"daysWorking":4}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"MA-EXCHANGE ST","code":"EL70857040","employees":[{"name":"isaiah caliz","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"09:45 AM-07:00 PM","Sat 4/4":"09:45 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":2},{"name":"Jazmine Heredia","shifts":{"Mon 3/30":"09:45 AM-07:00 PM","Tue 3/31":"09:45 AM-07:00 PM","Wed 4/1":"09:45 AM-07:00 PM","Thu 4/2":"09:45 AM-07:00 PM","Fri 4/3":"09:45 AM-07:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":5}],"totalReps":2,"activeThisWeek":2,"repsForApril1":2},{"label":"MA-LOCUST ST","code":"EL70857042","employees":[{"name":"isaiah caliz","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"09:45 AM-07:00 PM","Thu 4/2":"09:45 AM-07:00 PM","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":2},{"name":"Alicia Montero","shifts":{"Mon 3/30":"09:45 AM-07:00 PM","Tue 3/31":"09:45 AM-07:00 PM","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"09:45 AM-07:00 PM","Sat 4/4":"09:45 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":4}],"totalReps":2,"activeThisWeek":2,"repsForApril1":2},{"label":"TN-SHALLOWFORD","code":"EL70857043","employees":[{"name":"Jermaine Underwood","shifts":{"Mon 3/30":"09:30 AM-07:00 PM","Tue 3/31":"09:30 AM-07:00 PM","Wed 4/1":"09:45 AM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"09:30 AM-03:30 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":4},{"name":"CeCe Williamson","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"11:00 AM-07:00 PM","Fri 4/3":"03:30 PM-07:00 PM","Sat 4/4":"09:30 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":3},{"name":"Angela Westfield","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"09:45 AM-04:00 PM","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":1},{"name":"marquesha jones","shifts":{"Mon 3/30":"10:00 AM-07:00 PM","Tue 3/31":"09:30 AM-07:00 PM","Wed 4/1":"09:30 AM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"09:30 AM-07:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":4}],"totalReps":4,"activeThisWeek":4,"repsForApril1":4},{"label":"TN-KEITH ST","code":"EL70857044","employees":[{"name":"Angela Westfield","shifts":{"Mon 3/30":"09:30 AM-07:00 PM","Tue 3/31":"09:30 AM-02:00 PM","Wed 4/1":"09:30 AM-07:00 PM","Thu 4/2":"09:30 AM-02:00 PM","Fri 4/3":"09:30 AM-04:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Mirtha Melendez","shifts":{"Mon 3/30":"09:30 AM-05:00 PM","Tue 3/31":"09:30 AM-05:00 PM","Wed 4/1":"09:30 AM-04:00 PM","Thu 4/2":"09:30 AM-05:00 PM","Fri 4/3":"09:30 AM-05:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Nathan Millsaps","shifts":{"Mon 3/30":"OFF","Tue 3/31":"02:00 PM-07:00 PM","Wed 4/1":"04:00 PM-07:00 PM","Thu 4/2":"02:00 PM-07:00 PM","Fri 4/3":"04:00 PM-07:00 PM","Sat 4/4":"09:45 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":5}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"RI-751BROAD","code":"EL70857046","employees":[{"name":"Hector Marrero","shifts":{"Mon 3/30":"01:30 PM-07:00 PM","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"02:00 PM-07:00 PM","Fri 4/3":"OFF","Sat 4/4":"01:00 PM-07:00 PM","Sun 4/5":"10:45 AM-05:00 PM"},"daysWorking":4},{"name":"Jensy Rodriguez","shifts":{"Mon 3/30":"OFF","Tue 3/31":"09:30 AM-07:00 PM","Wed 4/1":"01:00 PM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"01:00 PM-07:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":3},{"name":"Keysha Betancourt","shifts":{"Mon 3/30":"09:45 AM-04:00 PM","Tue 3/31":"OFF","Wed 4/1":"09:45 AM-01:30 PM","Thu 4/2":"09:45 AM-05:30 PM","Fri 4/3":"09:45 AM-01:30 PM","Sat 4/4":"09:45 AM-03:00 PM","Sun 4/5":"OFF"},"daysWorking":5}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"MA-FALLRIVER","code":"EL70857047","employees":[{"name":"Justin Moniz","shifts":{"Mon 3/30":"OFF","Tue 3/31":"12:00 PM-07:00 PM","Wed 4/1":"09:45 AM-07:00 PM","Thu 4/2":"01:00 PM-07:00 PM","Fri 4/3":"09:45 AM-07:00 PM","Sat 4/4":"09:45 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Khrystyne Quasney","shifts":{"Mon 3/30":"09:45 AM-07:00 PM","Tue 3/31":"09:45 AM-07:00 PM","Wed 4/1":"OFF","Thu 4/2":"09:30 AM-07:00 PM","Fri 4/3":"01:00 PM-07:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":4}],"totalReps":2,"activeThisWeek":2,"repsForApril1":2},{"label":"MA-CAPE COD MALL","code":"EL70857049","employees":[{"name":"Maliek Feare","shifts":{"Mon 3/30":"OFF","Tue 3/31":"03:00 PM-08:00 PM","Wed 4/1":"OFF","Thu 4/2":"03:00 PM-08:00 PM","Fri 4/3":"03:00 PM-09:00 PM","Sat 4/4":"03:00 PM-09:00 PM","Sun 4/5":"OFF"},"daysWorking":4},{"name":"Jason Link Jr","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"09:45 AM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":1},{"name":"Vernard Ashe","shifts":{"Mon 3/30":"09:45 AM-08:00 PM","Tue 3/31":"09:45 AM-05:00 PM","Wed 4/1":"OFF","Thu 4/2":"09:45 AM-05:00 PM","Fri 4/3":"09:45 AM-05:00 PM","Sat 4/4":"09:45 AM-05:00 PM","Sun 4/5":"11:45 AM-06:00 PM"},"daysWorking":6}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"MA-WESTERN AVE","code":"EL70857050","employees":[{"name":"stephanie melo","shifts":{"Mon 3/30":"09:45 AM-07:00 PM","Tue 3/31":"09:45 AM-07:00 PM","Wed 4/1":"09:45 AM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"10:30 AM-05:00 PM"},"daysWorking":4},{"name":"Abel Burgos","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"09:45 AM-07:00 PM","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":1},{"name":"Amina Fellah","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"09:45 AM-07:00 PM","Sat 4/4":"09:45 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":2}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"MA-KELLEY SQUARE","code":"EL70857051","employees":[{"name":"Mariah Gonzalez","shifts":{"Mon 3/30":"OFF","Tue 3/31":"11:00 AM-06:00 PM","Wed 4/1":"OFF","Thu 4/2":"09:45 AM-06:00 PM","Fri 4/3":"12:00 PM-05:00 PM","Sat 4/4":"OFF","Sun 4/5":"11:00 AM-03:00 PM"},"daysWorking":4},{"name":"Richard Foster","shifts":{"Mon 3/30":"09:45 AM-06:00 PM","Tue 3/31":"09:45 AM-07:00 PM","Wed 4/1":"11:00 AM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"11:00 AM-07:00 PM","Sat 4/4":"12:00 PM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Alex Correa","shifts":{"Mon 3/30":"11:00 AM-07:00 PM","Tue 3/31":"OFF","Wed 4/1":"09:45 AM-06:00 PM","Thu 4/2":"11:00 AM-07:00 PM","Fri 4/3":"09:45 AM-06:00 PM","Sat 4/4":"09:45 AM-05:00 PM","Sun 4/5":"01:00 PM-06:00 PM"},"daysWorking":6},{"name":"Juliana Arruda","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"11:00 AM-07:00 PM","Fri 4/3":"11:00 AM-07:00 PM","Sat 4/4":"11:00 AM-05:00 PM","Sun 4/5":"OFF"},"daysWorking":3}],"totalReps":4,"activeThisWeek":4,"repsForApril1":4},{"label":"MA-ROCKDALE","code":"EL70857082","employees":[{"name":"Derek Tejeda","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"09:45 AM-07:00 PM","Thu 4/2":"09:45 AM-07:00 PM","Fri 4/3":"12:00 PM-07:00 PM","Sat 4/4":"09:45 AM-06:00 PM","Sun 4/5":"OFF"},"daysWorking":4},{"name":"Lori ruiz","shifts":{"Mon 3/30":"09:45 AM-06:45 PM","Tue 3/31":"10:00 AM-07:00 PM","Wed 4/1":"OFF","Thu 4/2":"09:45 AM-06:15 PM","Fri 4/3":"09:45 AM-06:15 PM","Sat 4/4":"10:00 AM-03:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Djeison Barbosa","shifts":{"Mon 3/30":"09:45 AM-07:00 PM","Tue 3/31":"09:45 AM-02:00 PM","Wed 4/1":"09:45 AM-02:00 PM","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"01:00 PM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":4}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"RI-BROAD ST","code":"EL70857083","employees":[{"name":"Sabrina morales","shifts":{"Mon 3/30":"OFF","Tue 3/31":"11:00 AM-07:00 PM","Wed 4/1":"09:45 AM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"09:45 AM-04:00 PM","Sat 4/4":"11:00 AM-07:00 PM","Sun 4/5":"10:45 AM-05:00 PM"},"daysWorking":5},{"name":"Ana Marrero","shifts":{"Mon 3/30":"09:30 AM-07:00 PM","Tue 3/31":"09:30 AM-07:00 PM","Wed 4/1":"OFF","Thu 4/2":"09:30 AM-07:00 PM","Fri 4/3":"09:30 AM-07:00 PM","Sat 4/4":"09:30 AM-05:00 PM","Sun 4/5":"OFF"},"daysWorking":5}],"totalReps":2,"activeThisWeek":2,"repsForApril1":2},{"label":"RI-BALD HILL","code":"EL70857084","employees":[{"name":"Allia Abodaher","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"10:00 AM-07:00 PM","Thu 4/2":"09:45 AM-07:00 PM","Fri 4/3":"09:45 AM-07:00 PM","Sat 4/4":"09:45 AM-07:00 PM","Sun 4/5":"10:30 AM-06:00 PM"},"daysWorking":5},{"name":"Izabella Regino","shifts":{"Mon 3/30":"09:45 AM-07:00 PM","Tue 3/31":"09:45 AM-07:00 PM","Wed 4/1":"12:30 PM-07:00 PM","Thu 4/2":"12:30 PM-07:00 PM","Fri 4/3":"12:30 PM-07:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":5}],"totalReps":2,"activeThisWeek":2,"repsForApril1":2},{"label":"RI-NEWPORT AVE","code":"EL70857085","employees":[{"name":"Oswaldo Aranda","shifts":{"Mon 3/30":"OFF","Tue 3/31":"01:00 PM-07:00 PM","Wed 4/1":"01:00 PM-07:00 PM","Thu 4/2":"01:00 PM-07:00 PM","Fri 4/3":"01:00 PM-07:00 PM","Sat 4/4":"09:45 AM-07:00 PM","Sun 4/5":"10:45 AM-05:00 PM"},"daysWorking":6},{"name":"Brandon Mitchell","shifts":{"Mon 3/30":"01:00 PM-07:00 PM","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":1},{"name":"Keysha Betancourt","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"02:00 PM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":1},{"name":"Cleoty Morales","shifts":{"Mon 3/30":"09:45 AM-02:00 PM","Tue 3/31":"09:45 AM-02:00 PM","Wed 4/1":"09:45 AM-07:00 PM","Thu 4/2":"09:45 AM-04:00 PM","Fri 4/3":"09:45 AM-03:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":5}],"totalReps":4,"activeThisWeek":4,"repsForApril1":3},{"label":"RI-PROVIDENCE PL","code":"EL70857086","employees":[{"name":"Abigail Baez","shifts":{"Mon 3/30":"10:45 AM-04:00 PM","Tue 3/31":"OFF","Wed 4/1":"10:45 AM-06:00 PM","Thu 4/2":"OFF","Fri 4/3":"09:45 AM-05:00 PM","Sat 4/4":"09:45 AM-04:00 PM","Sun 4/5":"OFF"},"daysWorking":4},{"name":"Kadisha Rivera","shifts":{"Mon 3/30":"OFF","Tue 3/31":"10:45 AM-06:00 PM","Wed 4/1":"OFF","Thu 4/2":"10:45 AM-06:00 PM","Fri 4/3":"12:00 PM-09:00 PM","Sat 4/4":"12:00 PM-08:00 PM","Sun 4/5":"OFF"},"daysWorking":4},{"name":"Brandon Mitchell","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"01:00 PM-08:00 PM","Thu 4/2":"01:00 PM-08:00 PM","Fri 4/3":"03:00 PM-09:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":3},{"name":"Juliana Arruda","shifts":{"Mon 3/30":"01:00 PM-08:00 PM","Tue 3/31":"01:00 PM-08:00 PM","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":2},{"name":"Jason Link Jr","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"01:00 PM-09:00 PM","Sun 4/5":"OFF"},"daysWorking":1}],"totalReps":5,"activeThisWeek":5,"repsForApril1":4},{"label":"MA-SOUTH SHORE","code":"EL70857087","employees":[{"name":"Yarele Soler","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"11:00 AM-05:00 PM","Thu 4/2":"11:00 AM-05:00 PM","Fri 4/3":"11:00 AM-08:00 PM","Sat 4/4":"11:00 AM-08:00 PM","Sun 4/5":"12:00 PM-05:00 PM"},"daysWorking":5},{"name":"Abel Burgos","shifts":{"Mon 3/30":"OFF","Tue 3/31":"11:00 AM-07:00 PM","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"09:45 AM-09:00 PM","Sun 4/5":"OFF"},"daysWorking":2},{"name":"Amina Fellah","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"09:45 AM-08:00 PM","Thu 4/2":"09:45 AM-08:00 PM","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":2},{"name":"Lucmila Lopes","shifts":{"Mon 3/30":"09:45 AM-08:00 PM","Tue 3/31":"09:45 AM-08:00 PM","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"09:45 AM-09:00 PM","Sat 4/4":"OFF","Sun 4/5":"10:45 AM-06:00 PM"},"daysWorking":4}],"totalReps":4,"activeThisWeek":4,"repsForApril1":4},{"label":"CT-NEW LONDON","code":"EL70857088","employees":[{"name":"James Garcia","shifts":{"Mon 3/30":"12:00 PM-07:00 PM","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":1},{"name":"Josh Landry","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"09:30 AM-05:00 PM","Thu 4/2":"01:00 PM-07:15 PM","Fri 4/3":"09:45 AM-04:00 PM","Sat 4/4":"09:30 AM-03:00 PM","Sun 4/5":"OFF"},"daysWorking":4},{"name":"Rashia Oates","shifts":{"Mon 3/30":"OFF","Tue 3/31":"12:00 PM-07:00 PM","Wed 4/1":"OFF","Thu 4/2":"09:30 AM-07:00 PM","Fri 4/3":"01:00 PM-07:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":3},{"name":"Shanelle Sanchez","shifts":{"Mon 3/30":"09:45 AM-05:30 PM","Tue 3/31":"09:45 AM-05:30 PM","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":2},{"name":"Gilberto Alvarez","shifts":{"Mon 3/30":"01:00 PM-07:15 PM","Tue 3/31":"OFF","Wed 4/1":"11:00 AM-07:15 PM","Thu 4/2":"OFF","Fri 4/3":"09:45 AM-07:15 PM","Sat 4/4":"11:00 AM-07:15 PM","Sun 4/5":"10:45 AM-06:00 PM"},"daysWorking":5}],"totalReps":5,"activeThisWeek":5,"repsForApril1":3},{"label":"MA-COGGESHALL","code":"EL70857089","employees":[{"name":"Napoleoa DaCruz","shifts":{"Mon 3/30":"09:30 AM-07:00 PM","Tue 3/31":"09:30 AM-05:30 PM","Wed 4/1":"OFF","Thu 4/2":"09:30 AM-07:00 PM","Fri 4/3":"10:00 AM-07:00 PM","Sat 4/4":"09:30 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Djeison Barbosa","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"09:45 AM-02:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":1},{"name":"Khrystyne Quasney","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"09:45 AM-07:15 PM","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":1}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"RI-HARTFORD AVE","code":"EL70857090","employees":[{"name":"Oscar Mendez Muniz","shifts":{"Mon 3/30":"OFF","Tue 3/31":"01:00 PM-07:00 PM","Wed 4/1":"09:45 AM-07:00 PM","Thu 4/2":"09:45 AM-07:00 PM","Fri 4/3":"02:00 PM-07:00 PM","Sat 4/4":"09:45 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Yanna Soriano","shifts":{"Mon 3/30":"09:30 AM-07:00 PM","Tue 3/31":"09:30 AM-03:00 PM","Wed 4/1":"11:00 AM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"09:30 AM-07:00 PM","Sat 4/4":"OFF","Sun 4/5":"10:45 AM-05:00 PM"},"daysWorking":5},{"name":"Abigail Baez","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"10:45 AM-05:00 PM"},"daysWorking":1},{"name":"Milton Vega","shifts":{"Mon 3/30":"11:00 AM-07:00 PM","Tue 3/31":"12:00 PM-07:00 PM","Wed 4/1":"OFF","Thu 4/2":"11:00 AM-07:00 PM","Fri 4/3":"09:45 AM-02:00 PM","Sat 4/4":"11:00 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":5}],"totalReps":4,"activeThisWeek":4,"repsForApril1":4},{"label":"RI-EAST PROV","code":"EL70857091","employees":[{"name":"saimary hernandez","shifts":{"Mon 3/30":"OFF","Tue 3/31":"09:30 AM-07:00 PM","Wed 4/1":"09:30 AM-07:00 PM","Thu 4/2":"09:30 AM-02:15 PM","Fri 4/3":"09:30 AM-07:15 PM","Sat 4/4":"09:30 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"JOSE Monroy","shifts":{"Mon 3/30":"01:00 PM-07:00 PM","Tue 3/31":"01:00 PM-07:00 PM","Wed 4/1":"01:00 PM-07:00 PM","Thu 4/2":"01:00 PM-07:00 PM","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"10:45 AM-05:00 PM"},"daysWorking":5},{"name":"Isiaish Valenzuela","shifts":{"Mon 3/30":"09:30 AM-04:00 PM","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"01:00 PM-07:00 PM","Fri 4/3":"10:00 AM-07:00 PM","Sat 4/4":"11:00 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":4}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"TN-MAGNOLIA","code":"EL70857097","employees":[{"name":"Melissa Sloane","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"09:30 AM-06:00 PM","Thu 4/2":"OFF","Fri 4/3":"09:30 AM-06:00 PM","Sat 4/4":"09:30 AM-07:00 PM","Sun 4/5":"10:30 AM-05:00 PM"},"daysWorking":4},{"name":"Mariel McAllister","shifts":{"Mon 3/30":"09:30 AM-07:00 PM","Tue 3/31":"09:30 AM-07:00 PM","Wed 4/1":"11:00 AM-07:00 PM","Thu 4/2":"09:30 AM-07:00 PM","Fri 4/3":"10:00 AM-07:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Delbert Phillips","shifts":{"Mon 3/30":"01:00 PM-07:00 PM","Tue 3/31":"01:00 PM-07:00 PM","Wed 4/1":"OFF","Thu 4/2":"01:00 PM-07:00 PM","Fri 4/3":"OFF","Sat 4/4":"01:00 PM-07:00 PM","Sun 4/5":"12:00 PM-05:00 PM"},"daysWorking":5}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"TN-WESTERN AVE","code":"EL70857098","employees":[{"name":"Melissa Sloane","shifts":{"Mon 3/30":"11:00 AM-05:00 PM","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"09:30 AM-07:00 PM","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":2},{"name":"NICKI Johnson","shifts":{"Mon 3/30":"09:30 AM-07:00 PM","Tue 3/31":"09:30 AM-07:00 PM","Wed 4/1":"09:30 AM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"09:30 AM-07:00 PM","Sat 4/4":"OFF","Sun 4/5":"10:45 AM-05:00 PM"},"daysWorking":5},{"name":"April Mayorga","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"11:00 AM-07:00 PM","Sat 4/4":"09:45 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":2}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"TN-N BROADWAY","code":"EL70857099","employees":[{"name":"Shelena Hamilton","shifts":{"Mon 3/30":"OFF","Tue 3/31":"09:30 AM-06:00 PM","Wed 4/1":"09:30 AM-06:00 PM","Thu 4/2":"09:30 AM-07:00 PM","Fri 4/3":"09:30 AM-06:00 PM","Sat 4/4":"09:30 AM-06:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Franchesca Rader","shifts":{"Mon 3/30":"09:30 AM-06:00 PM","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"10:00 AM-07:00 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":2},{"name":"Christopher Marion","shifts":{"Mon 3/30":"01:00 PM-07:00 PM","Tue 3/31":"11:00 AM-07:00 PM","Wed 4/1":"11:00 AM-07:00 PM","Thu 4/2":"11:00 AM-07:00 PM","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"10:45 AM-05:00 PM"},"daysWorking":5},{"name":"April Mayorga","shifts":{"Mon 3/30":"11:00 AM-07:00 PM","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"10:30 AM-07:00 PM","Sun 4/5":"11:00 AM-05:00 PM"},"daysWorking":3}],"totalReps":4,"activeThisWeek":4,"repsForApril1":4},{"label":"TN-WEST MARKET","code":"EL70857100","employees":[{"name":"Charisma Heggie","shifts":{"Mon 3/30":"OFF","Tue 3/31":"11:00 AM-06:00 PM","Wed 4/1":"09:45 AM-07:00 PM","Thu 4/2":"02:00 PM-07:00 PM","Fri 4/3":"11:00 AM-07:00 PM","Sat 4/4":"12:00 PM-05:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Melicia Angel","shifts":{"Mon 3/30":"OFF","Tue 3/31":"09:45 AM-03:00 PM","Wed 4/1":"09:45 AM-01:00 PM","Thu 4/2":"09:45 AM-03:00 PM","Fri 4/3":"09:45 AM-02:30 PM","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":4},{"name":"Samantha Cuevas","shifts":{"Mon 3/30":"01:00 PM-07:00 PM","Tue 3/31":"02:30 PM-07:00 PM","Wed 4/1":"03:00 PM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"02:30 PM-07:00 PM","Sat 4/4":"09:45 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Shanna Speed","shifts":{"Mon 3/30":"09:30 AM-07:00 PM","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"11:00 AM-03:00 PM","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":2}],"totalReps":4,"activeThisWeek":4,"repsForApril1":4},{"label":"TN-MORRISTOWN","code":"EL70857101","employees":[{"name":"Ashton Diamond","shifts":{"Mon 3/30":"09:30 AM-07:00 PM","Tue 3/31":"10:00 AM-06:00 PM","Wed 4/1":"10:00 AM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"11:00 AM-07:00 PM","Sat 4/4":"11:00 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":5},{"name":"Franchesca Rader","shifts":{"Mon 3/30":"OFF","Tue 3/31":"09:30 AM-07:00 PM","Wed 4/1":"OFF","Thu 4/2":"11:00 AM-06:00 PM","Fri 4/3":"OFF","Sat 4/4":"09:45 AM-06:00 PM","Sun 4/5":"OFF"},"daysWorking":3},{"name":"Andrew Serpa","shifts":{"Mon 3/30":"11:00 AM-06:00 PM","Tue 3/31":"OFF","Wed 4/1":"09:45 AM-07:00 PM","Thu 4/2":"09:45 AM-07:00 PM","Fri 4/3":"09:45 AM-07:00 PM","Sat 4/4":"OFF","Sun 4/5":"10:45 AM-05:00 PM"},"daysWorking":5}],"totalReps":3,"activeThisWeek":3,"repsForApril1":3},{"label":"RI-DOUGLAS","code":"EL70858436","employees":[{"name":"Kadisha Rivera","shifts":{"Mon 3/30":"09:45 AM-07:00 PM","Tue 3/31":"OFF","Wed 4/1":"OFF","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"OFF"},"daysWorking":1},{"name":"Handriel Marmol","shifts":{"Mon 3/30":"OFF","Tue 3/31":"OFF","Wed 4/1":"09:45 AM-07:00 PM","Thu 4/2":"OFF","Fri 4/3":"OFF","Sat 4/4":"OFF","Sun 4/5":"10:45 AM-05:00 PM"},"daysWorking":2},{"name":"Jason Link Jr","shifts":{"Mon 3/30":"OFF","Tue 3/31":"09:45 AM-07:00 PM","Wed 4/1":"OFF","Thu 4/2":"09:45 AM-07:00 PM","Fri 4/3":"09:30 AM-07:00 PM","Sat 4/4":"09:30 AM-07:00 PM","Sun 4/5":"OFF"},"daysWorking":4}],"totalReps":3,"activeThisWeek":3,"repsForApril1":2}];
+const SCHEDULE = [
+  {
+    "label":"AR-COLONEL GLENN","code":"EL70857034",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":1,
+    "employees":[
+      {"name":"Brenda Serna","daysWorking":5,"hours":47.4,"pct":0.751,
+       "goals":{"boxes":64,"upgrade":26,"voice":35,"bts":12,"hsi":5,"magenta":6,"acc":3640},
+       "shifts":{"Mon 3/30": "09:30 AM - 07:00 PM", "Tue 3/31": "09:30 AM - 07:00 PM", "Wed 4/1": "09:30 AM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "09:30 AM - 07:00 PM", "Sat 4/4": "09:30 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Kevin Martinez","daysWorking":1,"hours":9.5,"pct":0.15,
+       "goals":{"boxes":13,"upgrade":5,"voice":7,"bts":2,"hsi":1,"magenta":1,"acc":730},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "09:30 AM - 07:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Jasmine Griffin","daysWorking":1,"hours":6.2,"pct":0.098,
+       "goals":{"boxes":8,"upgrade":3,"voice":5,"bts":2,"hsi":1,"magenta":1,"acc":476},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "10:45 AM - 05:00 PM"}},
+    ]
+  },
+  {
+    "label":"AR-RADIO GEYER","code":"EL70857035",
+    "totalReps":4,"activeThisWeek":4,"repsForApril1":2,
+    "employees":[
+      {"name":"Brenda Serna","daysWorking":1,"hours":8.0,"pct":0.077,
+       "goals":{"boxes":14,"upgrade":6,"voice":7,"bts":3,"hsi":1,"magenta":1,"acc":791},
+       "shifts":{"Mon 3/30": "11:00 AM - 07:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Karmina Mendoza","daysWorking":5,"hours":42.9,"pct":0.414,
+       "goals":{"boxes":75,"upgrade":30,"voice":39,"bts":16,"hsi":6,"magenta":7,"acc":4244},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "09:30 AM - 02:30 PM", "Wed 4/1": "09:30 AM - 07:00 PM", "Thu 4/2": "09:30 AM - 07:00 PM", "Fri 4/3": "09:30 AM - 07:00 PM", "Sat 4/4": "09:30 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Kevin Martinez","daysWorking":5,"hours":39.7,"pct":0.383,
+       "goals":{"boxes":70,"upgrade":28,"voice":36,"bts":15,"hsi":5,"magenta":7,"acc":3927},
+       "shifts":{"Mon 3/30": "09:30 AM - 03:00 PM", "Tue 3/31": "09:30 AM - 07:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "10:00 AM - 07:00 PM", "Sat 4/4": "09:30 AM - 07:00 PM", "Sun 4/5": "10:45 AM - 05:00 PM"}},
+      {"name":"Jasmine Griffin","daysWorking":2,"hours":13.0,"pct":0.125,
+       "goals":{"boxes":23,"upgrade":9,"voice":12,"bts":5,"hsi":2,"magenta":2,"acc":1286},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "09:30 AM - 02:00 PM", "Thu 4/2": "09:30 AM - 06:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"MA-HOLYOKE","code":"EL70857036",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":2,
+    "employees":[
+      {"name":"Carlos Davila","daysWorking":4,"hours":37.0,"pct":0.325,
+       "goals":{"boxes":66,"upgrade":26,"voice":33,"bts":14,"hsi":3,"magenta":10,"acc":3651},
+       "shifts":{"Mon 3/30": "11:00 AM - 08:00 PM", "Tue 3/31": "10:00 AM - 07:00 PM", "Wed 4/1": "11:00 AM - 08:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "11:00 AM - 09:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Hector Torres","daysWorking":5,"hours":42.0,"pct":0.368,
+       "goals":{"boxes":75,"upgrade":30,"voice":37,"bts":16,"hsi":3,"magenta":11,"acc":4145},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "11:00 AM - 08:00 PM", "Wed 4/1": "10:00 AM - 07:00 PM", "Thu 4/2": "11:00 AM - 08:00 PM", "Fri 4/3": "10:00 AM - 08:00 PM", "Sat 4/4": "03:00 PM - 08:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Armando Perez","daysWorking":4,"hours":35.0,"pct":0.307,
+       "goals":{"boxes":62,"upgrade":25,"voice":31,"bts":13,"hsi":2,"magenta":9,"acc":3454},
+       "shifts":{"Mon 3/30": "10:00 AM - 07:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "10:00 AM - 07:00 PM", "Fri 4/3": "11:00 AM - 09:00 PM", "Sat 4/4": "10:00 AM - 05:00 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"CT-NORWICH","code":"EL70857037",
+    "totalReps":4,"activeThisWeek":4,"repsForApril1":2,
+    "employees":[
+      {"name":"James Garcia","daysWorking":3,"hours":10.5,"pct":0.131,
+       "goals":{"boxes":13,"upgrade":5,"voice":6,"bts":3,"hsi":1,"magenta":2,"acc":722},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "03:45 PM - 07:15 PM", "Wed 4/1": "OFF", "Thu 4/2": "03:45 PM - 07:15 PM", "Fri 4/3": "03:45 PM - 07:15 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Brendaliz Oliver Rodriguez","daysWorking":5,"hours":39.5,"pct":0.494,
+       "goals":{"boxes":50,"upgrade":20,"voice":24,"bts":10,"hsi":3,"magenta":6,"acc":2716},
+       "shifts":{"Mon 3/30": "11:00 AM - 07:15 PM", "Tue 3/31": "OFF", "Wed 4/1": "09:30 AM - 05:00 PM", "Thu 4/2": "09:30 AM - 07:15 PM", "Fri 4/3": "09:30 AM - 05:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "10:45 AM - 05:15 PM"}},
+      {"name":"Josh Landry","daysWorking":2,"hours":14.0,"pct":0.175,
+       "goals":{"boxes":18,"upgrade":7,"voice":9,"bts":4,"hsi":1,"magenta":2,"acc":963},
+       "shifts":{"Mon 3/30": "09:30 AM - 04:00 PM", "Tue 3/31": "09:30 AM - 05:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Rashia Oates","daysWorking":2,"hours":16.0,"pct":0.2,
+       "goals":{"boxes":20,"upgrade":8,"voice":10,"bts":4,"hsi":1,"magenta":2,"acc":1100},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "01:00 PM - 07:15 PM", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "09:30 AM - 07:15 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"CT-BUCKLAND HILLS","code":"EL70857038",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":2,
+    "employees":[
+      {"name":"Nereida Rodriguez","daysWorking":5,"hours":37.5,"pct":0.452,
+       "goals":{"boxes":61,"upgrade":24,"voice":30,"bts":13,"hsi":4,"magenta":8,"acc":3346},
+       "shifts":{"Mon 3/30": "12:30 PM - 08:00 PM", "Tue 3/31": "12:30 PM - 08:00 PM", "Wed 4/1": "12:30 PM - 08:00 PM", "Thu 4/2": "12:30 PM - 08:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "01:30 PM - 09:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Gamaly Gonzalez","daysWorking":4,"hours":25.5,"pct":0.307,
+       "goals":{"boxes":41,"upgrade":17,"voice":20,"bts":9,"hsi":2,"magenta":5,"acc":2275},
+       "shifts":{"Mon 3/30": "09:30 AM - 04:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "09:30 AM - 04:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "02:00 PM - 09:00 PM", "Sat 4/4": "09:30 AM - 03:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Alishabeth Gonzalez","daysWorking":3,"hours":20.0,"pct":0.241,
+       "goals":{"boxes":32,"upgrade":13,"voice":16,"bts":7,"hsi":2,"magenta":4,"acc":1785},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "09:30 AM - 03:30 PM", "Wed 4/1": "OFF", "Thu 4/2": "09:30 AM - 04:00 PM", "Fri 4/3": "09:30 AM - 05:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"MA-STATE STREET","code":"EL70857039",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":2,
+    "employees":[
+      {"name":"Alma Cedeno","daysWorking":4,"hours":21.0,"pct":0.234,
+       "goals":{"boxes":27,"upgrade":11,"voice":13,"bts":6,"hsi":1,"magenta":4,"acc":1509},
+       "shifts":{"Mon 3/30": "09:45 AM - 02:00 PM", "Tue 3/31": "09:45 AM - 04:00 PM", "Wed 4/1": "09:45 AM - 03:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "09:45 AM - 03:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Jessica Retamar","daysWorking":5,"hours":43.0,"pct":0.479,
+       "goals":{"boxes":56,"upgrade":23,"voice":27,"bts":12,"hsi":2,"magenta":8,"acc":3091},
+       "shifts":{"Mon 3/30": "12:00 PM - 07:15 PM", "Tue 3/31": "12:00 PM - 07:15 PM", "Wed 4/1": "09:45 AM - 07:15 PM", "Thu 4/2": "09:45 AM - 07:15 PM", "Fri 4/3": "09:45 AM - 07:15 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Divante Lacy","daysWorking":3,"hours":25.8,"pct":0.288,
+       "goals":{"boxes":34,"upgrade":14,"voice":16,"bts":7,"hsi":1,"magenta":5,"acc":1854},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "12:00 PM - 07:15 PM", "Fri 4/3": "10:00 AM - 07:15 PM", "Sat 4/4": "10:00 AM - 07:15 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"MA-EXCHANGE ST","code":"EL70857040",
+    "totalReps":2,"activeThisWeek":2,"repsForApril1":1,
+    "employees":[
+      {"name":"Isaiah Caliz","daysWorking":2,"hours":18.5,"pct":0.286,
+       "goals":{"boxes":31,"upgrade":13,"voice":15,"bts":6,"hsi":1,"magenta":4,"acc":1674},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "09:45 AM - 07:00 PM", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Jazmine Heredia","daysWorking":5,"hours":46.2,"pct":0.715,
+       "goals":{"boxes":78,"upgrade":31,"voice":37,"bts":15,"hsi":3,"magenta":10,"acc":4182},
+       "shifts":{"Mon 3/30": "09:45 AM - 07:00 PM", "Tue 3/31": "09:45 AM - 07:00 PM", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "09:45 AM - 07:00 PM", "Fri 4/3": "09:45 AM - 07:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"MA-LOCUST ST","code":"EL70857042",
+    "totalReps":2,"activeThisWeek":2,"repsForApril1":1,
+    "employees":[
+      {"name":"Isaiah Caliz","daysWorking":2,"hours":18.5,"pct":0.334,
+       "goals":{"boxes":33,"upgrade":13,"voice":16,"bts":7,"hsi":1,"magenta":4,"acc":1787},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "09:45 AM - 07:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Alicia Montero","daysWorking":4,"hours":36.9,"pct":0.666,
+       "goals":{"boxes":65,"upgrade":26,"voice":32,"bts":13,"hsi":2,"magenta":9,"acc":3563},
+       "shifts":{"Mon 3/30": "09:45 AM - 07:00 PM", "Tue 3/31": "09:45 AM - 07:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "09:45 AM - 07:00 PM", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"TN-SHALLOWFORD","code":"EL70857043",
+    "totalReps":4,"activeThisWeek":4,"repsForApril1":2,
+    "employees":[
+      {"name":"Jermaine Underwood","daysWorking":4,"hours":34.2,"pct":0.346,
+       "goals":{"boxes":49,"upgrade":20,"voice":25,"bts":10,"hsi":4,"magenta":5,"acc":2733},
+       "shifts":{"Mon 3/30": "09:30 AM - 07:00 PM", "Tue 3/31": "09:30 AM - 07:00 PM", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "09:30 AM - 03:30 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Cece Williamson","daysWorking":3,"hours":21.0,"pct":0.212,
+       "goals":{"boxes":30,"upgrade":12,"voice":16,"bts":6,"hsi":3,"magenta":3,"acc":1678},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "11:00 AM - 07:00 PM", "Fri 4/3": "03:30 PM - 07:00 PM", "Sat 4/4": "09:30 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Angela Westfield","daysWorking":1,"hours":6.2,"pct":0.063,
+       "goals":{"boxes":9,"upgrade":4,"voice":5,"bts":2,"hsi":1,"magenta":1,"acc":495},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "09:45 AM - 04:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Marquesha Jones","daysWorking":4,"hours":37.5,"pct":0.379,
+       "goals":{"boxes":54,"upgrade":22,"voice":28,"bts":11,"hsi":5,"magenta":5,"acc":2997},
+       "shifts":{"Mon 3/30": "10:00 AM - 07:00 PM", "Tue 3/31": "09:30 AM - 07:00 PM", "Wed 4/1": "09:30 AM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "09:30 AM - 07:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"TN-KEITH ST","code":"EL70857044",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":3,
+    "employees":[
+      {"name":"Angela Westfield","daysWorking":5,"hours":33.0,"pct":0.349,
+       "goals":{"boxes":32,"upgrade":13,"voice":17,"bts":6,"hsi":3,"magenta":3,"acc":1812},
+       "shifts":{"Mon 3/30": "09:30 AM - 07:00 PM", "Tue 3/31": "09:30 AM - 02:00 PM", "Wed 4/1": "09:30 AM - 05:30 PM", "Thu 4/2": "09:30 AM - 02:00 PM", "Fri 4/3": "09:30 AM - 04:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Mirtha Melendez","daysWorking":5,"hours":36.5,"pct":0.385,
+       "goals":{"boxes":36,"upgrade":14,"voice":19,"bts":7,"hsi":3,"magenta":4,"acc":2005},
+       "shifts":{"Mon 3/30": "09:30 AM - 05:00 PM", "Tue 3/31": "09:30 AM - 05:00 PM", "Wed 4/1": "09:30 AM - 04:00 PM", "Thu 4/2": "09:30 AM - 05:00 PM", "Fri 4/3": "09:30 AM - 05:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Nathan Millsaps","daysWorking":5,"hours":25.2,"pct":0.266,
+       "goals":{"boxes":25,"upgrade":10,"voice":13,"bts":5,"hsi":2,"magenta":3,"acc":1384},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "02:00 PM - 07:00 PM", "Wed 4/1": "04:00 PM - 07:00 PM", "Thu 4/2": "02:00 PM - 07:00 PM", "Fri 4/3": "04:00 PM - 07:00 PM", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"RI-BROADWAY","code":"EL70857045",
+    "totalReps":2,"activeThisWeek":2,"repsForApril1":1,
+    "employees":[
+      {"name":"Handriel Marmol","daysWorking":2,"hours":18.5,"pct":0.3,
+       "goals":{"boxes":34,"upgrade":14,"voice":15,"bts":8,"hsi":2,"magenta":5,"acc":1815},
+       "shifts":{"Mon 3/30": "09:45 AM - 07:00 PM", "Tue 3/31": "09:45 AM - 07:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Frank Alberto Merino Ceballos","daysWorking":5,"hours":43.2,"pct":0.701,
+       "goals":{"boxes":80,"upgrade":32,"voice":35,"bts":18,"hsi":5,"magenta":11,"acc":4239},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "09:45 AM - 07:00 PM", "Fri 4/3": "09:45 AM - 07:00 PM", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "10:45 AM - 05:00 PM"}},
+    ]
+  },
+  {
+    "label":"RI-751BROAD","code":"EL70857046",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":2,
+    "employees":[
+      {"name":"Hector Marrero","daysWorking":4,"hours":22.7,"pct":0.32,
+       "goals":{"boxes":29,"upgrade":12,"voice":14,"bts":6,"hsi":1,"magenta":4,"acc":1584},
+       "shifts":{"Mon 3/30": "01:30 PM - 07:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "02:00 PM - 07:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "01:00 PM - 07:00 PM", "Sun 4/5": "10:45 AM - 05:00 PM"}},
+      {"name":"Jensy Rodriguez","daysWorking":3,"hours":21.5,"pct":0.303,
+       "goals":{"boxes":28,"upgrade":11,"voice":13,"bts":6,"hsi":1,"magenta":3,"acc":1500},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "09:30 AM - 07:00 PM", "Wed 4/1": "01:00 PM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "01:00 PM - 07:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Keysha Betancourt","daysWorking":5,"hours":26.7,"pct":0.376,
+       "goals":{"boxes":34,"upgrade":14,"voice":17,"bts":7,"hsi":2,"magenta":4,"acc":1863},
+       "shifts":{"Mon 3/30": "09:45 AM - 04:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "09:45 AM - 01:30 PM", "Thu 4/2": "09:45 AM - 05:30 PM", "Fri 4/3": "09:45 AM - 01:30 PM", "Sat 4/4": "09:45 AM - 03:00 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"MA-FALLRIVER","code":"EL70857047",
+    "totalReps":2,"activeThisWeek":2,"repsForApril1":1,
+    "employees":[
+      {"name":"Justin Moniz","daysWorking":5,"hours":40.7,"pct":0.545,
+       "goals":{"boxes":60,"upgrade":24,"voice":29,"bts":12,"hsi":4,"magenta":10,"acc":3271},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "12:00 PM - 07:00 PM", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "01:00 PM - 07:00 PM", "Fri 4/3": "09:45 AM - 07:00 PM", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Khrystyne Quasney","daysWorking":4,"hours":33.9,"pct":0.454,
+       "goals":{"boxes":50,"upgrade":20,"voice":25,"bts":10,"hsi":3,"magenta":9,"acc":2725},
+       "shifts":{"Mon 3/30": "09:45 AM - 07:00 PM", "Tue 3/31": "09:45 AM - 07:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "09:30 AM - 07:00 PM", "Fri 4/3": "01:00 PM - 07:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"RI-RESERVOIR AVE","code":"EL70857048",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":2,
+    "employees":[
+      {"name":"Daniel Rosales","daysWorking":6,"hours":53.7,"pct":0.589,
+       "goals":{"boxes":74,"upgrade":29,"voice":29,"bts":18,"hsi":4,"magenta":10,"acc":3859},
+       "shifts":{"Mon 3/30": "09:30 AM - 07:00 PM", "Tue 3/31": "09:30 AM - 07:00 PM", "Wed 4/1": "09:30 AM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "09:30 AM - 07:00 PM", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "10:30 AM - 05:00 PM"}},
+      {"name":"Handriel Marmol","daysWorking":1,"hours":9.5,"pct":0.104,
+       "goals":{"boxes":13,"upgrade":5,"voice":5,"bts":3,"hsi":1,"magenta":2,"acc":683},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "09:30 AM - 07:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Jaden Thomas","daysWorking":4,"hours":28.0,"pct":0.307,
+       "goals":{"boxes":38,"upgrade":15,"voice":15,"bts":10,"hsi":2,"magenta":5,"acc":2012},
+       "shifts":{"Mon 3/30": "12:00 PM - 07:00 PM", "Tue 3/31": "12:00 PM - 07:00 PM", "Wed 4/1": "12:00 PM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "12:00 PM - 07:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"MA-CAPE COD MALL","code":"EL70857049",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":1,
+    "employees":[
+      {"name":"Maliek Feare","daysWorking":4,"hours":22.0,"pct":0.287,
+       "goals":{"boxes":48,"upgrade":19,"voice":24,"bts":9,"hsi":2,"magenta":6,"acc":2624},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "03:00 PM - 08:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "03:00 PM - 08:00 PM", "Fri 4/3": "03:00 PM - 09:00 PM", "Sat 4/4": "03:00 PM - 09:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Jason Link Jr","daysWorking":1,"hours":9.2,"pct":0.12,
+       "goals":{"boxes":20,"upgrade":8,"voice":10,"bts":4,"hsi":1,"magenta":3,"acc":1097},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Vernard Ashe","daysWorking":6,"hours":45.5,"pct":0.593,
+       "goals":{"boxes":99,"upgrade":40,"voice":50,"bts":19,"hsi":5,"magenta":12,"acc":5427},
+       "shifts":{"Mon 3/30": "09:45 AM - 08:00 PM", "Tue 3/31": "09:45 AM - 05:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "09:45 AM - 05:00 PM", "Fri 4/3": "09:45 AM - 05:00 PM", "Sat 4/4": "09:45 AM - 05:00 PM", "Sun 4/5": "11:45 AM - 06:00 PM"}},
+    ]
+  },
+  {
+    "label":"MA-WESTERN AVE","code":"EL70857050",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":1,
+    "employees":[
+      {"name":"Stephanie Melo","daysWorking":4,"hours":34.2,"pct":0.553,
+       "goals":{"boxes":81,"upgrade":33,"voice":35,"bts":19,"hsi":4,"magenta":10,"acc":4365},
+       "shifts":{"Mon 3/30": "09:45 AM - 07:00 PM", "Tue 3/31": "09:45 AM - 07:00 PM", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "10:30 AM - 05:00 PM"}},
+      {"name":"Abel Burgos","daysWorking":1,"hours":9.2,"pct":0.149,
+       "goals":{"boxes":22,"upgrade":9,"voice":10,"bts":5,"hsi":1,"magenta":3,"acc":1174},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "09:45 AM - 07:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Amina Fellah","daysWorking":2,"hours":18.5,"pct":0.299,
+       "goals":{"boxes":44,"upgrade":18,"voice":19,"bts":10,"hsi":2,"magenta":6,"acc":2361},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "09:45 AM - 07:00 PM", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"MA-KELLEY SQUARE","code":"EL70857051",
+    "totalReps":4,"activeThisWeek":4,"repsForApril1":2,
+    "employees":[
+      {"name":"Mariah Gonzalez","daysWorking":4,"hours":24.2,"pct":0.184,
+       "goals":{"boxes":49,"upgrade":20,"voice":21,"bts":13,"hsi":3,"magenta":5,"acc":2687},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "11:00 AM - 06:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "09:45 AM - 06:00 PM", "Fri 4/3": "12:00 PM - 05:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "11:00 AM - 03:00 PM"}},
+      {"name":"Richard Foster","daysWorking":5,"hours":40.5,"pct":0.308,
+       "goals":{"boxes":82,"upgrade":33,"voice":35,"bts":22,"hsi":4,"magenta":8,"acc":4497},
+       "shifts":{"Mon 3/30": "09:45 AM - 06:00 PM", "Tue 3/31": "09:45 AM - 07:00 PM", "Wed 4/1": "11:00 AM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "11:00 AM - 07:00 PM", "Sat 4/4": "12:00 PM - 07:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Alex Correa","daysWorking":6,"hours":44.8,"pct":0.341,
+       "goals":{"boxes":90,"upgrade":36,"voice":39,"bts":25,"hsi":5,"magenta":9,"acc":4975},
+       "shifts":{"Mon 3/30": "11:00 AM - 07:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "09:45 AM - 06:00 PM", "Thu 4/2": "11:00 AM - 07:00 PM", "Fri 4/3": "09:45 AM - 06:00 PM", "Sat 4/4": "09:45 AM - 05:00 PM", "Sun 4/5": "01:00 PM - 06:00 PM"}},
+      {"name":"Juliana Arruda","daysWorking":3,"hours":22.0,"pct":0.167,
+       "goals":{"boxes":44,"upgrade":18,"voice":19,"bts":12,"hsi":2,"magenta":5,"acc":2443},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "11:00 AM - 07:00 PM", "Fri 4/3": "11:00 AM - 07:00 PM", "Sat 4/4": "11:00 AM - 05:00 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"RI-COVENTRY","code":"EL70857052",
+    "totalReps":2,"activeThisWeek":2,"repsForApril1":1,
+    "employees":[
+      {"name":"Christopher Pierre Paul","daysWorking":4,"hours":36.9,"pct":0.571,
+       "goals":{"boxes":37,"upgrade":15,"voice":18,"bts":7,"hsi":2,"magenta":6,"acc":1970},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "09:45 AM - 07:00 PM", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "09:45 AM - 07:00 PM"}},
+      {"name":"Jason Link Jr","daysWorking":3,"hours":27.7,"pct":0.429,
+       "goals":{"boxes":27,"upgrade":11,"voice":13,"bts":5,"hsi":1,"magenta":5,"acc":1479},
+       "shifts":{"Mon 3/30": "09:45 AM - 07:00 PM", "Tue 3/31": "09:45 AM - 07:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "09:45 AM - 07:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"MA-ROCKDALE","code":"EL70857082",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":2,
+    "employees":[
+      {"name":"Derek Tejeda","daysWorking":4,"hours":35.9,"pct":0.36,
+       "goals":{"boxes":49,"upgrade":19,"voice":21,"bts":13,"hsi":3,"magenta":6,"acc":2630},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "09:45 AM - 07:00 PM", "Fri 4/3": "09:45 AM - 07:00 PM", "Sat 4/4": "09:45 AM - 06:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Lori Ruiz","daysWorking":5,"hours":40.0,"pct":0.401,
+       "goals":{"boxes":55,"upgrade":22,"voice":23,"bts":14,"hsi":3,"magenta":7,"acc":2930},
+       "shifts":{"Mon 3/30": "09:45 AM - 06:45 PM", "Tue 3/31": "10:00 AM - 07:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "09:45 AM - 06:15 PM", "Fri 4/3": "09:45 AM - 06:15 PM", "Sat 4/4": "10:00 AM - 03:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Djeison Barbosa","daysWorking":4,"hours":23.7,"pct":0.238,
+       "goals":{"boxes":32,"upgrade":13,"voice":14,"bts":8,"hsi":2,"magenta":4,"acc":1736},
+       "shifts":{"Mon 3/30": "09:45 AM - 07:00 PM", "Tue 3/31": "09:45 AM - 02:00 PM", "Wed 4/1": "09:45 AM - 02:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "01:00 PM - 07:00 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"RI-BROAD ST","code":"EL70857083",
+    "totalReps":2,"activeThisWeek":2,"repsForApril1":1,
+    "employees":[
+      {"name":"Sabrina Morales","daysWorking":5,"hours":37.7,"pct":0.486,
+       "goals":{"boxes":65,"upgrade":26,"voice":31,"bts":14,"hsi":3,"magenta":7,"acc":3544},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "11:00 AM - 07:00 PM", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "09:45 AM - 04:00 PM", "Sat 4/4": "11:00 AM - 07:00 PM", "Sun 4/5": "10:45 AM - 05:00 PM"}},
+      {"name":"Ana Marrero","daysWorking":5,"hours":39.9,"pct":0.514,
+       "goals":{"boxes":69,"upgrade":28,"voice":32,"bts":15,"hsi":4,"magenta":8,"acc":3751},
+       "shifts":{"Mon 3/30": "09:30 AM - 07:00 PM", "Tue 3/31": "09:30 AM - 02:30 PM", "Wed 4/1": "OFF", "Thu 4/2": "09:30 AM - 07:00 PM", "Fri 4/3": "09:30 AM - 07:00 PM", "Sat 4/4": "09:30 AM - 04:00 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"RI-BALD HILL","code":"EL70857084",
+    "totalReps":2,"activeThisWeek":2,"repsForApril1":2,
+    "employees":[
+      {"name":"Allia Abodaher","daysWorking":5,"hours":44.2,"pct":0.538,
+       "goals":{"boxes":69,"upgrade":28,"voice":30,"bts":17,"hsi":4,"magenta":9,"acc":3741},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "10:00 AM - 07:00 PM", "Thu 4/2": "09:45 AM - 07:00 PM", "Fri 4/3": "09:45 AM - 07:00 PM", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "10:30 AM - 06:00 PM"}},
+      {"name":"Izabella Regino","daysWorking":5,"hours":37.9,"pct":0.462,
+       "goals":{"boxes":60,"upgrade":24,"voice":25,"bts":15,"hsi":3,"magenta":7,"acc":3208},
+       "shifts":{"Mon 3/30": "09:45 AM - 07:00 PM", "Tue 3/31": "09:45 AM - 07:00 PM", "Wed 4/1": "12:30 PM - 07:00 PM", "Thu 4/2": "12:30 PM - 07:00 PM", "Fri 4/3": "12:30 PM - 07:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"RI-NEWPORT AVE","code":"EL70857085",
+    "totalReps":4,"activeThisWeek":4,"repsForApril1":2,
+    "employees":[
+      {"name":"Oswaldo Aranda","daysWorking":5,"hours":33.5,"pct":0.455,
+       "goals":{"boxes":35,"upgrade":14,"voice":16,"bts":8,"hsi":2,"magenta":4,"acc":1886},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "01:00 PM - 07:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "01:00 PM - 07:00 PM", "Fri 4/3": "01:00 PM - 07:00 PM", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "10:45 AM - 05:00 PM"}},
+      {"name":"Brandon Mitchell","daysWorking":1,"hours":6.0,"pct":0.081,
+       "goals":{"boxes":6,"upgrade":2,"voice":3,"bts":1,"hsi":0,"magenta":1,"acc":338},
+       "shifts":{"Mon 3/30": "01:00 PM - 07:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Keysha Betancourt","daysWorking":1,"hours":5.0,"pct":0.068,
+       "goals":{"boxes":5,"upgrade":2,"voice":2,"bts":1,"hsi":0,"magenta":1,"acc":282},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "02:00 PM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Cleoty Morales","daysWorking":5,"hours":29.2,"pct":0.396,
+       "goals":{"boxes":30,"upgrade":12,"voice":14,"bts":7,"hsi":2,"magenta":4,"acc":1644},
+       "shifts":{"Mon 3/30": "09:45 AM - 02:00 PM", "Tue 3/31": "09:45 AM - 02:00 PM", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "09:45 AM - 04:00 PM", "Fri 4/3": "09:45 AM - 03:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"RI-PROVIDENCE PL","code":"EL70857086",
+    "totalReps":5,"activeThisWeek":5,"repsForApril1":2,
+    "employees":[
+      {"name":"Abigail Baez","daysWorking":4,"hours":26.0,"pct":0.261,
+       "goals":{"boxes":63,"upgrade":25,"voice":28,"bts":13,"hsi":4,"magenta":9,"acc":3293},
+       "shifts":{"Mon 3/30": "10:45 AM - 04:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "10:45 AM - 06:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "09:45 AM - 05:00 PM", "Sat 4/4": "09:45 AM - 04:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Kadisha Rivera","daysWorking":4,"hours":31.5,"pct":0.317,
+       "goals":{"boxes":76,"upgrade":30,"voice":34,"bts":16,"hsi":5,"magenta":11,"acc":3990},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "10:45 AM - 06:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "10:45 AM - 06:00 PM", "Fri 4/3": "12:00 PM - 09:00 PM", "Sat 4/4": "12:00 PM - 08:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Brandon Mitchell","daysWorking":3,"hours":20.0,"pct":0.201,
+       "goals":{"boxes":48,"upgrade":19,"voice":22,"bts":10,"hsi":3,"magenta":7,"acc":2533},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "01:00 PM - 08:00 PM", "Thu 4/2": "01:00 PM - 08:00 PM", "Fri 4/3": "03:00 PM - 09:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Juliana Arruda","daysWorking":2,"hours":14.0,"pct":0.141,
+       "goals":{"boxes":34,"upgrade":14,"voice":15,"bts":7,"hsi":2,"magenta":5,"acc":1773},
+       "shifts":{"Mon 3/30": "01:00 PM - 08:00 PM", "Tue 3/31": "01:00 PM - 08:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Jason Link Jr","daysWorking":1,"hours":8.0,"pct":0.08,
+       "goals":{"boxes":19,"upgrade":8,"voice":9,"bts":4,"hsi":1,"magenta":3,"acc":1013},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "01:00 PM - 09:00 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"MA-SOUTH SHORE","code":"EL70857087",
+    "totalReps":4,"activeThisWeek":4,"repsForApril1":2,
+    "employees":[
+      {"name":"Yarele Soler","daysWorking":5,"hours":35.0,"pct":0.331,
+       "goals":{"boxes":68,"upgrade":27,"voice":26,"bts":17,"hsi":3,"magenta":11,"acc":3492},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "11:00 AM - 05:00 PM", "Thu 4/2": "11:00 AM - 05:00 PM", "Fri 4/3": "11:00 AM - 08:00 PM", "Sat 4/4": "11:00 AM - 08:00 PM", "Sun 4/5": "12:00 PM - 05:00 PM"}},
+      {"name":"Abel Burgos","daysWorking":1,"hours":11.2,"pct":0.106,
+       "goals":{"boxes":22,"upgrade":9,"voice":8,"bts":5,"hsi":1,"magenta":3,"acc":1117},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "09:45 AM - 09:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Amina Fellah","daysWorking":2,"hours":20.5,"pct":0.194,
+       "goals":{"boxes":40,"upgrade":16,"voice":15,"bts":10,"hsi":2,"magenta":6,"acc":2045},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "09:45 AM - 08:00 PM", "Thu 4/2": "09:45 AM - 08:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Lucmila Lopes","daysWorking":4,"hours":39.0,"pct":0.369,
+       "goals":{"boxes":76,"upgrade":30,"voice":29,"bts":18,"hsi":4,"magenta":12,"acc":3891},
+       "shifts":{"Mon 3/30": "09:45 AM - 08:00 PM", "Tue 3/31": "09:45 AM - 08:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "09:45 AM - 09:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "10:45 AM - 06:00 PM"}},
+    ]
+  },
+  {
+    "label":"CT-NEW LONDON","code":"EL70857088",
+    "totalReps":5,"activeThisWeek":5,"repsForApril1":2,
+    "employees":[
+      {"name":"James Garcia","daysWorking":1,"hours":7.0,"pct":0.064,
+       "goals":{"boxes":12,"upgrade":5,"voice":6,"bts":3,"hsi":1,"magenta":2,"acc":672},
+       "shifts":{"Mon 3/30": "12:00 PM - 07:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Josh Landry","daysWorking":4,"hours":25.5,"pct":0.232,
+       "goals":{"boxes":45,"upgrade":18,"voice":22,"bts":9,"hsi":2,"magenta":6,"acc":2448},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "09:30 AM - 05:00 PM", "Thu 4/2": "01:00 PM - 07:15 PM", "Fri 4/3": "09:45 AM - 04:00 PM", "Sat 4/4": "09:30 AM - 03:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Rashia Oates","daysWorking":3,"hours":22.5,"pct":0.205,
+       "goals":{"boxes":40,"upgrade":16,"voice":19,"bts":8,"hsi":2,"magenta":5,"acc":2160},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "12:00 PM - 07:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "09:30 AM - 07:00 PM", "Fri 4/3": "01:00 PM - 07:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Shanelle Sanchez","daysWorking":2,"hours":15.5,"pct":0.141,
+       "goals":{"boxes":27,"upgrade":11,"voice":13,"bts":6,"hsi":1,"magenta":3,"acc":1488},
+       "shifts":{"Mon 3/30": "09:45 AM - 05:30 PM", "Tue 3/31": "09:45 AM - 05:30 PM", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Gilberto Alvarez","daysWorking":5,"hours":39.5,"pct":0.359,
+       "goals":{"boxes":69,"upgrade":28,"voice":34,"bts":14,"hsi":3,"magenta":9,"acc":3791},
+       "shifts":{"Mon 3/30": "01:00 PM - 07:15 PM", "Tue 3/31": "OFF", "Wed 4/1": "11:00 AM - 07:15 PM", "Thu 4/2": "OFF", "Fri 4/3": "09:45 AM - 07:15 PM", "Sat 4/4": "11:00 AM - 07:15 PM", "Sun 4/5": "10:45 AM - 06:00 PM"}},
+    ]
+  },
+  {
+    "label":"MA-COGGESHALL","code":"EL70857089",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":1,
+    "employees":[
+      {"name":"Napoleoa Dacruz","daysWorking":5,"hours":45.5,"pct":0.769,
+       "goals":{"boxes":128,"upgrade":51,"voice":56,"bts":26,"hsi":6,"magenta":22,"acc":6687},
+       "shifts":{"Mon 3/30": "09:30 AM - 07:00 PM", "Tue 3/31": "09:30 AM - 05:30 PM", "Wed 4/1": "OFF", "Thu 4/2": "09:30 AM - 07:00 PM", "Fri 4/3": "10:00 AM - 07:00 PM", "Sat 4/4": "09:30 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Djeison Barbosa","daysWorking":1,"hours":4.2,"pct":0.071,
+       "goals":{"boxes":12,"upgrade":5,"voice":5,"bts":2,"hsi":1,"magenta":2,"acc":617},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "09:45 AM - 02:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Khrystyne Quasney","daysWorking":1,"hours":9.5,"pct":0.16,
+       "goals":{"boxes":27,"upgrade":11,"voice":12,"bts":5,"hsi":1,"magenta":4,"acc":1396},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "09:45 AM - 07:15 PM", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"RI-HARTFORD AVE","code":"EL70857090",
+    "totalReps":4,"activeThisWeek":4,"repsForApril1":2,
+    "employees":[
+      {"name":"Oscar Mendez Muniz","daysWorking":4,"hours":35.7,"pct":0.306,
+       "goals":{"boxes":63,"upgrade":25,"voice":29,"bts":15,"hsi":3,"magenta":7,"acc":3443},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "09:45 AM - 07:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "09:45 AM - 07:00 PM", "Fri 4/3": "11:00 AM - 07:00 PM", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Yanna Soriano","daysWorking":5,"hours":41.4,"pct":0.355,
+       "goals":{"boxes":73,"upgrade":29,"voice":33,"bts":17,"hsi":3,"magenta":9,"acc":3993},
+       "shifts":{"Mon 3/30": "09:30 AM - 06:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "11:00 AM - 07:00 PM", "Fri 4/3": "09:30 AM - 07:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "10:45 AM - 05:00 PM"}},
+      {"name":"Abigail Baez","daysWorking":1,"hours":6.2,"pct":0.053,
+       "goals":{"boxes":11,"upgrade":4,"voice":5,"bts":3,"hsi":0,"magenta":1,"acc":598},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "10:45 AM - 05:00 PM"}},
+      {"name":"Milton Vega","daysWorking":4,"hours":33.2,"pct":0.285,
+       "goals":{"boxes":59,"upgrade":23,"voice":27,"bts":14,"hsi":3,"magenta":7,"acc":3202},
+       "shifts":{"Mon 3/30": "11:00 AM - 07:00 PM", "Tue 3/31": "11:00 AM - 07:00 PM", "Wed 4/1": "11:00 AM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"RI-EAST PROV","code":"EL70857091",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":2,
+    "employees":[
+      {"name":"Saimary Hernandez","daysWorking":5,"hours":42.9,"pct":0.418,
+       "goals":{"boxes":57,"upgrade":23,"voice":24,"bts":13,"hsi":3,"magenta":8,"acc":2988},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "09:30 AM - 07:00 PM", "Wed 4/1": "09:30 AM - 07:00 PM", "Thu 4/2": "09:30 AM - 02:15 PM", "Fri 4/3": "09:30 AM - 07:15 PM", "Sat 4/4": "09:30 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Jose Monroy","daysWorking":5,"hours":30.2,"pct":0.294,
+       "goals":{"boxes":40,"upgrade":16,"voice":17,"bts":9,"hsi":2,"magenta":6,"acc":2103},
+       "shifts":{"Mon 3/30": "01:00 PM - 07:00 PM", "Tue 3/31": "01:00 PM - 07:00 PM", "Wed 4/1": "01:00 PM - 07:00 PM", "Thu 4/2": "01:00 PM - 07:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "10:45 AM - 05:00 PM"}},
+      {"name":"Isiaish Valenzuela","daysWorking":4,"hours":29.5,"pct":0.287,
+       "goals":{"boxes":39,"upgrade":16,"voice":17,"bts":9,"hsi":2,"magenta":6,"acc":2054},
+       "shifts":{"Mon 3/30": "09:30 AM - 04:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "01:00 PM - 07:00 PM", "Fri 4/3": "10:00 AM - 07:00 PM", "Sat 4/4": "11:00 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"TN-MAGNOLIA","code":"EL70857097",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":2,
+    "employees":[
+      {"name":"Melissa Sloane","daysWorking":4,"hours":32.9,"pct":0.306,
+       "goals":{"boxes":57,"upgrade":23,"voice":25,"bts":13,"hsi":5,"magenta":6,"acc":3002},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "09:30 AM - 06:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "09:30 AM - 06:00 PM", "Sat 4/4": "09:30 AM - 07:00 PM", "Sun 4/5": "10:30 AM - 05:00 PM"}},
+      {"name":"Mariel Mcallister","daysWorking":5,"hours":45.4,"pct":0.423,
+       "goals":{"boxes":78,"upgrade":31,"voice":34,"bts":18,"hsi":6,"magenta":8,"acc":4143},
+       "shifts":{"Mon 3/30": "09:30 AM - 07:00 PM", "Tue 3/31": "09:30 AM - 07:00 PM", "Wed 4/1": "11:00 AM - 07:00 PM", "Thu 4/2": "09:30 AM - 07:00 PM", "Fri 4/3": "10:00 AM - 07:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Delbert Phillips","daysWorking":5,"hours":29.0,"pct":0.27,
+       "goals":{"boxes":50,"upgrade":20,"voice":22,"bts":11,"hsi":4,"magenta":5,"acc":2646},
+       "shifts":{"Mon 3/30": "01:00 PM - 07:00 PM", "Tue 3/31": "01:00 PM - 07:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "01:00 PM - 07:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "01:00 PM - 07:00 PM", "Sun 4/5": "12:00 PM - 05:00 PM"}},
+    ]
+  },
+  {
+    "label":"TN-WESTERN AVE","code":"EL70857098",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":1,
+    "employees":[
+      {"name":"Melissa Sloane","daysWorking":2,"hours":15.5,"pct":0.202,
+       "goals":{"boxes":20,"upgrade":8,"voice":10,"bts":4,"hsi":2,"magenta":3,"acc":1058},
+       "shifts":{"Mon 3/30": "11:00 AM - 05:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "09:30 AM - 07:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Nicki Johnson","daysWorking":5,"hours":44.2,"pct":0.575,
+       "goals":{"boxes":56,"upgrade":22,"voice":28,"bts":10,"hsi":5,"magenta":7,"acc":3018},
+       "shifts":{"Mon 3/30": "09:30 AM - 07:00 PM", "Tue 3/31": "09:30 AM - 07:00 PM", "Wed 4/1": "09:30 AM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "09:30 AM - 07:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "10:45 AM - 05:00 PM"}},
+      {"name":"April Mayorga","daysWorking":2,"hours":17.2,"pct":0.224,
+       "goals":{"boxes":22,"upgrade":9,"voice":11,"bts":4,"hsi":2,"magenta":3,"acc":1174},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "11:00 AM - 07:00 PM", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"TN-N BROADWAY","code":"EL70857099",
+    "totalReps":4,"activeThisWeek":4,"repsForApril1":2,
+    "employees":[
+      {"name":"Shelena Hamilton","daysWorking":5,"hours":43.4,"pct":0.363,
+       "goals":{"boxes":63,"upgrade":25,"voice":33,"bts":11,"hsi":5,"magenta":8,"acc":3483},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "09:30 AM - 06:00 PM", "Wed 4/1": "09:30 AM - 06:00 PM", "Thu 4/2": "09:30 AM - 07:00 PM", "Fri 4/3": "09:30 AM - 06:00 PM", "Sat 4/4": "09:30 AM - 06:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Franchesca Rader","daysWorking":2,"hours":17.5,"pct":0.146,
+       "goals":{"boxes":25,"upgrade":10,"voice":13,"bts":5,"hsi":2,"magenta":3,"acc":1404},
+       "shifts":{"Mon 3/30": "09:30 AM - 06:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "10:00 AM - 07:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Christopher Marion","daysWorking":5,"hours":36.2,"pct":0.303,
+       "goals":{"boxes":53,"upgrade":21,"voice":28,"bts":9,"hsi":4,"magenta":6,"acc":2905},
+       "shifts":{"Mon 3/30": "01:00 PM - 07:00 PM", "Tue 3/31": "11:00 AM - 07:00 PM", "Wed 4/1": "11:00 AM - 07:00 PM", "Thu 4/2": "11:00 AM - 07:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "10:45 AM - 05:00 PM"}},
+      {"name":"April Mayorga","daysWorking":3,"hours":22.5,"pct":0.188,
+       "goals":{"boxes":33,"upgrade":13,"voice":17,"bts":6,"hsi":3,"magenta":4,"acc":1806},
+       "shifts":{"Mon 3/30": "11:00 AM - 07:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "10:30 AM - 07:00 PM", "Sun 4/5": "11:00 AM - 05:00 PM"}},
+    ]
+  },
+  {
+    "label":"TN-WEST MARKET","code":"EL70857100",
+    "totalReps":4,"activeThisWeek":4,"repsForApril1":3,
+    "employees":[
+      {"name":"Charisma Heggie","daysWorking":5,"hours":34.2,"pct":0.362,
+       "goals":{"boxes":30,"upgrade":12,"voice":13,"bts":6,"hsi":2,"magenta":5,"acc":1558},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "11:00 AM - 06:00 PM", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "02:00 PM - 07:00 PM", "Fri 4/3": "11:00 AM - 07:00 PM", "Sat 4/4": "12:00 PM - 05:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Melicia Angel","daysWorking":4,"hours":18.5,"pct":0.196,
+       "goals":{"boxes":16,"upgrade":7,"voice":7,"bts":3,"hsi":1,"magenta":3,"acc":843},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "09:45 AM - 03:00 PM", "Wed 4/1": "09:45 AM - 01:00 PM", "Thu 4/2": "09:45 AM - 03:00 PM", "Fri 4/3": "09:45 AM - 02:30 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Samantha Cuevas","daysWorking":5,"hours":28.2,"pct":0.299,
+       "goals":{"boxes":25,"upgrade":10,"voice":11,"bts":5,"hsi":1,"magenta":4,"acc":1284},
+       "shifts":{"Mon 3/30": "01:00 PM - 07:00 PM", "Tue 3/31": "02:30 PM - 07:00 PM", "Wed 4/1": "03:00 PM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "02:30 PM - 07:00 PM", "Sat 4/4": "09:45 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Shanna Speed","daysWorking":2,"hours":13.5,"pct":0.143,
+       "goals":{"boxes":12,"upgrade":5,"voice":5,"bts":2,"hsi":1,"magenta":2,"acc":615},
+       "shifts":{"Mon 3/30": "09:30 AM - 07:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "11:00 AM - 03:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+    ]
+  },
+  {
+    "label":"TN-MORRISTOWN","code":"EL70857101",
+    "totalReps":3,"activeThisWeek":3,"repsForApril1":2,
+    "employees":[
+      {"name":"Ashton Diamond","daysWorking":5,"hours":42.5,"pct":0.393,
+       "goals":{"boxes":27,"upgrade":11,"voice":15,"bts":6,"hsi":2,"magenta":3,"acc":1591},
+       "shifts":{"Mon 3/30": "09:30 AM - 07:00 PM", "Tue 3/31": "10:00 AM - 06:00 PM", "Wed 4/1": "10:00 AM - 07:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "11:00 AM - 07:00 PM", "Sat 4/4": "11:00 AM - 07:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Franchesca Rader","daysWorking":3,"hours":24.7,"pct":0.228,
+       "goals":{"boxes":16,"upgrade":6,"voice":9,"bts":3,"hsi":1,"magenta":2,"acc":925},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "09:30 AM - 07:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "11:00 AM - 06:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "09:45 AM - 06:00 PM", "Sun 4/5": "OFF"}},
+      {"name":"Andrew Serpa","daysWorking":5,"hours":41.0,"pct":0.379,
+       "goals":{"boxes":26,"upgrade":11,"voice":15,"bts":5,"hsi":2,"magenta":3,"acc":1535},
+       "shifts":{"Mon 3/30": "11:00 AM - 06:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "09:45 AM - 07:00 PM", "Thu 4/2": "09:45 AM - 07:00 PM", "Fri 4/3": "09:45 AM - 07:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "10:45 AM - 05:00 PM"}},
+    ]
+  },
+  {
+    "label":"RI-DOUGLAS","code":"EL70858436",
+    "totalReps":4,"activeThisWeek":4,"repsForApril1":1,
+    "employees":[
+      {"name":"Kadisha Rivera","daysWorking":1,"hours":9.2,"pct":0.194,
+       "goals":{"boxes":16,"upgrade":7,"voice":8,"bts":3,"hsi":1,"magenta":2,"acc":883},
+       "shifts":{"Mon 3/30": "09:45 AM - 07:00 PM", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Handriel Marmol","daysWorking":2,"hours":10.2,"pct":0.215,
+       "goals":{"boxes":18,"upgrade":7,"voice":9,"bts":3,"hsi":1,"magenta":2,"acc":978},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "10:00 AM - 02:00 PM", "Thu 4/2": "OFF", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "10:45 AM - 05:00 PM"}},
+      {"name":"Hasba Hakim","daysWorking":1,"hours":9.2,"pct":0.194,
+       "goals":{"boxes":16,"upgrade":7,"voice":8,"bts":3,"hsi":1,"magenta":2,"acc":883},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "OFF", "Wed 4/1": "OFF", "Thu 4/2": "09:45 AM - 07:00 PM", "Fri 4/3": "OFF", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+      {"name":"Jason Link Jr","daysWorking":2,"hours":18.7,"pct":0.394,
+       "goals":{"boxes":33,"upgrade":13,"voice":16,"bts":6,"hsi":2,"magenta":4,"acc":1794},
+       "shifts":{"Mon 3/30": "OFF", "Tue 3/31": "09:45 AM - 07:00 PM", "Wed 4/1": "OFF", "Thu 4/2": "OFF", "Fri 4/3": "09:30 AM - 07:00 PM", "Sat 4/4": "OFF", "Sun 4/5": "OFF"}},
+    ]
+  },
+];
 
 const SCHED_DAYS = ['Mon 3/30','Tue 3/31','Wed 4/1','Thu 4/2','Fri 4/3','Sat 4/4','Sun 4/5'];
 
