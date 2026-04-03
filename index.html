@@ -1761,27 +1761,30 @@ async function loadAirtableData(){
   try{
     const today = new Date().toISOString().split('T')[0];
     // Filter to today's records only using Airtable formula
-    const formula = encodeURIComponent(`IS_SAME({Date}, '${today}', 'day')`);
-    const url = `https://api.airtable.com/v0/${cfg.base}/${encodeURIComponent(cfg.table)}?maxRecords=200&filterByFormula=${formula}`;
+    const url = `https://api.airtable.com/v0/${cfg.base}/${encodeURIComponent(cfg.table)}?maxRecords=500&sort[0][field]=Date&sort[0][direction]=desc`;
     const resp = await fetch(url,{headers:{Authorization:`Bearer ${cfg.key}`}});
     if(!resp.ok){ const e=await resp.json(); throw new Error(e.error?.message||'HTTP '+resp.status); }
     const data = await resp.json();
 
-    // Aggregate all submissions per store (sum them — multiple reps per store)
+    // Aggregate all submissions per store — filter today in JS (flexible date matching)
     const storeData = {};
     data.records.forEach(rec=>{
       const f = rec.fields;
-      const store = (f.Store||'').trim().toUpperCase();
+      // Flexible date check — accept today's records (or all if no date field)
+      if(f.Date && !f.Date.startsWith(today)) return;
+      // Flexible store field — try Store, store, STORE
+      const store = (f.Store||f.store||f.STORE||'').trim().toUpperCase();
       if(!store) return;
       if(!storeData[store]) storeData[store] = {voice:0,bts:0,hsi:0,reacts:0,upgrades:0,acc:0,magenta:0,reps:[]};
-      storeData[store].voice    += parseInt(f.Voice)||0;
-      storeData[store].bts      += parseInt(f.BTS)||0;
-      storeData[store].hsi      += parseInt(f.HSI)||0;
-      storeData[store].reacts   += parseInt(f.Reacts)||0;
-      storeData[store].upgrades += parseInt(f.Upgrades)||0;
-      storeData[store].acc      += parseFloat(f.ACC)||0;
-      storeData[store].magenta  += parseInt(f.Magenta)||0;
-      if(f.Rep) storeData[store].reps.push(f.Rep);
+      // Flexible field names
+      storeData[store].voice    += parseInt(f.Voice||f.voice||f.VOICE)||0;
+      storeData[store].bts      += parseInt(f.BTS||f.bts||f.Bts)||0;
+      storeData[store].hsi      += parseInt(f.HSI||f.hsi||f.Hsi)||0;
+      storeData[store].reacts   += parseInt(f.Reacts||f.reacts||f.React||f.react)||0;
+      storeData[store].upgrades += parseInt(f.Upgrades||f.upgrades||f.Upgrade||f.upgrade)||0;
+      storeData[store].acc      += parseFloat(f.ACC||f.acc||f.Acc)||0;
+      storeData[store].magenta  += parseInt(f.Magenta||f.magenta||f.MIMs||f.mims)||0;
+      if(f.Rep||f.rep) storeData[store].reps.push(f.Rep||f.rep);
     });
 
     // Match Airtable store names to ACT_STORES IDs and write to localStorage
