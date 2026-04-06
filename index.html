@@ -274,8 +274,8 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
 .tab-panel.active{display:block;}
 .tab-divider{width:1px;background:#e2e4ef;margin:8px 6px;flex-shrink:0;}
 </style><div class="tab-nav">
-  <button class="tab-btn" onclick="switchTab('blitz',this)">💰 WEEKEND BLITZ</button>
   <button class="tab-btn" onclick="switchTab('incentive',this)">💜 HOW YOU GET PAID</button>
+  <button class="tab-btn" onclick="switchTab('nonneg',this)">⚡ NON-NEGOTIABLES</button>
   <button class="tab-btn" onclick="switchTab('apr3',this)">📊 RESULTS</button>
   <button class="tab-btn active" onclick="switchTab('apr4',this)">🎯 GOALS</button>
   <div class="tab-divider"></div>
@@ -284,355 +284,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:300px;backgro
   <button class="tab-btn" onclick="switchTab('intel',this)">🚨 INTEL</button>
   <button class="tab-btn" onclick="switchTab('hil',this)">👁️ HOW I'M LOOKING</button>
   <div style="margin-left:auto;padding:0 16px;font-size:10px;color:#9095b0;display:flex;align-items:center;">Tap a tab · Ctrl+F to search your store</div>
-</div><div id="tab-blitz" class="tab-panel" style="padding:28px 32px 40px"><!-- ═══ WEEKEND MONEY BLITZ ═══ -->
-
-
-  <!-- Animated background particles -->
-  <div class="blitz-bg"></div>
-
-  <div class="blitz-card">
-
-    <!-- HEADER -->
-    <div class="blitz-header">
-      <div class="blitz-dollar left">$</div>
-      <div class="blitz-title-block">
-        <div class="blitz-eyebrow">FRIDAY — SUNDAY ONLY</div>
-        <div class="blitz-title">WEEKEND<br>MONEY BLITZ</div>
-        <div class="blitz-sub-tag">STACK IT ALL WEEKEND · NO CAP</div>
-      </div>
-      <div class="blitz-dollar right">$</div>
-    </div>
-
-    <!-- HERO BONUS -->
-    <div class="blitz-hero">
-      <div class="blitz-hero-inner">
-        <div class="blitz-hero-label">EVERY ACTIVATION</div>
-        <div class="blitz-hero-amount">+$1</div>
-        <div class="blitz-hero-sub">per box · all weekend · unlimited</div>
-      </div>
-    </div>
-
-    <!-- TWO COLUMNS -->
-    <div class="blitz-cols">
-
-      <!-- LEFT: HSI -->
-      <div class="blitz-panel blitz-panel-hsi">
-        <div class="blitz-panel-tag">HSI = EASY MONEY</div>
-        <div class="blitz-panel-amount">$10</div>
-        <div class="blitz-panel-unit">every sale</div>
-        <div class="blitz-panel-note">Plug it. Sell it. Get paid.</div>
-      </div>
-
-      <!-- RIGHT: Lucky 7 -->
-      <div class="blitz-panel blitz-panel-lucky">
-        <div class="blitz-panel-tag" style="color:#E20074">THE PLAY</div>
-        <div class="blitz-lucky-title">LUCKY 7</div>
-        <div class="blitz-lucky-combo">4 LINES · 2 TABLETS · HSI</div>
-        <div class="blitz-lucky-math">
-          <div class="blitz-lucky-base">$20</div>
-          <div class="blitz-lucky-plus">+</div>
-          <div class="blitz-lucky-bonus-wrap">
-            <div class="blitz-lucky-bonus">$30</div>
-            <div class="blitz-lucky-bonus-label">HSI BONUS</div>
-          </div>
-        </div>
-        <div class="blitz-lucky-total">$30 TOTAL PAYOUT</div>
-      </div>
-
-    </div>
-
-    <!-- MIM + ACCESSORIES TABLE -->
-    <div class="blitz-mim">
-      <div class="blitz-mim-header">
-        <span class="blitz-mim-icon">📶</span>
-        MIM + ACCESSORIES
-      </div>
-      <div class="blitz-mim-table">
-        <div class="blitz-mim-cell">
-          <div class="blitz-mim-lines">1 LINE</div>
-          <div class="blitz-mim-pay">$20</div>
-        </div>
-        <div class="blitz-mim-cell">
-          <div class="blitz-mim-lines">2 LINES</div>
-          <div class="blitz-mim-pay">$30</div>
-        </div>
-        <div class="blitz-mim-cell">
-          <div class="blitz-mim-lines">3 LINES</div>
-          <div class="blitz-mim-pay">$40</div>
-        </div>
-        <div class="blitz-mim-cell blitz-mim-top">
-          <div class="blitz-mim-lines">4 LINES</div>
-          <div class="blitz-mim-pay blitz-mim-pay-gold">$50🔥</div>
-        </div>
-      </div>
-      <div class="blitz-mim-note">Must include accessories</div>
-    </div>
-
-  </div>
-</div>
-
-<style>
-/* ── BLITZ STYLES ── */
-.blitz-bg {
-  position:absolute; top:0; left:0; right:0; height:500px; pointer-events:none;
-  background: radial-gradient(ellipse 60% 40% at 50% 0%, #E2007420 0%, transparent 70%),
-              radial-gradient(ellipse 40% 30% at 20% 50%, #f59e0b15 0%, transparent 60%),
-              radial-gradient(ellipse 40% 30% at 80% 50%, #E2007415 0%, transparent 60%);
-  z-index:0;
-}
-
-.blitz-card {
-  position:relative;z-index:1;
-  background: linear-gradient(160deg, #0f0f1e 0%, #0a0a18 50%, #0f0a1a 100%);
-  border:1px solid #E2007430;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow: 0 0 60px #E2007420, 0 0 120px #f59e0b10, inset 0 1px 0 #ffffff08;
-  animation: blitz-appear 0.6s cubic-bezier(0.16,1,0.3,1) both;
-}
-
-@keyframes blitz-appear {
-  from { opacity:0; transform: translateY(20px) scale(0.98); }
-  to   { opacity:1; transform: translateY(0) scale(1); }
-}
-
-/* HEADER */
-.blitz-header {
-  position:relative;
-  text-align:center;
-  padding:32px 20px 24px;
-  background: linear-gradient(180deg, #E2007418 0%, transparent 100%);
-  border-bottom:1px solid #E2007425;
-  display:flex;align-items:center;justify-content:center;gap:0;
-}
-.blitz-dollar {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:72px;
-  line-height:1;
-  background: linear-gradient(180deg, #FFD700 0%, #f59e0b 50%, #E2007480 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter: drop-shadow(0 0 20px #f59e0b60);
-  flex-shrink:0;
-  animation: pulse-dollar 2s ease-in-out infinite;
-}
-.blitz-dollar.left { animation-delay:0s; }
-.blitz-dollar.right { animation-delay:1s; }
-@keyframes pulse-dollar {
-  0%,100% { filter: drop-shadow(0 0 16px #f59e0b50); }
-  50%      { filter: drop-shadow(0 0 30px #f59e0b90); }
-}
-
-.blitz-title-block { flex:1; text-align:center; }
-.blitz-eyebrow {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:13px;letter-spacing:5px;
-  color:#ffffff60;margin-bottom:6px;
-  text-transform:uppercase;
-}
-.blitz-title {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(42px,6vw,68px);
-  letter-spacing:4px;
-  line-height:0.9;
-  background: linear-gradient(180deg, #FFD700 0%, #f59e0b 40%, #E20074 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter: drop-shadow(0 2px 20px #f59e0b40);
-}
-.blitz-sub-tag {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:13px;letter-spacing:4px;
-  color:#ffffff50;margin-top:8px;
-}
-
-/* HERO */
-.blitz-hero {
-  padding:20px 24px;
-  display:flex;justify-content:center;
-}
-.blitz-hero-inner {
-  background: linear-gradient(135deg, #E2007420, #f59e0b15);
-  border:1px solid #E2007440;
-  border-radius:12px;
-  padding:20px 48px;
-  text-align:center;
-  width:100%;
-  position:relative;
-  overflow:hidden;
-}
-.blitz-hero-inner::before {
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,#E20074,transparent);
-}
-.blitz-hero-label {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:14px;letter-spacing:5px;color:#ffffff60;margin-bottom:4px;
-}
-.blitz-hero-amount {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(56px,8vw,88px);
-  letter-spacing:2px;
-  line-height:1;
-  background: linear-gradient(180deg, #ffffff 0%, #E20074 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter: drop-shadow(0 0 30px #E2007460);
-  animation: hero-pulse 2.5s ease-in-out infinite;
-}
-@keyframes hero-pulse {
-  0%,100% { filter: drop-shadow(0 0 20px #E2007440); }
-  50%      { filter: drop-shadow(0 0 50px #E2007480); }
-}
-.blitz-hero-sub {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:14px;letter-spacing:4px;color:#ffffff50;margin-top:4px;
-}
-
-/* COLUMNS */
-.blitz-cols {
-  display:grid;grid-template-columns:1fr 1fr;gap:16px;
-  padding:0 24px 20px;
-}
-.blitz-panel {
-  border-radius:12px;padding:20px;text-align:center;
-  position:relative;overflow:hidden;
-}
-.blitz-panel::before {
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-}
-.blitz-panel-hsi {
-  background:linear-gradient(135deg,#00BCD415,#34d39910);
-  border:1px solid #34d39930;
-}
-.blitz-panel-hsi::before { background:linear-gradient(90deg,transparent,#34d399,transparent); }
-.blitz-panel-lucky {
-  background:linear-gradient(135deg,#E2007418,#f59e0b10);
-  border:1px solid #E2007440;
-}
-.blitz-panel-lucky::before { background:linear-gradient(90deg,transparent,#E20074,transparent); }
-
-.blitz-panel-tag {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:12px;letter-spacing:3px;
-  color:#34d399;margin-bottom:6px;
-}
-.blitz-panel-amount {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(48px,6vw,72px);
-  line-height:1;
-  background:linear-gradient(180deg,#FFD700,#f59e0b);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 20px #f59e0b50);
-}
-.blitz-panel-unit {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:16px;letter-spacing:3px;color:#ffffff80;margin-top:2px;
-}
-.blitz-panel-note {
-  font-size:11px;color:#ffffff40;margin-top:10px;letter-spacing:1px;
-}
-
-/* Lucky 7 */
-.blitz-lucky-title {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(36px,5vw,54px);letter-spacing:4px;
-  background:linear-gradient(135deg,#FFD700,#f59e0b);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 16px #f59e0b50);
-  animation: lucky-glow 2s ease-in-out infinite;
-}
-@keyframes lucky-glow {
-  0%,100% { filter:drop-shadow(0 0 12px #f59e0b40); }
-  50%      { filter:drop-shadow(0 0 28px #f59e0b70); }
-}
-.blitz-lucky-combo {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:12px;letter-spacing:3px;color:#ffffff60;
-  margin:4px 0 12px;
-}
-.blitz-lucky-math {
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  margin-bottom:8px;
-}
-.blitz-lucky-base {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:36px;color:#ffffff90;line-height:1;
-}
-.blitz-lucky-plus {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:28px;color:#ffffff50;
-}
-.blitz-lucky-bonus-wrap {
-  background:linear-gradient(135deg,#34d39920,#34d39910);
-  border:1px solid #34d39950;
-  border-radius:8px;padding:6px 12px;text-align:center;
-}
-.blitz-lucky-bonus {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:36px;line-height:1;
-  background:linear-gradient(180deg,#34d399,#00BCD4);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.blitz-lucky-bonus-label {
-  font-size:8px;letter-spacing:2px;color:#34d39980;text-transform:uppercase;
-}
-.blitz-lucky-total {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:14px;letter-spacing:3px;
-  background:linear-gradient(90deg,#34d399,#00BCD4);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 12px #34d39940);
-}
-
-/* MIM TABLE */
-.blitz-mim {
-  border-top:1px solid #E2007420;
-  padding:20px 24px 24px;
-}
-.blitz-mim-header {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:18px;letter-spacing:4px;
-  color:#ffffff80;
-  text-align:center;margin-bottom:14px;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-}
-.blitz-mim-icon { font-size:16px; }
-.blitz-mim-table {
-  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
-}
-.blitz-mim-cell {
-  background:linear-gradient(135deg,#ffffff08,#ffffff04);
-  border:1px solid #ffffff15;
-  border-radius:10px;padding:14px 8px;text-align:center;
-  transition:.2s;
-}
-.blitz-mim-cell:hover {
-  border-color:#E2007440;background:linear-gradient(135deg,#E2007410,#E2007408);
-  transform:translateY(-2px);
-}
-.blitz-mim-top {
-  background:linear-gradient(135deg,#f59e0b20,#E2007415)!important;
-  border-color:#f59e0b40!important;
-  box-shadow:0 0 20px #f59e0b20;
-}
-.blitz-mim-lines {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:12px;letter-spacing:2px;color:#ffffff50;margin-bottom:6px;
-}
-.blitz-mim-pay {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(28px,4vw,40px);
-  color:#ffffff;line-height:1;
-}
-.blitz-mim-pay-gold {
-  background:linear-gradient(180deg,#FFD700,#f59e0b);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 16px #f59e0b50);
-}
-.blitz-mim-note {
-  text-align:center;font-size:10px;color:#ffffff30;
-  letter-spacing:2px;margin-top:10px;text-transform:uppercase;
-}
-</style></div>
-<div id="tab-incentive" class="tab-panel" style="padding:28px 32px 40px"><!-- ═══ WEEKLY INCENTIVE PAYOUTS ═══ -->
+</div><div id="tab-incentive" class="tab-panel" style="padding:28px 32px 40px"><!-- ═══ WEEKLY INCENTIVE PAYOUTS ═══ -->
 
 
 <div class="inc-card">
@@ -2436,40 +2088,40 @@ function storeCard(s) {
       <div style="padding:16px 14px 12px;border-bottom:2px solid #e2e4ef;background:linear-gradient(135deg,#1a1b2e,#2d1060)">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:4px;color:#ffffff;margin-bottom:4px">WHAT YOU NEED TODAY</div>
         <div style="font-size:10px;color:#9095b0;letter-spacing:2px;margin-bottom:16px">YOUR TARGETS FOR APRIL 6</div>
-        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+        <div class="today-tiles">
 
           <!-- BOXES -->
-          <div style="background:#2a0a1a;border:2px solid #C8005E60;border-radius:10px;padding:14px 6px;text-align:center">
-            <div style="font-size:8px;font-weight:700;color:#ff6b9d;letter-spacing:1px;margin-bottom:6px">BOXES</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#ff6b9d;line-height:1">${todayBoxes}</div>
+          <div style="background:#2a0a1a;border:2px solid #C8005E60;border-radius:10px;padding:10px 4px;text-align:center">
+            <div style="font-size:7px;font-weight:700;color:#ff6b9d;letter-spacing:1px;margin-bottom:6px">BOXES</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:44px;color:#ff6b9d;line-height:1">${todayBoxes}</div>
             <div style="font-size:9px;color:#ffffff60;margin-top:4px">${s.remaining} left MTD</div>
           </div>
 
           <!-- TABLETS (BTS) -->
-          <div style="background:#0a2a1a;border:2px solid #00875a60;border-radius:10px;padding:14px 6px;text-align:center">
+          <div style="background:#0a2a1a;border:2px solid #00875a60;border-radius:10px;padding:10px 4px;text-align:center">
             <div style="font-size:8px;font-weight:700;color:#34d399;letter-spacing:1px;margin-bottom:6px">TABLETS</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#34d399;line-height:1">${todayBTS}</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:44px;color:#34d399;line-height:1">${todayBTS}</div>
             <div style="font-size:9px;color:#9095b0;margin-top:4px">per day goal</div>
           </div>
 
           <!-- HOME INTERNET (HSI) -->
-          <div style="background:#0a1a2e;border:2px solid #0284c760;border-radius:10px;padding:14px 6px;text-align:center">
+          <div style="background:#0a1a2e;border:2px solid #0284c760;border-radius:10px;padding:10px 4px;text-align:center">
             <div style="font-size:8px;font-weight:700;color:#60a5fa;letter-spacing:1px;margin-bottom:6px">HOME INTERNET</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#60a5fa;line-height:1">${todayHSI}</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:44px;color:#60a5fa;line-height:1">${todayHSI}</div>
             <div style="font-size:9px;color:#9095b0;margin-top:4px">per day goal</div>
           </div>
 
           <!-- MAGENTA (MIM) -->
-          <div style="background:#2a0a20;border:2px solid #f472b660;border-radius:10px;padding:14px 6px;text-align:center">
+          <div style="background:#2a0a20;border:2px solid #f472b660;border-radius:10px;padding:10px 4px;text-align:center">
             <div style="font-size:8px;font-weight:700;color:#f9a8d4;letter-spacing:1px;margin-bottom:6px">MAGENTA</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#f9a8d4;line-height:1">${todayMIM}</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:44px;color:#f9a8d4;line-height:1">${todayMIM}</div>
             <div style="font-size:9px;color:#9095b0;margin-top:4px">per day goal</div>
           </div>
 
           <!-- ACCESSORIES $ -->
-          <div style="background:#1a1200;border:2px solid #f59e0b60;border-radius:10px;padding:14px 6px;text-align:center">
+          <div class="tile-acc" style="background:#1a1200;border:2px solid #f59e0b60;border-radius:10px;padding:10px 4px;text-align:center">
             <div style="font-size:8px;font-weight:700;color:#fbbf24;letter-spacing:1px;margin-bottom:6px">ACC $</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:#fbbf24;line-height:1;margin-top:8px">$${todayAcc}</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:30px;color:#fbbf24;line-height:1;margin-top:8px">$${todayAcc}</div>
             <div style="font-size:9px;color:#9095b0;margin-top:4px">daily target</div>
           </div>
 
@@ -2590,6 +2242,139 @@ function toggleStore(dropId, cardId) {
   if (!open) card.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
+
+
+// ═══ FIRE & LIGHTNING EFFECTS ═══
+function initFireLightning() {
+  const tab = document.getElementById('tab-incentive');
+  if (!tab || tab._fxInit) return;
+  tab._fxInit = true;
+
+  // ── CANVAS FIRE ──
+  const canvas = document.createElement('canvas');
+  canvas.id = 'incentive-fx-canvas';
+  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.18';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+
+  function resizeCanvas() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  // Flame particles
+  const particles = [];
+  const COLORS = ['#ff0000','#ff2200','#ff4500','#ff6500','#ff8c00','#ffa500','#ffcc00','#ffffff'];
+
+  function spawnParticle() {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: canvas.height,
+      vx: (Math.random() - 0.5) * 2,
+      vy: -(Math.random() * 4 + 2),
+      life: 1,
+      decay: Math.random() * 0.015 + 0.008,
+      size: Math.random() * 8 + 3,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    });
+  }
+
+  // Lightning bolts
+  const bolts = [];
+  function spawnBolt() {
+    if (Math.random() > 0.04) return;
+    const x = Math.random() * canvas.width;
+    const segs = [];
+    let cx = x, cy = 0;
+    while (cy < canvas.height * 0.6) {
+      const nx = cx + (Math.random()-0.5)*60;
+      const ny = cy + Math.random()*60+20;
+      segs.push({x1:cx,y1:cy,x2:nx,y2:ny});
+      cx = nx; cy = ny;
+    }
+    bolts.push({ segs, life: 1, decay: 0.15 + Math.random()*0.1 });
+  }
+
+  function drawFrame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Spawn
+    for (let i = 0; i < 3; i++) spawnParticle();
+    spawnBolt();
+
+    // Draw fire particles
+    for (let i = particles.length-1; i >= 0; i--) {
+      const p = particles[i];
+      p.x  += p.vx;
+      p.y  += p.vy;
+      p.vx += (Math.random()-0.5)*0.3;
+      p.life -= p.decay;
+      if (p.life <= 0) { particles.splice(i,1); continue; }
+      ctx.save();
+      ctx.globalAlpha = p.life * 0.7;
+      ctx.shadowColor = p.color;
+      ctx.shadowBlur  = p.size * 2;
+      ctx.fillStyle   = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // Draw lightning
+    for (let i = bolts.length-1; i >= 0; i--) {
+      const b = bolts[i];
+      b.life -= b.decay;
+      if (b.life <= 0) { bolts.splice(i,1); continue; }
+      ctx.save();
+      ctx.globalAlpha = b.life * 0.9;
+      ctx.strokeStyle = '#a29bfe';
+      ctx.lineWidth   = 2;
+      ctx.shadowColor = '#6c5ce7';
+      ctx.shadowBlur  = 20;
+      ctx.beginPath();
+      b.segs.forEach((s,j) => {
+        if (j===0) ctx.moveTo(s.x1,s.y1);
+        ctx.lineTo(s.x2,s.y2);
+      });
+      ctx.stroke();
+      // Bright core
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth   = 0.5;
+      ctx.shadowBlur  = 5;
+      ctx.beginPath();
+      b.segs.forEach((s,j) => {
+        if (j===0) ctx.moveTo(s.x1,s.y1);
+        ctx.lineTo(s.x2,s.y2);
+      });
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    if (document.getElementById('tab-incentive').style.display !== 'none') {
+      requestAnimationFrame(drawFrame);
+    } else {
+      canvas.style.display = 'none';
+    }
+  }
+
+  drawFrame();
+}
+
+function stopFireLightning() {
+  const canvas = document.getElementById('incentive-fx-canvas');
+  if (canvas) canvas.style.display = 'none';
+}
+
+
+
+function toggleProcess(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
 
 // Initial render
 render();
@@ -2799,6 +2584,20 @@ function toggleMgr(dropId, cardId) {
 
 // ── TAB NAVIGATION ──
 function switchTab(id, btn) {
+  // Re-trigger incentive animations when tab is clicked
+  if (id === 'incentive') {
+    const tab = document.getElementById('tab-incentive');
+    tab.querySelectorAll('.inc-panel,.inc-tier,.inc-acc-row,.inc-powerup,.inc-bottom-panel').forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = '';
+    });
+    const cvs = document.getElementById('incentive-fx-canvas');
+    if (cvs) cvs.style.display = 'block';
+    initFireLightning();
+  } else {
+    stopFireLightning();
+  }
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   const el = document.getElementById('tab-' + id);
@@ -4335,5 +4134,82 @@ function hilOpenStorePanel(name) {
 <div id="hil-store-overlay" onclick="if(event.target===this)this.classList.remove('open')">
   <div class="hil-store-panel" id="hil-store-panel-inner"></div>
 </div>
+
+<!-- TAB: NON-NEGOTIABLES -->
+<div id="tab-nonneg" class="tab-panel" style="background:#0f0f1e;min-height:100vh;padding:0">
+
+  <!-- Header -->
+  <div style="background:linear-gradient(135deg,#1a1b2e 0%,#2d1060 60%,#1a1b2e 100%);padding:32px;border-bottom:3px solid #C8005E;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,#C8005E18,transparent);pointer-events:none"></div>
+    <div style="position:relative;z-index:1;text-align:center">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:5px;color:#C8005E;margin-bottom:8px">EDGE LINK INC · APRIL 2026</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,56px);letter-spacing:3px;color:#ffffff;line-height:1;margin-bottom:8px">NON-NEGOTIABLES</div>
+      <div style="font-size:13px;color:#9095b0;max-width:500px;margin:0 auto;line-height:1.7">These are not suggestions. These are not goals. These are the <b style="color:#ffffff">minimum standard</b> of execution at Edge Link — every rep, every store, every transaction.</div>
+    </div>
+  </div>
+
+  <!-- Cards -->
+  <div style="padding:28px 24px 48px;max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:16px">
+
+    <!-- 1. BOXES -->
+    <div style="background:#1a1b2e;border:1px solid #ffffff12;border-left:5px solid #C8005E;border-radius:12px;padding:24px 28px;display:flex;align-items:flex-start;gap:20px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#C8005E;line-height:1;flex-shrink:0;width:48px;text-align:center">1</div>
+      <div style="flex:1">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#ffffff;margin-bottom:6px">BOXES ARE THE BASELINE</div>
+        <div style="font-size:13px;color:#e8e8f0;line-height:1.9">Every rep is expected to hit their daily goal. <b style="color:#ffffff">No traffic excuse. No slow day excuse.</b> If you're open, you're selling. Your daily goal is posted — know it before you walk in the door.</div>
+        <div style="margin-top:10px;background:#C8005E18;border:1px solid #C8005E30;border-radius:6px;padding:8px 14px;font-size:11px;color:#ff6b9d;letter-spacing:1px">📦 FIND YOUR STORE → GOALS TAB → YOUR NUMBER IS THERE</div>
+      </div>
+    </div>
+
+    <!-- 2. BTS -->
+    <div style="background:#1a1b2e;border:1px solid #ffffff12;border-left:5px solid #00875a;border-radius:12px;padding:24px 28px;display:flex;align-items:flex-start;gap:20px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#00875a;line-height:1;flex-shrink:0;width:48px;text-align:center">2</div>
+      <div style="flex:1">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#ffffff;margin-bottom:6px">BTS ON EVERY TRANSACTION</div>
+        <div style="font-size:13px;color:#e8e8f0;line-height:1.9">Every phone sold needs a tablet conversation. <b style="color:#ffffff">Zero BTS is zero effort.</b> You didn't forget — you chose not to offer it. That's not acceptable here. Walk them to the tablets. Show them the value.</div>
+        <div style="margin-top:10px;background:#00875a18;border:1px solid #00875a30;border-radius:6px;padding:8px 14px;font-size:11px;color:#34d399;letter-spacing:1px">📲 OFFER EVERY TIME · IF NOT INTERESTED → WALK TO 3 → FINAL OFFER 1</div>
+      </div>
+    </div>
+
+    <!-- 3. HSI -->
+    <div style="background:#1a1b2e;border:1px solid #ffffff12;border-left:5px solid #0284c7;border-radius:12px;padding:24px 28px;display:flex;align-items:flex-start;gap:20px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#0284c7;line-height:1;flex-shrink:0;width:48px;text-align:center">3</div>
+      <div style="flex:1">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#ffffff;margin-bottom:6px">HSI ON EVERY ACCOUNT</div>
+        <div style="font-size:13px;color:#e8e8f0;line-height:1.9">Ask about home internet <b style="color:#ffffff">every single time.</b> It takes one question. "Do you have home internet? Are you happy with it?" That's it. <b style="color:#ffffff">Zero HSI means you never asked.</b> That's not a slow day — that's a missed opportunity.</div>
+        <div style="margin-top:10px;background:#0284c718;border:1px solid #0284c730;border-radius:6px;padding:8px 14px;font-size:11px;color:#60a5fa;letter-spacing:1px">📡 LUCKY 7 = 4 LINES + 2 TABLETS + 1 HSI = $30 SPIFF + $10 BONUS</div>
+      </div>
+    </div>
+
+    <!-- 4. MIM -->
+    <div style="background:#1a1b2e;border:1px solid #ffffff12;border-left:5px solid #f472b6;border-radius:12px;padding:24px 28px;display:flex;align-items:flex-start;gap:20px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#f472b6;line-height:1;flex-shrink:0;width:48px;text-align:center">4</div>
+      <div style="flex:1">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#ffffff;margin-bottom:6px">MIM ON EVERY ACCOUNT</div>
+        <div style="font-size:13px;color:#e8e8f0;line-height:1.9">Magenta in Metro is not optional. <b style="color:#ffffff">Check eligibility on every account before anything else.</b> If they qualify — lead with it. If they don't — pivot to Metro and build the full solution. No exceptions.</div>
+        <div style="margin-top:10px;background:#f472b618;border:1px solid #f472b630;border-radius:6px;padding:8px 14px;font-size:11px;color:#f9a8d4;letter-spacing:1px">🔴 CHECK ELIGIBLE BANs FIRST · MAGENTA FIRST · METRO SECOND</div>
+      </div>
+    </div>
+
+    <!-- 5. ACCESSORIES -->
+    <div style="background:#1a1b2e;border:1px solid #ffffff12;border-left:5px solid #f59e0b;border-radius:12px;padding:24px 28px;display:flex;align-items:flex-start;gap:20px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#f59e0b;line-height:1;flex-shrink:0;width:48px;text-align:center">5</div>
+      <div style="flex:1">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#ffffff;margin-bottom:6px">ACCESSORIES ON EVERY SALE</div>
+        <div style="font-size:13px;color:#e8e8f0;line-height:1.9">Build the full solution. <b style="color:#ffffff">Every customer deserves the complete experience.</b> Present 5. Walk to 3 if no. Final offer 1. <b style="color:#C8005E">Never skip steps. Never freestyle.</b> This process is your income — protect it.</div>
+        <div style="margin-top:10px;background:#f59e0b18;border:1px solid #f59e0b30;border-radius:6px;padding:8px 14px;font-size:11px;color:#fbbf24;letter-spacing:1px">💰 5 → 3 → 1 · EVERY TIME · NO EXCEPTIONS</div>
+      </div>
+    </div>
+
+    <!-- THE RULE -->
+    <div style="background:linear-gradient(135deg,#C8005E18,#7c3aed18);border:1px solid #C8005E40;border-radius:12px;padding:24px 28px;text-align:center;margin-top:8px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:4px;color:#9095b0;margin-bottom:10px">THE BOTTOM LINE</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,4vw,28px);color:#ffffff;line-height:1.4;margin-bottom:12px">Hitting boxes with 0 BTS · 0 HSI · 0 MIM<br>is still a <span style="color:#C8005E">failed day.</span></div>
+      <div style="font-size:12px;color:#9095b0;line-height:1.8">We don't measure volume alone. We measure <b style="color:#ffffff">complete execution.</b><br>Show up. Do the work. Hit all five. Every day.</div>
+    </div>
+
+  </div>
+</div>
+
 </body>
 </html>
