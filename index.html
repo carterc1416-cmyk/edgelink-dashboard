@@ -377,13 +377,13 @@ if(window.innerWidth < 768){
 <div id="closing-recap-banner" style="display:none;"></div>
 
 <div class="net-bar">
-  <div class="net-stat"><div class="net-label">MTD PPD</div><div class="net-val c-green">945</div><div class="net-sub" style="color:#00875a;font-weight:600">137% pace ✅</div><div class="net-sub">exp 688 · mo 4,266</div></div>
-  <div class="net-stat"><div class="net-label">MTD BTS</div><div class="net-val" style="color:#FFD600">150</div><div class="net-sub" style="color:#FFD600;font-weight:600">78% pace ⚠️</div><div class="net-sub">exp 192 · mo 1,192</div></div>
-  <div class="net-stat"><div class="net-label">MTD HSI</div><div class="net-val" style="color:#60a5fa">71</div><div class="net-sub" style="color:#00875a;font-weight:600">142% pace ✅</div><div class="net-sub">exp 50 · mo 308</div></div>
-  <div class="net-stat"><div class="net-label">MTD MIM LINES</div><div class="net-val" style="color:#f472b6">118</div><div class="net-sub" style="color:#00875a;font-weight:600">257% pace ✅</div><div class="net-sub">exp 46 · mo 287</div></div>
-  <div class="net-stat"><div class="net-label">MTD VOICE</div><div class="net-val" style="color:#a78bfa">517</div><div class="net-sub" style="color:#00875a;font-weight:600">121% pace ✅</div><div class="net-sub">exp 426 · mo 2,643</div></div>
-  <div class="net-stat"><div class="net-label">MTD ACC $</div><div class="net-val c-gold">$34,037</div><div class="net-sub" style="color:#00875a;font-weight:600">103% pace ✅</div><div class="net-sub">exp $32,990 · mo $204,540</div></div>
-  <div class="net-stat"><div class="net-label">Remaining</div><div class="net-val">3,321</div><div class="net-sub">of 4,266 monthly</div><div class="net-sub">~128/day needed</div></div>
+  <div class="net-stat"><div class="net-label">MTD PPD</div><div class="net-val c-green">1,119</div><div class="net-sub" style="color:#00875a;font-weight:600">135% pace ✅</div><div class="net-sub">exp 826 · mo 4,266</div></div>
+  <div class="net-stat"><div class="net-label">MTD BTS</div><div class="net-val" style="color:#FFD600">172</div><div class="net-sub" style="color:#FFD600;font-weight:600">74% pace ⚠️</div><div class="net-sub">exp 231 · mo 1,192</div></div>
+  <div class="net-stat"><div class="net-label">MTD HSI</div><div class="net-val" style="color:#60a5fa">84</div><div class="net-sub" style="color:#00875a;font-weight:600">140% pace ✅</div><div class="net-sub">exp 60 · mo 308</div></div>
+  <div class="net-stat"><div class="net-label">MTD MIM LINES</div><div class="net-val" style="color:#f472b6">135</div><div class="net-sub" style="color:#00875a;font-weight:600">241% pace ✅</div><div class="net-sub">exp 56 · mo 287</div></div>
+  <div class="net-stat"><div class="net-label">MTD VOICE</div><div class="net-val" style="color:#a78bfa">605</div><div class="net-sub" style="color:#00875a;font-weight:600">118% pace ✅</div><div class="net-sub">exp 512 · mo 2,643</div></div>
+  <div class="net-stat"><div class="net-label">MTD ACC $</div><div class="net-val c-gold">$39,204</div><div class="net-sub" style="color:#00875a;font-weight:600">99% pace 🟡</div><div class="net-sub">exp $39,622 · mo $204,540</div></div>
+  <div class="net-stat"><div class="net-label">Remaining</div><div class="net-val">3,147</div><div class="net-sub">of 4,266 monthly</div><div class="net-sub">~126/day needed</div></div>
 </div>
 <div class="tab-nav">
   <!-- OPEN TABS — no PIN required -->
@@ -1521,6 +1521,27 @@ function closePinModal(){document.getElementById('pinModal').classList.remove('a
 function setFilter(f,btn){curFilter=f;render();}
 function setSort(s,btn){curSort=s;render();}
 function render(){
+  // Update net bar dynamically from live STORES data
+  (function(){
+    const T = STORES.reduce((a,s)=>({
+      ppd:a.ppd+s.mtd, voice:a.voice+s.mtdVoice, bts:a.bts+(s.mtdTablet||0),
+      hsi:a.hsi+s.mtdHint, mim:a.mim+s.mtdMIM, acc:a.acc+s.mtdAcc,
+      goal:a.goal+s.monthly
+    }),{ppd:0,voice:0,bts:0,hsi:0,mim:0,acc:0,goal:0});
+    const exp = (g,mo=31) => Math.round(g*DE/mo);
+    const pace = (a,e) => e>0?Math.round(a/e*100):0;
+    const pC = p=>p>=100?'#00875a':p>=85?'#f59e0b':'#dc2626';
+    const pL = p=>p>=100?'✅':p>=85?'⚠️':'🔴';
+    const nb = document.querySelector('.net-bar');
+    if(nb) nb.innerHTML = `
+      <div class="net-stat"><div class="net-label">MTD PPD</div><div class="net-val c-green">${T.ppd.toLocaleString()}</div><div class="net-sub" style="color:${pC(pace(T.ppd,exp(T.goal)))};font-weight:600">${pace(T.ppd,exp(T.goal))}% pace ${pL(pace(T.ppd,exp(T.goal)))}</div><div class="net-sub">exp ${exp(T.goal).toLocaleString()} · mo 4,266</div></div>
+      <div class="net-stat"><div class="net-label">MTD BTS</div><div class="net-val" style="color:${pC(pace(T.bts,exp(1192)))}">${T.bts}</div><div class="net-sub" style="color:${pC(pace(T.bts,exp(1192)))};font-weight:600">${pace(T.bts,exp(1192))}% pace ${pL(pace(T.bts,exp(1192)))}</div><div class="net-sub">exp ${exp(1192)} · mo 1,192</div></div>
+      <div class="net-stat"><div class="net-label">MTD HSI</div><div class="net-val" style="color:${pC(pace(T.hsi,exp(308)))}">${T.hsi}</div><div class="net-sub" style="color:${pC(pace(T.hsi,exp(308)))};font-weight:600">${pace(T.hsi,exp(308))}% pace ${pL(pace(T.hsi,exp(308)))}</div><div class="net-sub">exp ${exp(308)} · mo 308</div></div>
+      <div class="net-stat"><div class="net-label">MTD MIM LINES</div><div class="net-val" style="color:#f472b6">${T.mim}</div><div class="net-sub" style="color:${pC(pace(T.mim,exp(287)))};font-weight:600">${pace(T.mim,exp(287))}% pace ${pL(pace(T.mim,exp(287)))}</div><div class="net-sub">exp ${exp(287)} · mo 287</div></div>
+      <div class="net-stat"><div class="net-label">MTD VOICE</div><div class="net-val" style="color:#a78bfa">${T.voice}</div><div class="net-sub" style="color:${pC(pace(T.voice,exp(2643)))};font-weight:600">${pace(T.voice,exp(2643))}% pace ${pL(pace(T.voice,exp(2643)))}</div><div class="net-sub">exp ${exp(2643)} · mo 2,643</div></div>
+      <div class="net-stat"><div class="net-label">MTD ACC $</div><div class="net-val c-gold">$${Math.round(T.acc).toLocaleString()}</div><div class="net-sub" style="color:${pC(pace(T.acc,exp(204540)))};font-weight:600">${pace(T.acc,exp(204540))}% pace ${pL(pace(T.acc,exp(204540)))}</div><div class="net-sub">exp $${Math.round(exp(204540)/1000)}K · mo $204,540</div></div>
+      <div class="net-stat"><div class="net-label">Remaining</div><div class="net-val">${(T.goal-T.ppd).toLocaleString()}</div><div class="net-sub">of ${T.goal.toLocaleString()} monthly</div><div class="net-sub">~${Math.ceil((T.goal-T.ppd)/Math.max(1,31-DE))}/day needed</div></div>`;
+  })();
   const q=(document.getElementById('search')||{value:''}).value.toLowerCase();
   let list=[...STORES];
   if(q)list=list.filter(s=>s.name.toLowerCase().includes(q)||s.coach.toLowerCase().includes(q)||s.market.toLowerCase().includes(q));
@@ -2210,7 +2231,7 @@ render();
     <div>
       <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:5px;color:#C8005E;margin-bottom:6px">EDGE LINK INC · MAY 2026 · ALL 34 STORES</div>
       <div id="co-headline" style="font-family:'Bebas Neue';font-size:36px;color:#fff;line-height:1;letter-spacing:2px">COMPANY SCORECARD</div>
-      <div style="font-size:11px;color:#9095b0;margin-top:5px">May 2026 · Day 1 of 31</div>
+      <div style="font-size:11px;color:#9095b0;margin-top:5px">May 2026 · Day 6 of 31</div>
       <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;padding:10px 16px;background:rgba(200,0,94,0.06);border:1px solid rgba(200,0,94,0.2);border-radius:8px">
         <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:3px;color:#C8005E;width:100%;margin-bottom:4px">MAY 2026 · EDGE LINK GOALS</div>
         <div style="font-size:11px;color:rgba(255,255,255,0.7)">PPD: <b style="color:#00875a">+20</b> ahead</div>
@@ -2304,11 +2325,14 @@ function renderCompany(){
   // Hero header
   document.getElementById('co-h-ppd').textContent  = Nf(T.ppd);
   document.getElementById('co-h-ppd-sub').textContent = overallP+'% of pace · vs '+Nf(exp(T.gPPD))+' expected';
-  document.getElementById('co-h-today').textContent = 132;
+  document.getElementById('co-h-today').textContent = getDayTargets(DE).perf;
   document.getElementById('co-h-acc').textContent   = '$'+Math.round(T.acc/1000)+'K';
   document.getElementById('co-h-acc-sub').textContent = '$'+Math.round(apb)+'/ppd avg';
   document.getElementById('co-h-rem').textContent   = Nf(T.gPPD-T.ppd);
   document.getElementById('co-headline').textContent = overallP>=110?'🚀 COMPANY IS CRUSHING IT':overallP>=100?'✅ COMPANY IS ON TRACK — MAINTAIN PACE':overallP>=80?'⚠️ COMPANY IS CLOSE — PUSH NOW':'🔴 COMPANY IS BEHIND — URGENT';
+  // Update day counter dynamically
+  const coDateEl = document.querySelector('#tab-company [style*="Day 1 of 31"], #tab-company [style*="Day 6 of 31"], #tab-company [style*="Day 7 of 31"]');
+  if(coDateEl){ const h=new Date().getHours(); const dayNum=h>=21?DE+1:DE; coDateEl.textContent='May 2026 · Day '+dayNum+' of 31'; }
 
   // Metrics
   const M = [
