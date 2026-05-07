@@ -4470,6 +4470,7 @@ function screenshotStore72(){
       <div style="position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(200,0,94,0.12),transparent 70%);pointer-events:none;"></div>
       <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:4px;color:#a78bfa;margin-bottom:8px;" data-pb-label="jamesMsg">💬 JAMES'S MESSAGE THIS WEEK</div>
       <div id="pb-message" style="font-size:15px;color:#fff;line-height:1.7;font-style:italic;"></div>
+      <div id="pb-status-banner" style="display:none;border:1px solid;border-radius:10px;padding:14px 16px;margin-bottom:14px;display:none;align-items:flex-start;gap:12px;"></div>
       <div id="pb-theme-tag" style="margin-top:12px;display:inline-block;font-family:'Bebas Neue';font-size:11px;letter-spacing:3px;padding:5px 14px;background:rgba(200,0,94,0.15);border:1px solid rgba(200,0,94,0.35);border-radius:20px;color:#C8005E;"></div>
     </div>
 
@@ -4525,7 +4526,7 @@ function screenshotStore72(){
 
     <!-- T-MOBILE RESOURCES -->
     <div style="background:#fff;border:1px solid var(--b);border-top:4px solid #C8005E;border-radius:10px;padding:18px;">
-      <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:4px;color:#C8005E;margin-bottom:14px;" data-pb-label="documents">📎 T-MOBILE OFFICIAL DOCUMENTS — APR 28–MAY 6 UPDATE PACK</div>
+      <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:4px;color:#C8005E;margin-bottom:14px;" data-pb-label="documents">📎 T-MOBILE OFFICIAL DOCUMENTS — MAY 5–11 UPDATE PACK</div>
       <div id="pb-resources" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(200px,100%),1fr));gap:10px;"></div>
       <div style="margin-top:12px;font-size:10px;color:var(--tm);text-align:center;">
         📌 All documents available on T-Mobile Portal: MBTM → Reference → PDF Guide &amp; Promotional PDFs
@@ -4540,9 +4541,10 @@ function screenshotStore72(){
 // Add a new week object as each week begins. James updates this data.
 const PLAYBOOKS = {
 
-  1: { // Week 1 — Apr 28–May 6 (T-Mobile update cycle)
+  1: { // Week 1 — Apr 28–May 6 (EXPIRED)
     label: 'APR 28 – MAY 6, 2026',
-    badge: '🆕 NEW THIS WEEK',
+    badge: '⛔ EXPIRED — MAY 6 WAS LAST DAY',
+    expired: true,
     theme: '🚀 NEW PROMOS LIVE. KNOW THEM. SELL THEM.',
     message: `T-Mobile dropped a full update on April 28th — new LATAM offer, HSI promo, BTS limit change, tablet deals, and device pricing shifts. I need every rep in every store trained on these by Monday. No excuses. If they don't know the offer, they can't sell the offer. Coaches — verify your teams are current before opening.`,
     focusMetrics: [
@@ -4630,18 +4632,109 @@ const PLAYBOOKS = {
 
   2: {
     label: 'MAY 5–11, 2026',
-    badge: 'COMING MONDAY',
-    theme: '📈 HOLD THE PACE.',
-    message: `Week 2 playbook drops Monday morning. Stay locked in through the weekend.`,
-    focusMetrics: [],
-    weekTargets: [],
-    priorities: ['Check back Monday 8am for Week 2 priorities'],
-    coaching:   ['Check back Monday 8am for coaching focus'],
-    watchList:  [],
-    win: 'Week 2 highlights coming Monday.',
-    challenge: 'Week 2 challenge coming Monday.',
-    daily: [],
-    notes: 'James will publish Week 2 playbook by Monday 8am.',
+    badge: '🆕 LIVE NOW — EFFECTIVE MAY 7',
+    pending: false,
+    expired: false,
+    theme: '🔥 $40 PERIOD IS YOUR DOOR OPENER. STACK EVERY DEAL.',
+    message: `New week, new opportunities. Key change effective May 7: HSI gateway for existing AAL customers moves from $0 to $9.99 — still a strong pitch. Moto G '26 is removed from 4 for $100. Metro Annual Upgrade is live with Samsung A15 and Moto razr 2024 FREE on $50+ plans. Activation fees are still waived on everything. Push LATAM on every port-in. Tablets are free for existing customers — there is no excuse for zero BTS days. Every transaction is a stacking opportunity.`,
+    focusMetrics: [
+      { metric:'Tablets (BTS)',        why:'TCL Tab 8 FREE for new & existing. Revvl Tab 2 FREE for existing. Tab A9+ FREE for existing. Zero-cost BTS — pitch on every deal.', color:'#34d399' },
+      { metric:'HSI / Home Internet',  why:'$40/month promo plan still live. Gateway now $9.99 for existing AAL (was $0). New customers $49.99. 5-year price guarantee is your close.', color:'#60a5fa' },
+      { metric:'MIM / Magenta Lines',  why:'$600 off Android w/ Metro Port. iPhone 16 On Us. Must manually add PLATAM SOC for LATAM customers — do not skip this step.', color:'#f472b6' },
+      { metric:'Voice Activations',    why:'$40 PERIOD with port — unlimited data for $40. A17 FREE with ID. Waived activation on everything. This is your door opener on every transaction.', color:'#a78bfa' },
+      { metric:'Accessories $',        why:'Samsung Watch 7 at $29.99 for existing. Bundle on every upgrade. Target $40/box minimum — push for $60+.', color:'#fbbf24' },
+    ],
+    weekTargets: [
+      { label:'PPD Target',    val:'163/day',   sub:'Weighted daily target',  color:'#C8005E' },
+      { label:'Voice',         val:'91/day',    sub:'$40 PERIOD every port',  color:'#a78bfa' },
+      { label:'BTS',           val:'41/day',    sub:'Free tablets — no excuses', color:'#34d399' },
+      { label:'HSI',           val:'11/day',    sub:'$9.99 gateway close',    color:'#60a5fa' },
+      { label:'MIM Lines',     val:'10/day',    sub:'Metro Port to T-Mobile', color:'#f472b6' },
+      { label:'Acc $/day',     val:'$6,600+',  sub:'Watch 7 + bundles',      color:'#fbbf24' },
+    ],
+    priorities: [
+      '📅 EFFECTIVE MAY 7: HSI gateway for existing AAL customers is now $9.99 (was $0) — update your pitch, still a strong close',
+      '📲 BTS: TCL Tab 8 is FREE for new AND existing — this should be on every transaction. No zero BTS days.',
+      '🌎 LATAM (PLATAM): $0 SOC — must be added MANUALLY during activation flow. Does NOT auto-apply. Verify every time.',
+      '🏆 METRO ANNUAL UPGRADE: Samsung Galaxy A15 FREE and Moto razr 2024 FREE on $50+ plan (4/24/25 rate plan launch)',
+      '❌ 4 FOR $100 UPDATE: Moto G 2026 is NO LONGER FREE on this plan — removed effective 5/7. Update reps immediately.',
+      '✅ WAIVED ACTIVATION FEES: Still active on all activations and reactivations — use this as your opener every time.',
+    ],
+    coaching: [
+      'Quiz every rep: What is the HSI gateway price for existing AAL customers this week? (Answer: $9.99)',
+      'Role-play the tablet pitch: "We have 3 free tablet options for you today — which one fits your household best?"',
+      'Verify reps know LATAM SOC must be added manually — test this in a mock transaction',
+      'BTS pitch: "The TCL Tab 8 is FREE today on a $15 plan. That\'s internet everywhere for less than a streaming subscription."',
+      'Watch 7 bundle: "While we\'re activating your phone, the Galaxy Watch 7 is only $29.99 for existing customers today."',
+      'LATAM close: "Do you have family in Mexico or Latin America? We have a $0 add-on for unlimited calling to 15+ countries."',
+    ],
+    watchList: [
+      { store:'Any store with 0 BTS MTD',   reason:'TCL Tab 8 and Revvl Tab 2 are FREE — there is no valid reason for zero tablets' },
+      { store:'Stores with zero LATAM pitch',reason:'PLATAM SOC must be added manually — coach must verify it\'s being offered on every port-in' },
+      { store:'TN & AR stores',             reason:'72-HR report shows consistently low HSI — $9.99 close is straightforward, get on phones today' },
+    ],
+    win: `🥇 MTD through Day 6: 1,119 PPD at 135% pace — company is ahead through 6 days. Voice at 605 (118% pace) and HSI at 84 (140% pace) are strong. BTS at 74% pace is the gap — free tablets should fix this starting today.`,
+    challenge: `🔥 FREE TABLET CHALLENGE: First coach whose territory posts 3+ BTS every single day this week gets a shoutout on the Command Center Friday. TCL Tab 8, Revvl Tab 2, and Tab A9+ are FREE for existing customers. There is no excuse for a zero BTS day this week. Track daily and report to James by Friday 6pm.`,
+    daily: [
+      { day:'Wed May 7',  dow:'WED', focus:'LAUNCH DAY — New prices effective today. Brief every rep on HSI gateway change ($9.99), 4 for $100 device update, and Metro Annual Upgrade. Tablet pitch on every deal.', color:'#C8005E' },
+      { day:'Thu May 8',  dow:'THU', focus:'ACCESSORIES DAY — Samsung Watch 7 at $29.99 for existing. Bundle on every upgrade. Target $2K+ per store in accessories. Push Watch 7 and Tab bundles.', color:'#fbbf24' },
+      { day:'Fri May 9',  dow:'FRI', focus:'FULL PUSH — Highest traffic day. $40 PERIOD with port is your opener. Waived activation on everything. All hands selling. LATAM pitch on every port-in.', color:'#C8005E' },
+      { day:'Sat May 10', dow:'SAT', focus:'PORT-IN DAY — Metro Port to T-Mobile: $600 off Android w/ new line. iPhone 16 On Us. Push port-ins hard. Samsung A17 FREE with ID. Every port is a MIM line.', color:'#a78bfa' },
+      { day:'Sun May 11', dow:'SUN', focus:'CLOSE THE WEEK — HSI and BTS push. Existing customers: Tab 8 FREE, Tab A9+ FREE, Watch 7 at $29.99. Stack deals on every transaction.', color:'#34d399' },
+    ],
+    notes: `WHAT\'S NEW THIS WEEK (Effective May 5–7, 2026):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌐 HSI OFFER UPDATE (EFFECTIVE MAY 7)
+• $40/month Home Internet Promo Plan w/AutoPay — STILL ACTIVE
+• NEW: Existing AAL customers (30+ days): $9.99 Gateway (was $0)
+• New BAN customers: $49.99 5G Gateway (unchanged)
+• 5-Year Price Guarantee still applies
+
+📲 TABLET OFFERS (ALL WEEK)
+• TCL Tab 8: FREE for new ($20 plan) AND existing ($15 plan) — STACK THIS
+• Revvl Tab 2: NEW $29.99 ($20 plan) | EXISTING FREE ($20 plan)
+• Samsung Tab A9+: NEW $99.99 ($20 plan) | EXISTING FREE ($20 plan)
+• Limit 2 highlighted devices per BAN
+
+⌚ WATCH OFFERS
+• Samsung Galaxy Watch 7: $29.99 for existing BAN (30+ days) on $10 Watch Plan
+• Apple Watch SE3: Available — check price grid for existing/new pricing
+
+❌ 4 FOR $100 UPDATE (EFFECTIVE MAY 7)
+• Moto G 2026 REMOVED as a free device
+• Refer to updated price chart for current free device lineup
+
+🏆 METRO ANNUAL UPGRADE (EFFECTIVE MAY 7)
+• $50+ Plan (4/24/25 Rate Plan Launch)
+• Samsung Galaxy A15: FREE
+• Moto razr 2024: FREE
+
+📱 SINGLE LINE KEY OFFERS
+• $40 PERIOD: Unlimited data $40 w/port (Samsung line)
+• Samsung A17: FREE with ID only
+• Apple: $99.99 upfront w/port or ID on $50+ plan — $100 VPM
+• iPhone 16e: On Us after VPM (3 months)
+• 6 Month Unlimited: New BAN w/$120 upfront
+
+🌎 LATAM SERVICE OFFER (PLATAM) — ONGOING
+• $0 Latin America ILD Promo
+• Port-in required | Must be added MANUALLY — does NOT auto-apply
+• Eligible plans: $40 Period | 4 for $100
+• SOC must be selected during activation flow
+
+💜 MAGENTA IN METRO (MIM) — KEY PROMOS
+• $600 Off Android w/ New Line (Metro Port): Galaxy S25 series, Pixel 10 series, Moto razr/+/ultra — No trade required
+• iPhone 16 On Us (Apple New Line): iPhone 17 & 16 series — up to $730 value
+• $300 Off iPhone 17 with Trade: iPhone 17 & 16 series
+• 50% Off iPhone 15: $315 value — 12-month limit
+
+📋 COMPLIANCE REMINDERS
+• Limit 4 voice rebates per household
+• Limit 3 BTS rebates per household
+• Limit 1 HSI device rebate per household
+• Limit 2 highlighted devices per BAN
+• Always verify promo period & account history before completing transaction
+• PLATAM SOC MUST be added manually — verify every time`,
   },
 };
 
@@ -4672,6 +4765,24 @@ function renderPlaybook(){
   // Header
   document.getElementById('pb-week-label').textContent = pb.label;
   document.getElementById('pb-week-badge').textContent  = pb.badge;
+
+  // Expired or pending banner
+  const statusBanner = document.getElementById('pb-status-banner');
+  if(statusBanner){
+    if(pb.expired){
+      statusBanner.style.display='block';
+      statusBanner.style.background='rgba(220,38,38,0.12)';
+      statusBanner.style.borderColor='rgba(220,38,38,0.4)';
+      statusBanner.innerHTML=`<span style="font-size:16px;">⛔</span> <div><div style="font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:#dc2626;">THIS PLAYBOOK HAS EXPIRED — MAY 6 WAS THE LAST DAY</div><div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:3px;">These promos and rules are no longer active. Showing for reference only. New playbook coming from James shortly.</div></div>`;
+    } else if(pb.pending){
+      statusBanner.style.display='block';
+      statusBanner.style.background='rgba(245,158,11,0.12)';
+      statusBanner.style.borderColor='rgba(245,158,11,0.4)';
+      statusBanner.innerHTML=`<span style="font-size:16px;">⏳</span> <div><div style="font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:#f59e0b;">WEEK 2 PLAYBOOK PENDING — WAITING ON JAMES</div><div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:3px;">New promo rules, focus metrics, and coaching priorities will be posted here as soon as the update drops. Keep using Week 1 rules until then.</div></div>`;
+    } else {
+      statusBanner.style.display='none';
+    }
+  }
 
   // Week progress bar (within the current 7-day week)
   const today = new Date();
