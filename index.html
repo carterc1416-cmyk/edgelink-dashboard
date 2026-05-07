@@ -1540,6 +1540,7 @@ function render(){
       if(el) el.textContent = id==='gb-acc'?'$'+Math.round(val).toLocaleString():val;
       if(sub){const r=pL2(val,exp);sub.textContent=r.pc+'% of pace '+r.ic;sub.style.color=r.c;sub.style.fontWeight='600';}
     });
+    const nb = document.querySelector('.net-bar');
     if(nb) nb.innerHTML = `
       <div class="net-stat"><div class="net-label">MTD PPD</div><div class="net-val c-green">${T.ppd.toLocaleString()}</div><div class="net-sub" style="color:${pC(pace(T.ppd,exp(T.goal)))};font-weight:600">${pace(T.ppd,exp(T.goal))}% pace ${pL(pace(T.ppd,exp(T.goal)))}</div><div class="net-sub">exp ${exp(T.goal).toLocaleString()} · mo 4,266</div></div>
       <div class="net-stat"><div class="net-label">MTD BTS</div><div class="net-val" style="color:${pC(pace(T.bts,exp(1192)))}">${T.bts}</div><div class="net-sub" style="color:${pC(pace(T.bts,exp(1192)))};font-weight:600">${pace(T.bts,exp(1192))}% pace ${pL(pace(T.bts,exp(1192)))}</div><div class="net-sub">exp ${exp(1192)} · mo 1,192</div></div>
