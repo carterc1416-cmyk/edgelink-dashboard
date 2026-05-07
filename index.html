@@ -342,7 +342,7 @@ if(window.innerWidth < 768){
 <div class="header">
   <div class="brand">
     <div class="logo">EL</div>
-    <div><h1>EDGE LINK INC</h1><p>May 5, 2026 · Director View · James Jackson</p></div>
+    <div><h1>EDGE LINK INC</h1><p id="hdr-brand-date">May 5, 2026 · Director View · James Jackson</p></div>
   </div>
   <div class="header-right">
     <div class="date" id="hdr-date">MAY 7, 2026</div>
@@ -366,11 +366,11 @@ if(window.innerWidth < 768){
   </div>
   <div style="width:1px;height:60px;background:rgba(255,255,255,0.1)"></div>
     <div style="display:flex;gap:24px;flex-wrap:wrap">
-    <div style="text-align:center"><div class="goal-stat-label">MTD VOICE</div><div class="goal-stat-val" style="color:#a78bfa">351</div><div class="goal-stat-sub" style="color:#00875a;font-weight:600">130% of pace ✅</div></div>
-    <div style="text-align:center"><div class="goal-stat-label">MTD TABLETS</div><div class="goal-stat-val" style="color:#34d399">102</div><div class="goal-stat-sub" style="color:#FFD600;font-weight:600">84% of pace ⚠️</div></div>
-    <div style="text-align:center"><div class="goal-stat-label">MTD HSI</div><div class="goal-stat-val" style="color:#00BCD4">50</div><div class="goal-stat-sub" style="color:#00875a;font-weight:600">152% of pace ✅</div></div>
-    <div style="text-align:center"><div class="goal-stat-label">MTD MIM LINES</div><div class="goal-stat-val" style="color:#f472b6">133</div><div class="goal-stat-sub" style="color:#00875a;font-weight:600">154% of pace ✅</div></div>
-    <div style="text-align:center"><div class="goal-stat-label">MTD ACC $</div><div class="goal-stat-val" style="color:#fbbf24">$22,669</div><div class="goal-stat-sub" style="color:#FFD600;font-weight:600">11% of pace ⚠️</div></div>
+    <div style="text-align:center"><div class="goal-stat-label">MTD VOICE</div><div class="goal-stat-val" style="color:#a78bfa" id="gb-voice">—</div><div class="goal-stat-sub" id="gb-voice-sub"></div></div>
+    <div style="text-align:center"><div class="goal-stat-label">MTD TABLETS</div><div class="goal-stat-val" style="color:#34d399" id="gb-bts">—</div><div class="goal-stat-sub" id="gb-bts-sub"></div></div>
+    <div style="text-align:center"><div class="goal-stat-label">MTD HSI</div><div class="goal-stat-val" style="color:#00BCD4" id="gb-hsi">—</div><div class="goal-stat-sub" id="gb-hsi-sub"></div></div>
+    <div style="text-align:center"><div class="goal-stat-label">MTD MIM LINES</div><div class="goal-stat-val" style="color:#f472b6" id="gb-mim">—</div><div class="goal-stat-sub" id="gb-mim-sub"></div></div>
+    <div style="text-align:center"><div class="goal-stat-label">MTD ACC $</div><div class="goal-stat-val" style="color:#fbbf24" id="gb-acc">—</div><div class="goal-stat-sub" id="gb-acc-sub"></div></div>
   </div>
 </div>
 
@@ -1532,7 +1532,14 @@ function render(){
     const pace = (a,e) => e>0?Math.round(a/e*100):0;
     const pC = p=>p>=100?'#00875a':p>=85?'#f59e0b':'#dc2626';
     const pL = p=>p>=100?'✅':p>=85?'⚠️':'🔴';
-    const nb = document.querySelector('.net-bar');
+    // Update goal banner stats dynamically
+    const pL2=(v,e)=>{const pc=e>0?Math.round(v/e*100):0;const c=pc>=100?'#00875a':pc>=85?'#f59e0b':'#dc2626';const ic=pc>=100?'✅':pc>=85?'⚠️':'🔴';return {pc,c,ic};};
+    const eV=Math.round(2643*DE/31),eB=Math.round(1192*DE/31),eH=Math.round(308*DE/31),eM=Math.round(287*DE/31),eA=Math.round(204540*DE/31);
+    [[`gb-voice`,T.voice,eV,'#a78bfa'],[`gb-bts`,T.bts,eB,'#34d399'],[`gb-hsi`,T.hsi,eH,'#00BCD4'],[`gb-mim`,T.mim,eM,'#f472b6'],[`gb-acc`,T.acc,eA,'#fbbf24']].forEach(([id,val,exp,col])=>{
+      const el=document.getElementById(id); const sub=document.getElementById(id+'-sub');
+      if(el) el.textContent = id==='gb-acc'?'$'+Math.round(val).toLocaleString():val;
+      if(sub){const r=pL2(val,exp);sub.textContent=r.pc+'% of pace '+r.ic;sub.style.color=r.c;sub.style.fontWeight='600';}
+    });
     if(nb) nb.innerHTML = `
       <div class="net-stat"><div class="net-label">MTD PPD</div><div class="net-val c-green">${T.ppd.toLocaleString()}</div><div class="net-sub" style="color:${pC(pace(T.ppd,exp(T.goal)))};font-weight:600">${pace(T.ppd,exp(T.goal))}% pace ${pL(pace(T.ppd,exp(T.goal)))}</div><div class="net-sub">exp ${exp(T.goal).toLocaleString()} · mo 4,266</div></div>
       <div class="net-stat"><div class="net-label">MTD BTS</div><div class="net-val" style="color:${pC(pace(T.bts,exp(1192)))}">${T.bts}</div><div class="net-sub" style="color:${pC(pace(T.bts,exp(1192)))};font-weight:600">${pace(T.bts,exp(1192))}% pace ${pL(pace(T.bts,exp(1192)))}</div><div class="net-sub">exp ${exp(1192)} · mo 1,192</div></div>
@@ -2169,6 +2176,7 @@ render();
 
   const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
 
+  set('hdr-brand-date', ML[mon]+' '+calDay+', '+yr+' · Director View · James Jackson');
   set('hdr-date',        MS[mon]+' '+calDay+', '+yr);
   set('hdr-sub',         dow+' · Day '+dayNum+' of 31 · '+rem+' Days Remaining');
   set('goals-date-label','📅 TODAY IS '+MF[mon]+' '+calDay+', '+yr);
