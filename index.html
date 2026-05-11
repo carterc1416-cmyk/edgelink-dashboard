@@ -4,7 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EDGE LINK — May 2026 Command Center</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>@font-face{font-family:"Bebas Neue";font-display:swap;}</style>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>@font-face{font-family:"Bebas Neue";font-display:swap;}
+#coach-detail-overlay{display:none;position:fixed;inset:0;background:#0a0a14;z-index:9999;flex-direction:column;overflow-y:auto;padding:20px 24px;}
+.cd-header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #2a2a3a;padding-bottom:16px;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+.cd-title{font-family:'Bebas Neue';font-size:34px;letter-spacing:3px;}
+.cd-subtitle{font-family:'Bebas Neue';font-size:11px;color:#9095b0;letter-spacing:2px;margin-top:4px;}
+.cd-close{font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;background:#1a1a2a;color:#9095b0;border:1px solid #3a3a4a;border-radius:6px;padding:8px 18px;cursor:pointer;}
+.cd-close:hover{background:#2a2a3a;color:#fff;}
+.cd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;}
+.cd-card{background:#12121e;border:1px solid #2a2a3a;border-radius:10px;padding:16px;}
+.cd-sname{font-family:'Bebas Neue';font-size:15px;letter-spacing:2px;color:#fff;margin-bottom:10px;border-bottom:1px solid #2a2a3a;padding-bottom:8px;}
+.cd-section{margin-bottom:10px;}
+.cd-slabel{font-family:'Bebas Neue';font-size:9px;letter-spacing:2px;color:#9095b0;margin-bottom:5px;}
+.cd-metrics{display:flex;gap:10px;}
+.cd-m{display:flex;flex-direction:column;align-items:center;min-width:40px;}
+.cd-mv{font-family:'Bebas Neue';font-size:24px;line-height:1;}
+.cd-ml{font-size:7px;color:#9095b0;letter-spacing:1px;text-transform:uppercase;}
+.cd-pace-bar{height:4px;background:#2a2a3a;border-radius:2px;margin:6px 0 4px;overflow:hidden;}
+.cd-pace-fill{height:100%;border-radius:2px;}
+.cd-pace-txt{font-size:10px;color:#9095b0;}
+.cd-btn{font-family:'Bebas Neue';font-size:9px;letter-spacing:2px;background:#1a1a2e;color:#9095b0;border:1px solid #3a3a5a;border-radius:4px;padding:3px 8px;cursor:pointer;margin-left:8px;vertical-align:middle;}
+.cd-btn:hover{background:#2a2a4e;color:#fff;}
+</style>
 <style>
 :root{--mg:#C8005E;--mg2:#E2007430;--mg3:#E2007410;--green:#00875a;--gd:#00e67615;--gb:#00e67640;--yellow:#FFD600;--yd:#FFD60015;--yb:#FFD60040;--red:#dc2626;--rd:#FF174415;--rb:#FF174440;--cyan:#00BCD4;--bg:#f4f5f9;--bg2:#ffffff;--bg3:#eef0f6;--s:#ffffff;--b:#e2e4ef;--b2:#d0d3e5;--t:#1a1b2e;--td:#5a5f80;--tm:#9095b0;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -1205,13 +1226,13 @@ function triggerScriptAnimations(){
     <div style="width:1px;height:20px;background:var(--b);margin:0 4px;"></div>
     <button class="fb active" onclick="filterMgr('ALL',this)" id="mgrf-ALL">ALL</button>
     <span id="mgr-coach-filters" style="display:flex;gap:4px;flex-wrap:wrap;">
-      <button class="fb" onclick="filterMgr('Rose Perez',this)" id="mgrf-Rose" style="color:#f472b6">Rose Perez</button>
-      <button class="fb" onclick="filterMgr('Mr. Watts',this)" id="mgrf-Watts" style="color:#fb923c">Mr. Watts</button>
-      <button class="fb" onclick="filterMgr('Ambulai Sheku',this)" id="mgrf-Ambulai" style="color:#34d399">Ambulai Sheku</button>
-      <button class="fb" onclick="filterMgr('Joel Montero',this)" id="mgrf-Joel" style="color:#a78bfa">Joel Montero</button>
-      <button class="fb" onclick="filterMgr('Manny Rivera',this)" id="mgrf-Manny" style="color:#f59e0b">Manny Rivera</button>
-      <button class="fb" onclick="filterMgr('Cheryl',this)" id="mgrf-Cheryl" style="color:#f87171">Cheryl</button>
-      <button class="fb" onclick="filterMgr('TBD',this)" id="mgrf-TBD" style="color:#9095b0">TBD</button>
+      <button class="fb" onclick="filterMgr('Rose Perez',this)" id="mgrf-Rose" style="color:#f472b6">Rose Perez</button><button class="cd-btn" onclick="event.stopPropagation();openCoachDetail('Rose Perez','#f472b6')">&#x25A6; VIEW</button>
+      <button class="fb" onclick="filterMgr('Mr. Watts',this)" id="mgrf-Watts" style="color:#fb923c">Mr. Watts</button><button class="cd-btn" onclick="event.stopPropagation();openCoachDetail('Mr. Watts','#fb923c')">&#x25A6; VIEW</button>
+      <button class="fb" onclick="filterMgr('Ambulai Sheku',this)" id="mgrf-Ambulai" style="color:#34d399">Ambulai Sheku</button><button class="cd-btn" onclick="event.stopPropagation();openCoachDetail('Ambulai Sheku','#34d399')">&#x25A6; VIEW</button>
+      <button class="fb" onclick="filterMgr('Joel Montero',this)" id="mgrf-Joel" style="color:#a78bfa">Joel Montero</button><button class="cd-btn" onclick="event.stopPropagation();openCoachDetail('Joel Montero','#a78bfa')">&#x25A6; VIEW</button>
+      <button class="fb" onclick="filterMgr('Manny Rivera',this)" id="mgrf-Manny" style="color:#f59e0b">Manny Rivera</button><button class="cd-btn" onclick="event.stopPropagation();openCoachDetail('Manny Rivera','#f59e0b')">&#x25A6; VIEW</button>
+      <button class="fb" onclick="filterMgr('Cheryl',this)" id="mgrf-Cheryl" style="color:#f87171">Cheryl</button><button class="cd-btn" onclick="event.stopPropagation();openCoachDetail('Cheryl','#f87171')">&#x25A6; VIEW</button>
+      <button class="fb" onclick="filterMgr('TBD',this)" id="mgrf-TBD" style="color:#9095b0">TBD</button><button class="cd-btn" onclick="event.stopPropagation();openCoachDetail('TBD','#9095b0')">&#x25A6; VIEW</button>
     </span>
   </div>
 
@@ -6284,8 +6305,58 @@ function closeStoreIntel(){
 // Close on backdrop click
 const _sim = document.getElementById('store-intel-modal');
 if(_sim) _sim.addEventListener('click', e=>{ if(e.target===_sim) closeStoreIntel(); });
+
+function openCoachDetail(coachName, color) {
+  const myStores = STORES.filter(s => s.coach === coachName);
+  const yWin = Math.ceil(DE/3);
+  const yIdx = (DE-1) % 3;
+  const yWinData = (WINDOW_STORE_DATA[yWin]) || {};
+  const cards = myStores.map(s => {
+    const tPPD = Math.round(s.flatDaily);
+    const tV   = Math.max(1, Math.round(s.voiceGoal/31));
+    const tB   = Math.max(0, Math.round(s.btsTgt/31));
+    const tH   = Math.max(0, Math.round(s.hsiTgt/31));
+    const yd   = yWinData[s.name];
+    const ydV  = yd ? (yd.voice[yIdx]||0) : 0;
+    const ydB  = yd ? (yd.bts[yIdx]||0) : 0;
+    const ydH  = yd ? (yd.hsi[yIdx]||0) : 0;
+    const ydP  = ydV+ydB+ydH;
+    const ydC  = ydP>=tPPD?'#00875a':ydP>=tPPD*0.7?'#FFD600':'#f472b6';
+    const ydBadge = ydP>=tPPD?'HIT':'MISS';
+    const pac  = s.monthly>0 ? Math.min(Math.round(s.mtd/s.monthly*100),200) : 0;
+    const pacC = pac>=100?'#00875a':pac>=70?'#FFD600':'#f472b6';
+    return '<div class="cd-card">' +
+      '<div class="cd-sname">'+s.name+'</div>' +
+      '<div class="cd-section"><div class="cd-slabel">TODAY'S GOAL</div><div class="cd-metrics">' +
+        '<div class="cd-m"><div class="cd-mv" style="color:'+color+'">'+tPPD+'</div><div class="cd-ml">PPD</div></div>' +
+        '<div class="cd-m"><div class="cd-mv">'+tV+'</div><div class="cd-ml">VOICE</div></div>' +
+        '<div class="cd-m"><div class="cd-mv">'+tB+'</div><div class="cd-ml">TABLETS</div></div>' +
+        '<div class="cd-m"><div class="cd-mv">'+tH+'</div><div class="cd-ml">HSI</div></div>' +
+      '</div></div>' +
+      '<div class="cd-section"><div class="cd-slabel">YESTERDAY <span style="color:'+ydC+';font-size:9px">'+ydBadge+'</span></div><div class="cd-metrics">' +
+        '<div class="cd-m"><div class="cd-mv" style="color:'+ydC+'">'+ydP+'</div><div class="cd-ml">PPD</div></div>' +
+        '<div class="cd-m"><div class="cd-mv">'+ydV+'</div><div class="cd-ml">VOICE</div></div>' +
+        '<div class="cd-m"><div class="cd-mv">'+ydB+'</div><div class="cd-ml">TABLETS</div></div>' +
+        '<div class="cd-m"><div class="cd-mv">'+ydH+'</div><div class="cd-ml">HSI</div></div>' +
+      '</div></div>' +
+      '<div class="cd-section"><div class="cd-slabel">MTD PACE</div>' +
+        '<div class="cd-pace-bar"><div class="cd-pace-fill" style="width:'+Math.min(pac,100)+'%;background:'+pacC+'"></div></div>' +
+        '<div class="cd-pace-txt" style="color:'+pacC+'">'+s.mtd+' of '+s.monthly+' &nbsp;&middot;&nbsp; '+pac+'%</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+  document.getElementById('cd-title-name').textContent = coachName;
+  document.getElementById('cd-title-name').style.color = color;
+  document.getElementById('cd-title-sub').textContent = myStores.length + ' STORES · MAY 2026 · DAY ' + DE + ' OF 31';
+  document.getElementById('cd-grid-content').innerHTML = cards;
+  const ov = document.getElementById('coach-detail-overlay');
+  ov.style.display = 'flex';
+  ov.scrollTop = 0;
+}
 </script>
 
 
 
+
+<div id="coach-detail-overlay"><div class="cd-header"><div><div class="cd-title" id="cd-title-name"></div><div class="cd-subtitle" id="cd-title-sub"></div></div><button class="cd-close" onclick="document.getElementById('coach-detail-overlay').style.display='none'">&#x2715; BACK</button></div><div class="cd-grid" id="cd-grid-content"></div></div>
 </body>
