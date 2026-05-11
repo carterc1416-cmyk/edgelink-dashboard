@@ -1331,7 +1331,7 @@ STORES.forEach(s => {
   s.market     = s.name.split('-')[0]; // RI, MA, CT, TN, AR
 });
 
-const DAYS=31,DE=10,DAILY_GOAL=132;
+const DAYS=31,DE=10,DAILY_GOAL=132,TODAY=11,REM=20;
 // ── MAY 2026 WEIGHTED DAILY TARGETS (EdgeLink · sourced from T-Mobile allocation report) ──
 // perf=PerfBonus(totact) · voice=VoiceActs · bts=Tablets · hsi=HomeInternet · mim=MIMLines
 const MAY_DAILY = {
@@ -2206,13 +2206,13 @@ render();
 
   const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
 
-  set('hdr-brand-date', ML[mon]+' '+calDay+', '+yr+' · Director View · James Jackson');
-  set('hdr-date',        MS[mon]+' '+calDay+', '+yr);
-  set('hdr-sub',         dow+' · Day '+dayNum+' of 31 · '+rem+' Days Remaining');
+  set('hdr-brand-date','May '+TODAY+', 2026 — Director View — James Jackson');
+  set('hdr-date','MAY '+TODAY+', 2026');
+  set('hdr-sub','Day '+DE+' of 31 · '+REM+' Days Remaining');
   set('goals-date-label','📅 TODAY IS '+MF[mon]+' '+calDay+', '+yr);
-  set('goal-banner-date',"TODAY'S GOAL — "+MS[mon]+' '+calDay+', '+yr);
+  set('goal-banner-date',"TODAY'S GOAL — MAY "+TODAY+", 2026");
   (function(){ set('goal-num-val', typeof DAILY_GOAL!=='undefined'?DAILY_GOAL:132); })();
-  set('goal-sub-line',   ML[mon]+' '+yr+' · Day '+dayNum+' of 31 · '+rem+' days remaining');
+  set('goal-sub-line','May 2026 · Day '+DE+' of 31 · '+REM+' days remaining');
   set('splash-date',     MF[mon]+' '+calDay+', '+yr+' · DAY '+dayNum+' OF 31 · '+rem+' DAYS REMAINING');
 
   // ── CLOSING RECAP BANNER ──────────────────────────────────
@@ -6429,11 +6429,11 @@ function fixDates(){
     const DOW=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const d=now.getDate(), m=now.getMonth(), y=now.getFullYear();
     const rem=DAYS-d;
-    set('goal-banner-date',"TODAY'S GOAL — "+MF[m]+' '+d+', '+y);
-    set('goal-sub-line', ML2[m]+' '+y+' · Day '+DE+' of 31 · '+rem+' days remaining');
-    set('hdr-date', MS2[m]+' '+d+', '+y);
+    set('goal-banner-date',"TODAY'S GOAL — MAY "+TODAY+", 2026");
+    set('goal-sub-line','May 2026 · Day '+DE+' of 31 · '+REM+' days remaining');
+    set('hdr-date','MAY '+TODAY+', 2026');
     set('hdr-sub', DOW[now.getDay()]+' · Day '+DE+' of 31 · '+(DAYS-DE)+' Days Remaining');
-    set('hdr-brand-date', ML2[m]+' '+d+', '+y+' — Director View — James Jackson');
+    set('hdr-brand-date','May '+TODAY+', 2026 — Director View — James Jackson');
     set('goals-date-label','⚡️ TODAY IS '+MF[m]+' '+d+', '+y);
   } catch(e){}
 }
