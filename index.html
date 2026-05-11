@@ -6354,48 +6354,53 @@ function openCoachDetail(coachName, color) {
   ov.scrollTop = 0;
 }
 
+
 (function(){
-  var COACH_MAP = {
+  var CMAP = {
     'Rose Perez':'#f472b6','Ambulai Sheku':'#34d399','Joel Montero':'#a78bfa',
     'Mr. Watts':'#fb923c','Manny Rivera':'#f59e0b','Cheryl':'#f87171','TBD':'#9095b0'
   };
-  function addCoachBtns(){
+  function addBtns(){
     var grid = document.getElementById('coaches-grid');
-    if(!grid) return;
-    // Find all elements that contain coach names
-    var all = grid.querySelectorAll('*');
-    all.forEach(function(el){
-      if(el.getAttribute('data-coach-btn')) return; // already added
-      var txt = el.textContent && el.textContent.trim();
-      if(!txt) return;
-      // Check if this element's text matches a coach name exactly
-      for(var cName in COACH_MAP){
-        if(txt === cName && el.children.length === 0){
-          el.setAttribute('data-coach-btn','1');
-          var btn = document.createElement('button');
-          btn.className = 'cd-btn';
-          btn.textContent = 'VIEW DETAIL';
-          btn.style.cssText = 'margin-left:8px;font-size:9px;font-family:Bebas Neue,sans-serif;letter-spacing:2px;background:#1a1a2e;color:#9095b0;border:1px solid #3a3a5a;border-radius:4px;padding:3px 8px;cursor:pointer;';
-          (function(n,c){ btn.onclick = function(e){ e.stopPropagation(); openCoachDetail(n,c); }; })(cName, COACH_MAP[cName]);
-          el.parentNode.insertBefore(btn, el.nextSibling);
+    if(!grid || grid.getAttribute('data-btns-added')) return;
+    // Walk all text nodes looking for coach names
+    var walker = document.createTreeWalker(grid, NodeFilter.SHOW_TEXT, null, false);
+    var node, found = [];
+    while((node = walker.nextNode())){
+      var t = (node.textContent||'').trim();
+      for(var n in CMAP){
+        if(t.toUpperCase() === n.toUpperCase()){
+          found.push({node:node, name:n, color:CMAP[n]});
           break;
         }
       }
-    });
-  }
-  var target = document.getElementById('coaches-grid');
-  if(target){
-    new MutationObserver(function(){ setTimeout(addCoachBtns, 50); }).observe(target, {childList:true,subtree:true});
-  }
-  // Also run on tab click
-  document.addEventListener('click', function(e){
-    var t = e.target;
-    if(t && (t.textContent||'').includes('coach') || (t.getAttribute('onclick')||'').includes('renderCoaches')){
-      setTimeout(addCoachBtns, 200);
     }
-  });
-  // Run after initial render
-  setTimeout(addCoachBtns, 1000);
+    if(found.length === 0) return;
+    found.forEach(function(f){
+      var parent = f.node.parentElement;
+      if(!parent || parent.querySelector('.cd-view-btn')) return;
+      var btn = document.createElement('button');
+      btn.className = 'cd-view-btn';
+      btn.innerHTML = '&#x25BA; VIEW';
+      btn.style.cssText = 'font-family:"Bebas Neue",sans-serif;font-size:11px;letter-spacing:2px;background:transparent;color:'+f.color+';border:1px solid '+f.color+';border-radius:4px;padding:4px 10px;cursor:pointer;margin-left:10px;vertical-align:middle;';
+      (function(n,c){ btn.onclick = function(e){ e.stopPropagation(); openCoachDetail(n,c); }; })(f.name, f.color);
+      parent.appendChild(btn);
+    });
+    grid.setAttribute('data-btns-added','1');
+  }
+  function watchAndAdd(){
+    var grid = document.getElementById('coaches-grid');
+    if(grid){
+      new MutationObserver(function(){
+        grid.removeAttribute('data-btns-added');
+        setTimeout(addBtns, 100);
+      }).observe(grid, {childList:true,subtree:false});
+      setTimeout(addBtns, 500);
+    } else {
+      setTimeout(watchAndAdd, 500);
+    }
+  }
+  watchAndAdd();
 })();
 </script>
 
