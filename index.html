@@ -402,7 +402,7 @@ if(window.innerWidth < 768){
   <div class="net-stat"><div class="net-label">MTD BTS</div><div class="net-val" style="color:#FFD600">279</div><div class="net-sub" style="color:#FFD600;font-weight:600">74% pace ⚠️</div><div class="net-sub">exp 385 · mo 1,192</div></div>
   <div class="net-stat"><div class="net-label">MTD HSI</div><div class="net-val" style="color:#60a5fa">125</div><div class="net-sub" style="color:#00875a;font-weight:600">126% pace ✅</div><div class="net-sub">exp 99 · mo 308</div></div>
   <div class="net-stat"><div class="net-label">MTD MIM LINES</div><div class="net-val" style="color:#f472b6">238</div><div class="net-sub" style="color:#00875a;font-weight:600">256% pace ✅</div><div class="net-sub">exp 93 · mo 287</div></div>
-  <div class="net-stat"><div class="net-label">MTD VOICE</div><div class="net-val" style="color:#a78bfa">796</div><div class="net-sub" style="color:#00875a;font-weight:600">113% pace ✅</div><div class="net-sub">exp 853 · mo 2,643</div></div>
+  <div class="net-stat"><div class="net-label">MTD VOICE</div><div class="net-val" style="color:#a78bfa">958</div><div class="net-sub" style="color:#00875a;font-weight:600">113% pace ✅</div><div class="net-sub">exp 853 · mo 2,643</div></div>
   <div class="net-stat"><div class="net-label">MTD ACC $</div><div class="net-val c-gold">$60,550</div><div class="net-sub" style="color:#00875a;font-weight:600">92% pace 🟡</div><div class="net-sub">exp $65,981 · mo $204,540</div></div>
   <div class="net-stat"><div class="net-label">Remaining</div><div class="net-val">2,865</div><div class="net-sub">of 4,266 monthly</div><div class="net-sub">~125/day needed</div></div>
 </div>
@@ -2193,7 +2193,7 @@ render();
   // After 9PM — flip to tomorrow (prep mode for next day)
   const isNightPrep = hour >= 21;
   const display = new Date(now);
-  if(isNightPrep) display.setDate(display.getDate() + 1);
+  if(isNightPrep) // removed date offset
 
   const calDay = new Date().getDate();
   const mon    = display.getMonth();
