@@ -164,7 +164,7 @@ if(window.innerWidth < 768){
 
       // After 9PM flip to tomorrow
       var display = new Date(now);
-      if(isNightPrep) display.setDate(display.getDate() + 1);
+      if(isNightPrep) // date offset removed
 
       var day = display.getDate();
       var daysInMonth = 31;
@@ -1541,7 +1541,7 @@ function submitPin(){
 function closePinModal(){document.getElementById('pinModal').classList.remove('active');}
 function setFilter(f,btn){curFilter=f;render();}
 function setSort(s,btn){curSort=s;render();}
-function render(){
+function render(){ /* v1778516623925 */
   // Update net bar dynamically from live STORES data
   (function(){
     const T = (function(){
