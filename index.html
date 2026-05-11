@@ -346,7 +346,7 @@ if(window.innerWidth < 768){
   </div>
   <div class="header-right">
     <div class="date" id="hdr-date">MAY 7, 2026</div>
-    <div class="sub" id="hdr-sub">Day 7 of 31 · 24 Days Remaining</div>
+    <div class="sub" id="hdr-sub">Day 10 of 31 · 20 Days Remaining</div>
     <button id="lang-toggle" onclick="toggleLang()"
       style="margin-top:8px;background:linear-gradient(135deg,#C8005E,#a78bfa);color:#fff;border:none;border-radius:20px;font-family:'Bebas Neue';font-size:12px;letter-spacing:3px;padding:6px 16px;cursor:pointer;box-shadow:0 2px 8px rgba(200,0,94,0.3);transition:.2s;"
       onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
@@ -359,7 +359,7 @@ if(window.innerWidth < 768){
   <div>
     <div class="goal-label"><span id="goal-banner-date">TODAY'S GOAL — MAY 7, 2026</span></div>
     <div style="display:flex;align-items:baseline;gap:8px">
-      <div class="goal-num">163</div>
+      <div class="goal-num">132</div>
       <div class="goal-unit">PPD</div>
     </div>
     <div class="goal-sub"><span id="goal-sub-line">May 2026 · Day 10 of 31 · 24 days remaining</span></div>
@@ -2240,7 +2240,7 @@ render();
     <div>
       <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:5px;color:#C8005E;margin-bottom:6px">EDGE LINK INC · MAY 2026 · ALL 34 STORES</div>
       <div id="co-headline" style="font-family:'Bebas Neue';font-size:36px;color:#fff;line-height:1;letter-spacing:2px">COMPANY SCORECARD</div>
-      <div style="font-size:11px;color:#9095b0;margin-top:5px">May 2026 · Day 7 of 31</div>
+      <div style="font-size:11px;color:#9095b0;margin-top:5px">May 2026 · Day 10 of 31</div>
       <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;padding:10px 16px;background:rgba(200,0,94,0.06);border:1px solid rgba(200,0,94,0.2);border-radius:8px">
         <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:3px;color:#C8005E;width:100%;margin-bottom:4px">MAY 2026 · EDGE LINK GOALS</div>
         <div style="font-size:11px;color:rgba(255,255,255,0.7)">PPD: <b style="color:#00875a">+20</b> ahead</div>
@@ -2340,7 +2340,7 @@ function renderCompany(){
   document.getElementById('co-h-rem').textContent   = Nf(T.gPPD-T.ppd);
   document.getElementById('co-headline').textContent = overallP>=110?'🚀 COMPANY IS CRUSHING IT':overallP>=100?'✅ COMPANY IS ON TRACK — MAINTAIN PACE':overallP>=80?'⚠️ COMPANY IS CLOSE — PUSH NOW':'🔴 COMPANY IS BEHIND — URGENT';
   // Update day counter dynamically
-  const coDateEl = document.querySelector('#tab-company [style*="Day 1 of 31"], #tab-company [style*="Day 6 of 31"], #tab-company [style*="Day 7 of 31"]');
+  const coDateEl = document.querySelector('#tab-company [style*="Day 1 of 31"], #tab-company [style*="Day 6 of 31"], #tab-company [style*="Day 10 of 31"]');
   if(coDateEl){ const h=new Date().getHours(); const dayNum=h>=21?DE+1:DE; coDateEl.textContent='May 2026 · Day '+dayNum+' of 31'; }
 
   // Metrics
@@ -3239,7 +3239,7 @@ function renderFacts(){
   let h=`
   <!-- COMPANY SNAPSHOT -->
   <div class="fs-section">
-    <div class="fs-section-title">📈 COMPANY SNAPSHOT — MTD THROUGH APR ${DE}</div>
+    <div class="fs-section-title">📈 COMPANY SNAPSHOT — MTD THROUGH MAY ${DE}</div>
     <div class="fs-grid">
       <div class="fs-card fs-good"><div class="fs-bar" style="background:#00875a"></div><div class="fs-label">Total PPD MTD</div><div class="fs-val">${tPPD.toLocaleString()}</div><div class="fs-sub">${avgPPDday} avg/store/day</div></div>
       <div class="fs-card fs-good"><div class="fs-bar" style="background:#a78bfa"></div><div class="fs-label">Voice Activations</div><div class="fs-val">${tVoice.toLocaleString()}</div><div class="fs-sub">${Math.round(tVoice/tPPD*100)}% voice attach rate</div></div>
