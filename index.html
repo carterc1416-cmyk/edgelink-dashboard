@@ -359,7 +359,7 @@ if(window.innerWidth < 768){
   <div>
     <div class="goal-label"><span id="goal-banner-date">TODAY'S GOAL — MAY 7, 2026</span></div>
     <div style="display:flex;align-items:baseline;gap:8px">
-      <div class="goal-num" id="goal-num-val">163</div>
+      <div class="goal-num" id="goal-num-val">132</div>
       <div class="goal-unit">PPD</div>
     </div>
     <div class="goal-sub"><span id="goal-sub-line">May 2026 · Day 10 of 31 · 24 days remaining</span></div>
@@ -1310,7 +1310,7 @@ STORES.forEach(s => {
   s.market     = s.name.split('-')[0]; // RI, MA, CT, TN, AR
 });
 
-const DAYS=31,DE=10;
+const DAYS=31,DE=10,DAILY_GOAL=132;
 // ── MAY 2026 WEIGHTED DAILY TARGETS (EdgeLink · sourced from T-Mobile allocation report) ──
 // perf=PerfBonus(totact) · voice=VoiceActs · bts=Tablets · hsi=HomeInternet · mim=MIMLines
 const MAY_DAILY = {
@@ -2182,7 +2182,7 @@ render();
   set('hdr-sub',         dow+' · Day '+dayNum+' of 31 · '+rem+' Days Remaining');
   set('goals-date-label','📅 TODAY IS '+MF[mon]+' '+calDay+', '+yr);
   set('goal-banner-date',"TODAY'S GOAL — "+MS[mon]+' '+calDay+', '+yr);
-  (function(){ const gP=Math.round(STORES.reduce((a,s)=>a+(s.flatDaily||0),0)); set('goal-num-val',gP); })();
+  (function(){ set('goal-num-val', typeof DAILY_GOAL!=='undefined'?DAILY_GOAL:132); })();
   set('goal-sub-line',   ML[mon]+' '+yr+' · Day '+dayNum+' of 31 · '+rem+' days remaining');
   set('splash-date',     MF[mon]+' '+calDay+', '+yr+' · DAY '+dayNum+' OF 31 · '+rem+' DAYS REMAINING');
 
