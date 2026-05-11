@@ -6307,51 +6307,60 @@ const _sim = document.getElementById('store-intel-modal');
 if(_sim) _sim.addEventListener('click', e=>{ if(e.target===_sim) closeStoreIntel(); });
 
 function openCoachDetail(coachName, color) {
-  const myStores = STORES.filter(s => s.coach === coachName);
-  const yWin = Math.ceil(DE/3);
-  const yIdx = (DE-1) % 3;
-  const yWinData = (WINDOW_STORE_DATA[yWin]) || {};
-  const cards = myStores.map(s => {
-    const tPPD = Math.round(s.flatDaily);
-    const tV   = Math.max(1, Math.round(s.voiceGoal/31));
-    const tB   = Math.max(0, Math.round(s.btsTgt/31));
-    const tH   = Math.max(0, Math.round(s.hsiTgt/31));
-    const yd   = yWinData[s.name];
-    const ydV  = yd ? (yd.voice[yIdx]||0) : 0;
-    const ydB  = yd ? (yd.bts[yIdx]||0) : 0;
-    const ydH  = yd ? (yd.hsi[yIdx]||0) : 0;
-    const ydP  = ydV+ydB+ydH;
-    const ydC  = ydP>=tPPD?'#00875a':ydP>=tPPD*0.7?'#FFD600':'#f472b6';
-    const ydBadge = ydP>=tPPD?'HIT':'MISS';
-    const pac  = s.monthly>0 ? Math.min(Math.round(s.mtd/s.monthly*100),200) : 0;
-    const pacC = pac>=100?'#00875a':pac>=70?'#FFD600':'#f472b6';
-    return '<div class="cd-card">' +
-      '<div class="cd-sname">'+s.name+'</div>' +
-      '<div class="cd-section"><div class="cd-slabel">TODAY'S GOAL</div><div class="cd-metrics">' +
-        '<div class="cd-m"><div class="cd-mv" style="color:'+color+'">'+tPPD+'</div><div class="cd-ml">PPD</div></div>' +
-        '<div class="cd-m"><div class="cd-mv">'+tV+'</div><div class="cd-ml">VOICE</div></div>' +
-        '<div class="cd-m"><div class="cd-mv">'+tB+'</div><div class="cd-ml">TABLETS</div></div>' +
-        '<div class="cd-m"><div class="cd-mv">'+tH+'</div><div class="cd-ml">HSI</div></div>' +
-      '</div></div>' +
-      '<div class="cd-section"><div class="cd-slabel">YESTERDAY <span style="color:'+ydC+';font-size:9px">'+ydBadge+'</span></div><div class="cd-metrics">' +
-        '<div class="cd-m"><div class="cd-mv" style="color:'+ydC+'">'+ydP+'</div><div class="cd-ml">PPD</div></div>' +
-        '<div class="cd-m"><div class="cd-mv">'+ydV+'</div><div class="cd-ml">VOICE</div></div>' +
-        '<div class="cd-m"><div class="cd-mv">'+ydB+'</div><div class="cd-ml">TABLETS</div></div>' +
-        '<div class="cd-m"><div class="cd-mv">'+ydH+'</div><div class="cd-ml">HSI</div></div>' +
-      '</div></div>' +
-      '<div class="cd-section"><div class="cd-slabel">MTD PACE</div>' +
-        '<div class="cd-pace-bar"><div class="cd-pace-fill" style="width:'+Math.min(pac,100)+'%;background:'+pacC+'"></div></div>' +
-        '<div class="cd-pace-txt" style="color:'+pacC+'">'+s.mtd+' of '+s.monthly+' &nbsp;&middot;&nbsp; '+pac+'%</div>' +
-      '</div>' +
-    '</div>';
-  }).join('');
-  document.getElementById('cd-title-name').textContent = coachName;
-  document.getElementById('cd-title-name').style.color = color;
-  document.getElementById('cd-title-sub').textContent = myStores.length + ' STORES · MAY 2026 · DAY ' + DE + ' OF 31';
-  document.getElementById('cd-grid-content').innerHTML = cards;
-  const ov = document.getElementById('coach-detail-overlay');
-  ov.style.display = 'flex';
-  ov.scrollTop = 0;
+  try {
+    // Use STORE_COACH mapping to find this coach's stores
+    var myStores = STORES.filter(function(s){ return STORE_COACH[s.name] === coachName; });
+    var yWin = Math.ceil(DE/3);
+    var yIdx = (DE-1) % 3;
+    var yWinData = (WINDOW_STORE_DATA && WINDOW_STORE_DATA[yWin]) || {};
+
+    var cards = myStores.map(function(s){
+      var tPPD = Math.round(s.flatDaily||0);
+      var tV   = Math.max(0, Math.round((s.voiceGoal||0)/31));
+      var tB   = Math.max(0, Math.round((s.btsTgt||0)/31));
+      var tH   = Math.max(0, Math.round((s.hsiTgt||0)/31));
+      var yd   = yWinData[s.name] || null;
+      var ydV  = yd ? (yd.voice[yIdx]||0) : 0;
+      var ydB  = yd ? (yd.bts[yIdx]||0) : 0;
+      var ydH  = yd ? (yd.hsi[yIdx]||0) : 0;
+      var ydP  = ydV+ydB+ydH;
+      var ydC  = ydP>=tPPD?'#00875a':ydP>0&&ydP>=tPPD*0.7?'#FFD600':'#f472b6';
+      var ydBadge = ydP>=tPPD?'HIT':ydP>0?'MISS':'NO DATA';
+      var pac  = (s.monthly||0)>0 ? Math.min(Math.round((s.mtd||0)/(s.monthly)*100),200) : 0;
+      var pacC = pac>=100?'#00875a':pac>=70?'#FFD600':'#f472b6';
+      return '<div class="cd-card">'+
+        '<div class="cd-sname">'+s.name+'</div>'+
+        '<div class="cd-section"><div class="cd-slabel">TODAY'S GOAL</div>'+
+        '<div class="cd-metrics">'+
+          '<div class="cd-m"><div class="cd-mv" style="color:'+color+'">'+tPPD+'</div><div class="cd-ml">PPD</div></div>'+
+          '<div class="cd-m"><div class="cd-mv">'+tV+'</div><div class="cd-ml">VOICE</div></div>'+
+          '<div class="cd-m"><div class="cd-mv">'+tB+'</div><div class="cd-ml">TABLETS</div></div>'+
+          '<div class="cd-m"><div class="cd-mv">'+tH+'</div><div class="cd-ml">HSI</div></div>'+
+        '</div></div>'+
+        '<div class="cd-section"><div class="cd-slabel">YESTERDAY &nbsp;<span style="color:'+ydC+';font-size:9px;font-family:Bebas Neue">'+ydBadge+'</span></div>'+
+        '<div class="cd-metrics">'+
+          '<div class="cd-m"><div class="cd-mv" style="color:'+ydC+'">'+ydP+'</div><div class="cd-ml">PPD</div></div>'+
+          '<div class="cd-m"><div class="cd-mv">'+ydV+'</div><div class="cd-ml">VOICE</div></div>'+
+          '<div class="cd-m"><div class="cd-mv">'+ydB+'</div><div class="cd-ml">TABLETS</div></div>'+
+          '<div class="cd-m"><div class="cd-mv">'+ydH+'</div><div class="cd-ml">HSI</div></div>'+
+        '</div></div>'+
+        '<div class="cd-section"><div class="cd-slabel">MTD PACE</div>'+
+          '<div class="cd-pace-bar"><div class="cd-pace-fill" style="width:'+Math.min(pac,100)+'%;background:'+pacC+'"></div></div>'+
+          '<div class="cd-pace-txt"><span style="color:'+pacC+'">'+pac+'%</span> &nbsp;&middot;&nbsp; '+(s.mtd||0)+' of '+(s.monthly||0)+'</div>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+
+    document.getElementById('cd-title-name').textContent = coachName;
+    document.getElementById('cd-title-name').style.color = color;
+    document.getElementById('cd-title-sub').textContent = myStores.length+' STORES · MAY 2026 · DAY '+DE+' OF 31';
+    document.getElementById('cd-grid-content').innerHTML = cards || '<div style="color:#9095b0;padding:20px">No stores found for this coach.</div>';
+    var ov = document.getElementById('coach-detail-overlay');
+    ov.style.display = 'flex';
+    ov.scrollTop = 0;
+  } catch(e) {
+    alert('Error: ' + e.message);
+  }
 }
 
 
