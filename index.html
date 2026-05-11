@@ -1544,11 +1544,18 @@ function setSort(s,btn){curSort=s;render();}
 function render(){
   // Update net bar dynamically from live STORES data
   (function(){
-    const T = STORES.reduce((a,s)=>({
-      ppd:a.ppd+s.mtd, voice:a.voice+s.mtdVoice, bts:a.bts+(s.mtdTablet||0),
-      hsi:a.hsi+s.mtdHint, mim:a.mim+s.mtdMIM, acc:a.acc+s.mtdAcc,
-      goal:a.goal+s.monthly
-    }),{ppd:0,voice:0,bts:0,hsi:0,mim:0,acc:0,goal:0});
+    const T = (function(){
+    const days = Object.keys(DAILY_LOG).map(Number).filter(d=>d<=DE);
+    return {
+      ppd:   days.reduce((a,d)=>a+(DAILY_LOG[d].ppd||0),0),
+      voice: days.reduce((a,d)=>a+(DAILY_LOG[d].voice||0),0),
+      bts:   days.reduce((a,d)=>a+(DAILY_LOG[d].bts||0),0),
+      hsi:   days.reduce((a,d)=>a+(DAILY_LOG[d].hsi||0),0),
+      mim:   days.reduce((a,d)=>a+(DAILY_LOG[d].mim||0),0),
+      acc:   days.reduce((a,d)=>a+(DAILY_LOG[d].acc||0),0),
+      goal:  STORES.reduce((a,s)=>a+s.monthly, 0)
+    };
+  })();
     const exp = (g,mo=31) => Math.round(g*DE/mo);
     const pace = (a,e) => e>0?Math.round(a/e*100):0;
     const pC = p=>p>=100?'#00875a':p>=85?'#f59e0b':'#dc2626';
