@@ -359,7 +359,7 @@ if(window.innerWidth < 768){
   <div>
     <div class="goal-label"><span id="goal-banner-date">TODAY'S GOAL — MAY 7, 2026</span></div>
     <div style="display:flex;align-items:baseline;gap:8px">
-      <div class="goal-num">163</div>
+      <div class="goal-num" id="goal-num-val">163</div>
       <div class="goal-unit">PPD</div>
     </div>
     <div class="goal-sub"><span id="goal-sub-line">May 2026 · Day 10 of 31 · 24 days remaining</span></div>
@@ -2182,6 +2182,7 @@ render();
   set('hdr-sub',         dow+' · Day '+dayNum+' of 31 · '+rem+' Days Remaining');
   set('goals-date-label','📅 TODAY IS '+MF[mon]+' '+calDay+', '+yr);
   set('goal-banner-date',"TODAY'S GOAL — "+MS[mon]+' '+calDay+', '+yr);
+  (function(){ const gP=Math.round(STORES.reduce((a,s)=>a+(s.flatDaily||0),0)); set('goal-num-val',gP); })();
   set('goal-sub-line',   ML[mon]+' '+yr+' · Day '+dayNum+' of 31 · '+rem+' days remaining');
   set('splash-date',     MF[mon]+' '+calDay+', '+yr+' · DAY '+dayNum+' OF 31 · '+rem+' DAYS REMAINING');
 
