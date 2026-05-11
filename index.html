@@ -1764,6 +1764,8 @@ function render(){
     html+='</div></div>';
   });
   document.getElementById('content').innerHTML=html;
+
+  fixDates();
 }
 
 function screenshotGoalsCard(sid, storeName){
@@ -6418,6 +6420,24 @@ function openCoachDetail(coachName, color) {
   }
   watchAndAdd();
 })();
+
+function fixDates(){
+  try {
+    const now = new Date();
+    const MF=['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+    const MS2=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+    const ML2=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const DOW=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const d=now.getDate(), m=now.getMonth(), y=now.getFullYear();
+    const rem=DAYS-d;
+    set('goal-banner-date',"TODAY'S GOAL — "+MF[m]+' '+d+', '+y);
+    set('goal-sub-line', ML2[m]+' '+y+' · Day '+DE+' of 31 · '+rem+' days remaining');
+    set('hdr-date', MS2[m]+' '+d+', '+y);
+    set('hdr-sub', DOW[now.getDay()]+' · Day '+DE+' of 31 · '+(DAYS-DE)+' Days Remaining');
+    set('hdr-brand-date', ML2[m]+' '+d+', '+y+' — Director View — James Jackson');
+    set('goals-date-label','⚡️ TODAY IS '+MF[m]+' '+d+', '+y);
+  } catch(e){}
+}
 </script>
 
 
