@@ -6353,6 +6353,50 @@ function openCoachDetail(coachName, color) {
   ov.style.display = 'flex';
   ov.scrollTop = 0;
 }
+
+(function(){
+  var COACH_MAP = {
+    'Rose Perez':'#f472b6','Ambulai Sheku':'#34d399','Joel Montero':'#a78bfa',
+    'Mr. Watts':'#fb923c','Manny Rivera':'#f59e0b','Cheryl':'#f87171','TBD':'#9095b0'
+  };
+  function addCoachBtns(){
+    var grid = document.getElementById('coaches-grid');
+    if(!grid) return;
+    // Find all elements that contain coach names
+    var all = grid.querySelectorAll('*');
+    all.forEach(function(el){
+      if(el.getAttribute('data-coach-btn')) return; // already added
+      var txt = el.textContent && el.textContent.trim();
+      if(!txt) return;
+      // Check if this element's text matches a coach name exactly
+      for(var cName in COACH_MAP){
+        if(txt === cName && el.children.length === 0){
+          el.setAttribute('data-coach-btn','1');
+          var btn = document.createElement('button');
+          btn.className = 'cd-btn';
+          btn.textContent = 'VIEW DETAIL';
+          btn.style.cssText = 'margin-left:8px;font-size:9px;font-family:Bebas Neue,sans-serif;letter-spacing:2px;background:#1a1a2e;color:#9095b0;border:1px solid #3a3a5a;border-radius:4px;padding:3px 8px;cursor:pointer;';
+          (function(n,c){ btn.onclick = function(e){ e.stopPropagation(); openCoachDetail(n,c); }; })(cName, COACH_MAP[cName]);
+          el.parentNode.insertBefore(btn, el.nextSibling);
+          break;
+        }
+      }
+    });
+  }
+  var target = document.getElementById('coaches-grid');
+  if(target){
+    new MutationObserver(function(){ setTimeout(addCoachBtns, 50); }).observe(target, {childList:true,subtree:true});
+  }
+  // Also run on tab click
+  document.addEventListener('click', function(e){
+    var t = e.target;
+    if(t && (t.textContent||'').includes('coach') || (t.getAttribute('onclick')||'').includes('renderCoaches')){
+      setTimeout(addCoachBtns, 200);
+    }
+  });
+  // Run after initial render
+  setTimeout(addCoachBtns, 1000);
+})();
 </script>
 
 
