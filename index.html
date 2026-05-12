@@ -1564,7 +1564,7 @@ function render(){
   const coaches=[...new Set(list.map(s=>s.coach))];
   let html='';
   coaches.forEach(coach=>{
-    const cs=list.filter(s=>s.coach===coach);if(!cs.length)return;
+    const cs=list.filter(s=>STORE_COACH[s.name]===coach);if(!cs.length)return;
     const cMtd=cs.reduce((a,s)=>a+s.mtd,0),cGoal=cs.reduce((a,s)=>a+s.monthly,0),cColor=cs[0].coachColor;
     const cV=cs.reduce((a,s)=>a+s.mtdVoice,0),cVG=cs.reduce((a,s)=>a+s.voiceGoal,0);
     const cB=cs.reduce((a,s)=>a+(s.mtdTablet||0),0),cBG=cs.reduce((a,s)=>a+s.btsTgt,0);
@@ -2086,7 +2086,7 @@ function renderMgr(){
   // ── BY COACH VIEW (default) ───────────────────────────────
   const coaches=[...new Set(list.map(s=>s.coach))];
   coaches.forEach(coach=>{
-    const cs=list.filter(s=>s.coach===coach);
+    const cs=list.filter(s=>STORE_COACH[s.name]===coach);
     if(!cs.length)return;
     const color=cs[0].coachColor;
     const cV=cs.reduce((a,s)=>a+s.mtdVoice,0),cB=cs.reduce((a,s)=>a+(s.mtdTablet||0),0),cH=cs.reduce((a,s)=>a+s.mtdHint,0),cPPD=cs.reduce((a,s)=>a+s.mtd,0);
@@ -4123,7 +4123,7 @@ function render72Grid(){
   }
 
   // Count zero stores
-  let stores = STORES.filter(s=>filter72==='ALL'||s.coach===filter72);
+  let stores = STORES.filter(s=>filter72==='ALL'||STORE_COACH[s.name]===filter72);
   const zeroStores = stores.filter(s=>hasAnyZero(wData[s.name]));
   const critStores = stores.filter(s=>countZeros(wData[s.name])>=3);
 
@@ -4150,7 +4150,7 @@ function render72Grid(){
   let html='';
 
   coaches.forEach(coach=>{
-    const cs = STORES.filter(s=>s.coach===coach && (filter72==='ALL'||s.coach===filter72));
+    const cs = STORES.filter(s=>STORE_COACH[s.name]===coach && (filter72==='ALL'||STORE_COACH[s.name]===filter72));
     if(!cs.length) return;
     const color = cs[0].coachColor;
 
