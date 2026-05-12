@@ -4049,8 +4049,14 @@ function set72Filter(f, btn){
 }
 
 function render72(){
-  render72Calendar();
-  render72Grid();
+  try {
+    render72Calendar();
+    render72Grid();
+  } catch(e) {
+    console.error('render72 error:', e);
+    const el = document.getElementById('tab-72hr') || document.querySelector('[data-tab="72hr"]');
+    if(el) el.innerHTML = '<div style="color:#f472b6;padding:20px;font-family:Bebas Neue;font-size:16px;">72-HR REPORT ERROR: ' + e.message + '</div>';
+  }
 }
 
 function render72Calendar(){
