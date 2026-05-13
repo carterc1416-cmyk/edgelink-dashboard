@@ -1738,7 +1738,7 @@ function render(){
               </div>
               <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
                 ${[
-                  {icon:'📦',label:'PPD',       need:Math.ceil(Math.max(0,s.monthly-s.mtd)/(DAYS-DE)),     color:'#C8005E'},
+                  {icon:'📦',label:'PPD',       need:Math.ceil(Math.max(0,s.monthly-s.mtd)/(DAYS-DE)),     color:'#C8005E', sub:'VOICE + TABLETS'},
                   {icon:'📞',label:'VOICE',     need:Math.ceil(Math.max(0,s.voiceGoal-s.mtdVoice)/(DAYS-DE)), color:'#a78bfa'},
                   {icon:'📲',label:'TABLETS',   need:Math.ceil(Math.max(0,s.btsTgt-s.mtdTablet)/(DAYS-DE)),   color:'#34d399'},
                   {icon:'🌐',label:'HSI',       need:Math.ceil(Math.max(0,s.hsiTgt-s.mtdHint)/(DAYS-DE)),     color:'#60a5fa'},
@@ -1747,7 +1747,8 @@ function render(){
                 ].map(r=>`
                   <div style="text-align:center;padding:12px 6px;border:1px solid var(--b);border-top:3px solid ${r.color};border-radius:8px;background:#fafbff;">
                     <div style="font-size:16px;margin-bottom:3px;">${r.icon}</div>
-                    <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:2px;color:var(--td);margin-bottom:3px;">${r.label}</div>
+                    <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:2px;color:var(--td);margin-bottom:${r.sub ? '2px' : '3px'};">${r.label}</div>
+                    ${ r.sub ? '<div style="font-size:8px;letter-spacing:1.5px;color:var(--tm);opacity:0.75;margin-bottom:3px;margin-top:2px;">'+r.sub+'</div>' : '' }
                     <div style="font-family:'Bebas Neue';font-size:34px;color:${r.color};line-height:1;">${r.need}</div>
                     <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:2px;color:var(--tm);margin-top:4px;">NEEDED/DAY</div>
                   </div>`).join('')}
