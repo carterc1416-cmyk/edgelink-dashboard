@@ -387,6 +387,7 @@ if(window.innerWidth < 768){
 </div>
 <div class="tab-nav">
   <!-- OPEN TABS — no PIN required -->
+  <button class="tab-btn" onclick="switchTab('guide',this)">📚 FIELD GUIDE</button>
   <button class="tab-btn active" onclick="switchTab('incentive',this)">💜 HOW YOU GET PAID</button>
   <button class="tab-btn" onclick="switchTab('apr13',this)">🎯 GOALS</button>
   <button class="tab-btn" onclick="switchTab('script',this)">⚙️ PROCESS</button>
@@ -394,8 +395,6 @@ if(window.innerWidth < 768){
   <button class="tab-btn" onclick="switchTab('playbook',this);renderPlaybook()">📋 WEEKLY PLAYBOOK</button>
   <button class="tab-btn" onclick="switchTab('training',this)">🎓 TRAINING PRIORITIES</button>
   <button class="tab-btn" onclick="switchTab('tru',this);renderTRU()">📊 TRU REPORT</button>
-  <button class="tab-btn" onclick="switchTab('guide',this)">📚 FIELD GUIDE</button>
-  <button class="tab-btn" onclick="switchTab('guide',this)">📖 FIELD GUIDE</button>
   <!-- LOCKED TABS — PIN required -->
   <button class="tab-btn" onclick="handleLockedTab('company',this)">🏢 COMPANY TOTAL 🔒</button>
   <button class="tab-btn" onclick="handleLockedTab('facts',this)" data-render="facts">📊 STATS & FACTS 🔒</button>
@@ -6550,261 +6549,276 @@ function renderTRU(){renderTRUSection(_truSec);}
 document.addEventListener('DOMContentLoaded',()=>{const el=document.getElementById('tab-tru');if(el&&el.classList.contains('active'))renderTRU();});
 </script>
 
+
+
 <!-- FIELD GUIDE TAB -->
-<div id="tab-guide" class="tab-panel" style="background:var(--bg);padding-bottom:80px;">
-<div style="background:linear-gradient(135deg,#0a1628 0%,#1a0a2e 50%,#0a1628 100%);border-bottom:3px solid #C8005E;padding:24px 32px;">
-  <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:5px;color:#C8005E;margin-bottom:4px;">EDGE LINK INC · MAY 2026</div>
-  <div style="font-family:'Bebas Neue';font-size:36px;color:#fff;letter-spacing:2px;">COMMAND CENTER FIELD GUIDE</div>
-  <div style="font-size:12px;color:#9095b0;margin-top:6px;">How every tab works · What each metric means · How to run your coaching conversations</div>
+<div id="tab-guide" class="tab-panel" style="background:#fff;padding-bottom:80px;">
+<div style="max-width:820px;margin:0 auto;padding:36px 28px 20px;">
+
+<div style="border-bottom:2px solid #C8005E;padding-bottom:14px;margin-bottom:20px;">
+  <div style="font-size:28px;font-weight:800;color:#C8005E;letter-spacing:0.5px;font-family:Arial,sans-serif;">EDGE LINK INC</div>
+  <div style="font-size:13px;color:#6B7280;font-style:italic;margin-top:3px;">May 2026 Command Center — Manager &amp; Coach Field Guide</div>
 </div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;padding:12px 20px;background:var(--bg2);border-bottom:1px solid var(--b);">
-  <a href="#guide-overview" style="font-family:'Bebas Neue';font-size:11px;letter-spacing:2px;color:#C8005E;text-decoration:none;padding:5px 10px;border:1px solid #C8005E;border-radius:4px;">OVERVIEW</a>
-  <a href="#guide-goals" style="font-family:'Bebas Neue';font-size:11px;letter-spacing:2px;color:var(--td);text-decoration:none;padding:5px 10px;border:1px solid var(--b);border-radius:4px;">GOALS</a>
-  <a href="#guide-paid" style="font-family:'Bebas Neue';font-size:11px;letter-spacing:2px;color:var(--td);text-decoration:none;padding:5px 10px;border:1px solid var(--b);border-radius:4px;">GET PAID</a>
-  <a href="#guide-playbook" style="font-family:'Bebas Neue';font-size:11px;letter-spacing:2px;color:var(--td);text-decoration:none;padding:5px 10px;border:1px solid var(--b);border-radius:4px;">PLAYBOOK</a>
-  <a href="#guide-training" style="font-family:'Bebas Neue';font-size:11px;letter-spacing:2px;color:var(--td);text-decoration:none;padding:5px 10px;border:1px solid var(--b);border-radius:4px;">TRAINING</a>
-  <a href="#guide-tru" style="font-family:'Bebas Neue';font-size:11px;letter-spacing:2px;color:var(--td);text-decoration:none;padding:5px 10px;border:1px solid var(--b);border-radius:4px;">TRU</a>
-  <a href="#guide-72hr" style="font-family:'Bebas Neue';font-size:11px;letter-spacing:2px;color:var(--td);text-decoration:none;padding:5px 10px;border:1px solid var(--b);border-radius:4px;">72-HR</a>
-  <a href="#guide-locked" style="font-family:'Bebas Neue';font-size:11px;letter-spacing:2px;color:var(--td);text-decoration:none;padding:5px 10px;border:1px solid var(--b);border-radius:4px;">LOCKED TABS</a>
-  <a href="#guide-convo" style="font-family:'Bebas Neue';font-size:11px;letter-spacing:2px;color:var(--td);text-decoration:none;padding:5px 10px;border:1px solid var(--b);border-radius:4px;">COACH FLOW</a>
-</div>
-<div style="max-width:900px;margin:0 auto;padding:24px 20px;"><div id="guide-overview" style="margin-top:40px;">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
-    <span style="font-size:24px;">📋</span>
-    <div>
-      <div style="font-family:'Bebas Neue';font-size:28px;color:#fff;letter-spacing:1px;">DASHBOARD AT A GLANCE</div>
-      <div style="font-size:12px;color:#9095b0;">What every tab does and who it's for</div>
-    </div>
+
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;">This guide covers every tab in the Edge Link Command Center. Use it to run informed coaching conversations, track store performance, and understand what each metric means for your team and your payout.</p>
+
+<div id="fg-overview" style="margin-top:36px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+    <span style="color:#C8005E;font-size:18px;">◇</span>
+    <h2 style="font-size:17px;font-weight:700;color:#1a0a2e;margin:0;letter-spacing:0.3px;">DASHBOARD AT A GLANCE</h2>
   </div>
-  <div style="height:2px;background:linear-gradient(90deg,#C8005E,transparent);margin-bottom:20px;"></div><div style="overflow-x:auto;border-radius:8px;border:1px solid var(--b);">
+  <div style="font-style:italic;color:#6B7280;font-size:12px;margin-bottom:6px;">What lives where and who it’s for</div>
+  <div style="height:1px;background:#C8005E;margin-bottom:16px;"></div>
+<div style="overflow-x:auto;margin-bottom:8px;">
 <table style="width:100%;border-collapse:collapse;font-size:12px;">
-<thead><tr style="background:#0a1628;">
-  <th style="padding:10px 12px;text-align:left;font-family:'Bebas Neue';font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.5);white-space:nowrap;">TAB</th>
-  <th style="padding:10px 12px;text-align:left;font-family:'Bebas Neue';font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.5);">AUDIENCE</th>
-  <th style="padding:10px 12px;text-align:left;font-family:'Bebas Neue';font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.5);">PURPOSE</th>
+<thead><tr style="background:#1a0a2e;">
+  <th style="padding:9px 10px;text-align:left;color:#fff;font-size:11px;letter-spacing:0.5px;border:1px solid #374151;">TAB</th>
+  <th style="padding:9px 10px;text-align:left;color:#fff;font-size:11px;letter-spacing:0.5px;border:1px solid #374151;">PRIMARY AUDIENCE</th>
+  <th style="padding:9px 10px;text-align:left;color:#fff;font-size:11px;letter-spacing:0.5px;border:1px solid #374151;">ONE-LINE PURPOSE</th>
 </tr></thead>
-<tbody><tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-    <td style="padding:9px 12px;font-size:12px;color:#fff;white-space:nowrap;">💜 How You Get Paid</td>
-    <td style="padding:9px 12px;font-size:11px;color:#9095b0;">All reps + coaches</td>
-    <td style="padding:9px 12px;font-size:12px;color:rgba(255,255,255,0.7);">Payout structure, floor expectations, Power-Ups</td>
-  </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-    <td style="padding:9px 12px;font-size:12px;color:#fff;white-space:nowrap;">🎯 Goals</td>
-    <td style="padding:9px 12px;font-size:11px;color:#9095b0;">Reps (daily)</td>
-    <td style="padding:9px 12px;font-size:12px;color:rgba(255,255,255,0.7);">Today's pace targets — what to hit to stay on track</td>
-  </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-    <td style="padding:9px 12px;font-size:12px;color:#fff;white-space:nowrap;">⚙️ Process</td>
-    <td style="padding:9px 12px;font-size:11px;color:#9095b0;">All reps</td>
-    <td style="padding:9px 12px;font-size:12px;color:rgba(255,255,255,0.7);">Step-by-step sales process reference</td>
-  </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-    <td style="padding:9px 12px;font-size:12px;color:#fff;white-space:nowrap;">📶 Know Your Plans</td>
-    <td style="padding:9px 12px;font-size:11px;color:#9095b0;">Reps during sale</td>
-    <td style="padding:9px 12px;font-size:12px;color:rgba(255,255,255,0.7);">Plan comparison and selling points</td>
-  </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-    <td style="padding:9px 12px;font-size:12px;color:#fff;white-space:nowrap;">📋 Weekly Playbook</td>
-    <td style="padding:9px 12px;font-size:11px;color:#9095b0;">Coaches + managers</td>
-    <td style="padding:9px 12px;font-size:12px;color:rgba(255,255,255,0.7);">This week's focus areas and priorities</td>
-  </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-    <td style="padding:9px 12px;font-size:12px;color:#fff;white-space:nowrap;">🎓 Training Priorities</td>
-    <td style="padding:9px 12px;font-size:11px;color:#9095b0;">Coaches + RDM</td>
-    <td style="padding:9px 12px;font-size:12px;color:rgba(255,255,255,0.7);">Open Metro U training flags by rep</td>
-  </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-    <td style="padding:9px 12px;font-size:12px;color:#fff;white-space:nowrap;">📊 TRU Report</td>
-    <td style="padding:9px 12px;font-size:11px;color:#9095b0;">Managers + coaches</td>
-    <td style="padding:9px 12px;font-size:12px;color:rgba(255,255,255,0.7);">T-Mobile rep-level performance data</td>
-  </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-    <td style="padding:9px 12px;font-size:12px;color:#9095b0;white-space:nowrap;">🏢 Company Total</td>
-    <td style="padding:9px 12px;font-size:11px;color:#9095b0;">Managers (PIN)</td>
-    <td style="padding:9px 12px;font-size:12px;color:rgba(255,255,255,0.7);">Company-wide MTD rollup — all 34 stores</td>
-  </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-    <td style="padding:9px 12px;font-size:12px;color:#9095b0;white-space:nowrap;">📊 Stats & Facts</td>
-    <td style="padding:9px 12px;font-size:11px;color:#9095b0;">Managers (PIN)</td>
-    <td style="padding:9px 12px;font-size:12px;color:rgba(255,255,255,0.7);">Store-level ranked performance</td>
-  </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-    <td style="padding:9px 12px;font-size:12px;color:#9095b0;white-space:nowrap;">📅 Final Numbers</td>
-    <td style="padding:9px 12px;font-size:11px;color:#9095b0;">Managers (PIN)</td>
-    <td style="padding:9px 12px;font-size:12px;color:rgba(255,255,255,0.7);">Official end-of-period closing numbers</td>
-  </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-    <td style="padding:9px 12px;font-size:12px;color:#9095b0;white-space:nowrap;">🚨 72-HR Report</td>
-    <td style="padding:9px 12px;font-size:11px;color:#9095b0;">Coaches + managers (PIN)</td>
-    <td style="padding:9px 12px;font-size:12px;color:rgba(255,255,255,0.7);">Rolling 3-day store accountability window</td>
-  </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-    <td style="padding:9px 12px;font-size:12px;color:#9095b0;white-space:nowrap;">⚡ Non-Negotiables</td>
-    <td style="padding:9px 12px;font-size:11px;color:#9095b0;">Managers (PIN)</td>
-    <td style="padding:9px 12px;font-size:12px;color:rgba(255,255,255,0.7);">Floor compliance standards</td>
-  </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-    <td style="padding:9px 12px;font-size:12px;color:#9095b0;white-space:nowrap;">👥 Coaches / 📋 Managers</td>
-    <td style="padding:9px 12px;font-size:11px;color:#9095b0;">RDM / Director (PIN)</td>
-    <td style="padding:9px 12px;font-size:12px;color:rgba(255,255,255,0.7);">Territory and manager accountability rollup</td>
+<tbody><tr style="background:#fff;">
+    <td style="padding:8px 10px;font-size:12px;color:#1a0a2e;border:1px solid #e5e7eb;">💜 How You Get Paid</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">All reps + coaches</td>
+    <td style="padding:8px 10px;font-size:12px;color:#374151;border:1px solid #e5e7eb;">Payout structure, floor expectations, Power-Ups</td>
+  </tr><tr style="background:#fafafa;">
+    <td style="padding:8px 10px;font-size:12px;color:#1a0a2e;border:1px solid #e5e7eb;">🎯 Goals</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">Reps (daily view)</td>
+    <td style="padding:8px 10px;font-size:12px;color:#374151;border:1px solid #e5e7eb;">Today’s pace targets per metric</td>
+  </tr><tr style="background:#fff;">
+    <td style="padding:8px 10px;font-size:12px;color:#1a0a2e;border:1px solid #e5e7eb;">⚙️ Process</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">New & existing reps</td>
+    <td style="padding:8px 10px;font-size:12px;color:#374151;border:1px solid #e5e7eb;">Step-by-step sales process reference</td>
+  </tr><tr style="background:#fafafa;">
+    <td style="padding:8px 10px;font-size:12px;color:#1a0a2e;border:1px solid #e5e7eb;">📶 Know Your Plans</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">Reps during sale</td>
+    <td style="padding:8px 10px;font-size:12px;color:#374151;border:1px solid #e5e7eb;">Plan comparison and selling points</td>
+  </tr><tr style="background:#fff;">
+    <td style="padding:8px 10px;font-size:12px;color:#1a0a2e;border:1px solid #e5e7eb;">📋 Weekly Playbook</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">Coaches + managers</td>
+    <td style="padding:8px 10px;font-size:12px;color:#374151;border:1px solid #e5e7eb;">Focus areas and priorities for the week</td>
+  </tr><tr style="background:#fafafa;">
+    <td style="padding:8px 10px;font-size:12px;color:#1a0a2e;border:1px solid #e5e7eb;">🎓 Training Priorities</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">Coaches + RDM</td>
+    <td style="padding:8px 10px;font-size:12px;color:#374151;border:1px solid #e5e7eb;">Open training flags by rep (Metro U)</td>
+  </tr><tr style="background:#fff;">
+    <td style="padding:8px 10px;font-size:12px;color:#1a0a2e;border:1px solid #e5e7eb;">📊 TRU Report</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">Managers + coaches</td>
+    <td style="padding:8px 10px;font-size:12px;color:#374151;border:1px solid #e5e7eb;">T-Mobile rep-level performance data</td>
+  </tr><tr style="background:#fafafa;">
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">🏢 Company Total 🔒</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">Managers (PIN)</td>
+    <td style="padding:8px 10px;font-size:12px;color:#374151;border:1px solid #e5e7eb;">Company-wide MTD rollup across all 34 stores</td>
+  </tr><tr style="background:#fff;">
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">📊 Stats & Facts 🔒</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">Managers (PIN)</td>
+    <td style="padding:8px 10px;font-size:12px;color:#374151;border:1px solid #e5e7eb;">Store-level ranked performance data</td>
+  </tr><tr style="background:#fafafa;">
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">📅 Final Numbers 🔒</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">Managers (PIN)</td>
+    <td style="padding:8px 10px;font-size:12px;color:#374151;border:1px solid #e5e7eb;">End-of-period official closing numbers</td>
+  </tr><tr style="background:#fff;">
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">🚨 72-HR Report 🔒</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">Coaches + managers (PIN)</td>
+    <td style="padding:8px 10px;font-size:12px;color:#374151;border:1px solid #e5e7eb;">Rolling 3-day store accountability window</td>
+  </tr><tr style="background:#fafafa;">
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">⚡ Non-Negotiables 🔒</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">Managers (PIN)</td>
+    <td style="padding:8px 10px;font-size:12px;color:#374151;border:1px solid #e5e7eb;">Floor standards and compliance benchmarks</td>
+  </tr><tr style="background:#fff;">
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">👥 Coaches 🔒 / 📋 Managers 🔒</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">RDM / Director (PIN)</td>
+    <td style="padding:8px 10px;font-size:12px;color:#374151;border:1px solid #e5e7eb;">Territory and manager accountability rollup</td>
   </tr></tbody>
-</table></div></div><div id="guide-goals" style="margin-top:40px;">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
-    <span style="font-size:24px;">🎯</span>
-    <div>
-      <div style="font-family:'Bebas Neue';font-size:28px;color:#fff;letter-spacing:1px;">GOALS TAB</div>
-      <div style="font-size:12px;color:#9095b0;">The daily scorecard every rep should open first</div>
-    </div>
+</table></div></div><div style="max-width:820px;margin:0 auto;padding:0 28px;">
+
+<div id="fg-goals" style="margin-top:36px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+    <span style="color:#C8005E;font-size:18px;">□</span>
+    <h2 style="font-size:17px;font-weight:700;color:#1a0a2e;margin:0;letter-spacing:0.3px;">GOALS TAB</h2>
   </div>
-  <div style="height:2px;background:linear-gradient(90deg,#C8005E,transparent);margin-bottom:20px;"></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #C8005E;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.7;">This is the rep’s personal goal card for the day. It answers one question: <b style="color:#fff;">"What do I need to do today to stay on pace for the month?"</b> The numbers are calculated live based on the current date and the store’s monthly targets.</div></div><div style="margin:16px 0 8px;font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:rgba(255,255,255,0.4);">WHAT EACH METRIC MEANS</div><div style="background:var(--bg2);border:1px solid var(--b);border-radius:8px;padding:4px 16px 4px;"><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">Voice</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Phone activations needed today to hit monthly voice goal</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">Tablets</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">BTS/tablet activations needed today</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">HSI</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Home internet activations needed today</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">MIM Lines</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Magenta-In-Motion lines needed today</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">ACC / Day</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Dollar amount of accessories to sell today to stay on pace</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">🏆 National Rank</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Store’s current Metro Leaderboard national ranking — data reflects MLB as of last update date shown</div>
-  </div></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #f59e0b;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:#f59e0b;">THE "SHOULD BE" LABEL</b><div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6;">Under each metric you’ll see <b>"should be X."</b> This is the expected MTD total at today’s date on a linear pace. <span style="color:#00875a;">Green</span> = ahead. <span style="color:#f59e0b;">Yellow</span> = slightly behind. <span style="color:#dc2626;">Red</span> = needs to push.</div></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #a78bfa;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:#a78bfa;">MONTH TO DATE SUB-TAB</b><div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6;">Tap “Month to Date” inside any store’s card to see the actual MTD totals vs. the full monthly goal. Use this in coaching to show how the store is trending for the whole month, not just today.</div></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #34d399;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:#34d399;">SHARE WIN BUTTON</b><div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6;">Generates a screenshot-ready card reps can post directly to the Teams channel. Keeps momentum going during the shift and builds team culture around wins.</div></div></div><div id="guide-paid" style="margin-top:40px;">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
-    <span style="font-size:24px;">💜</span>
-    <div>
-      <div style="font-family:'Bebas Neue';font-size:28px;color:#fff;letter-spacing:1px;">HOW YOU GET PAID</div>
-      <div style="font-size:12px;color:#9095b0;">Payout structure, floor expectations, and Power-Ups</div>
-    </div>
+  <div style="font-style:italic;color:#6B7280;font-size:12px;margin-bottom:6px;">The daily scorecard every rep should open first</div>
+  <div style="height:1px;background:#C8005E;margin-bottom:16px;"></div>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;">This is the rep’s personal goal card for the day. It answers one question: <strong>"What do I need to do today to stay on pace for the month?"</strong> Numbers are calculated live based on the current date and the store’s monthly targets.</p>
+<div style="margin:0 0 12px;"><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">Voice</div>
+  <div style="color:#374151;line-height:1.5;">Phone activations needed today to hit monthly voice goal</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">Tablets</div>
+  <div style="color:#374151;line-height:1.5;">BTS/tablet activations needed today</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">HSI</div>
+  <div style="color:#374151;line-height:1.5;">Home internet activations needed today</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">MIM Lines</div>
+  <div style="color:#374151;line-height:1.5;">Magenta-In-Motion lines needed today</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">ACC / Day</div>
+  <div style="color:#374151;line-height:1.5;">Dollar amount of accessories to sell today to stay on pace</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">🏆 National Rank</div>
+  <div style="color:#374151;line-height:1.5;">Store’s current Metro Leaderboard ranking — reflects data as of last update date shown</div></div></div>
+<div style="background:#FFF0F5;border-left:3px solid #C8005E;border-radius:0 6px 6px 0;padding:10px 14px;margin:0 0 12px;font-size:12px;color:#9B1D5A;line-height:1.6;"><strong>THE “SHOULD BE” LABEL:</strong> Under each metric you’ll see “should be X.” This is the expected MTD total at today’s date on a linear pace. <span style="color:#065F46;font-weight:600;">Green</span> = ahead. <span style="color:#92400E;font-weight:600;">Yellow</span> = slightly behind. <span style="color:#991B1B;font-weight:600;">Red</span> = needs to push.</div>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;"><strong>Month to Date sub-tab:</strong> Tap “Month to Date” inside any store’s card to see actual MTD totals vs. the full monthly goal. Use in coaching to show how the store is trending for the whole month, not just today.</p>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;"><strong>Share Win button:</strong> Generates a screenshot-ready card reps can post to the Teams channel. Keeps momentum during the shift and builds culture around wins.</p>
+</div><div style="max-width:820px;margin:0 auto;padding:0 28px;">
+
+<div id="fg-paid" style="margin-top:36px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+    <span style="color:#C8005E;font-size:18px;">♥</span>
+    <h2 style="font-size:17px;font-weight:700;color:#1a0a2e;margin:0;letter-spacing:0.3px;">HOW YOU GET PAID</h2>
   </div>
-  <div style="height:2px;background:linear-gradient(90deg,#C8005E,transparent);margin-bottom:20px;"></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #C8005E;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.7;">Every rep should know this tab cold. It directly connects daily behaviors to their paycheck. Coaches should walk new reps through this on day one and revisit it whenever a rep’s motivation dips.</div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;"><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #a78bfa;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';letter-spacing:2px;color:#a78bfa;">ACTIVATION PAYOUTS</b><div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6;">Two tiers: Floor and Top Tier. Reps unlock Top Tier by hitting a minimum monthly activation count. Voice, BTS, and HSI each pay differently. The jump between tiers is significant — that gap is the daily conversation.</div></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #f472b6;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';letter-spacing:2px;color:#f472b6;">ACCESSORY PAYOUTS</b><div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6;">Separate commission grid for accessories. Reps who skip the accessory conversation are leaving money behind on every transaction. This isn’t optional — it’s part of the floor expectation.</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;"><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #fbbf24;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';letter-spacing:2px;color:#fbbf24;">FLOOR EXPECTATIONS</b><div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6;">The non-negotiable minimums. Not goals — the baseline every rep must hit to remain in good standing. Coaches reference this directly in performance conversations.</div></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #34d399;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';letter-spacing:2px;color:#34d399;">POWER-UPS / MIM / STACKED DEALS</b><div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6;">Bonus earnings for feature attachments and stacked transactions. MIM lines pay a separate bonus. Stacked deals — multiple lines, accessories + activation combos — trigger higher payout rates.</div></div></div><div style="background:rgba(200,0,94,0.08);border:1px solid rgba(200,0,94,0.2);border-radius:6px;padding:10px 14px;margin-top:10px;font-size:12px;color:#e879a0;line-height:1.6;"><b style="letter-spacing:1px;">COACH TIP →</b> Walk reps through a stacked deal scenario on this tab. When they see the actual dollar difference between a basic activation and a fully stacked one, the conversation changes.</div></div><div id="guide-playbook" style="margin-top:40px;">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
-    <span style="font-size:24px;">📋</span>
-    <div>
-      <div style="font-family:'Bebas Neue';font-size:28px;color:#fff;letter-spacing:1px;">WEEKLY PLAYBOOK</div>
-      <div style="font-size:12px;color:#9095b0;">This week’s focus areas and priorities</div>
-    </div>
+  <div style="font-style:italic;color:#6B7280;font-size:12px;margin-bottom:6px;">Payout structure, floor expectations, and Power-Ups</div>
+  <div style="height:1px;background:#C8005E;margin-bottom:16px;"></div>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;">Every rep should know this tab cold. It directly connects daily behaviors to their paycheck. Coaches should walk new reps through this on day one and revisit it whenever a rep’s motivation dips.</p>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;"><strong>Activation Payouts:</strong> Two tiers — Floor and Top Tier. Reps unlock Top Tier by hitting a minimum monthly activation count. Voice, BTS, and HSI each pay at different rates. The jump between tiers is significant and that gap is the daily coaching conversation.</p>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;"><strong>Accessory Payouts:</strong> Separate commission grid. Reps who skip the accessory conversation are leaving money behind on every transaction. This is part of the floor expectation, not optional.</p>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;"><strong>Floor Expectations:</strong> The non-negotiable minimums every rep must meet to remain in good standing. Not goals — the baseline. Coaches reference this directly in performance conversations.</p>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;"><strong>Power-Ups / MIM / Stacked Deals:</strong> Bonus earnings for feature attachments and stacked transactions. MIM lines earn a separate bonus. Stacked deals — multiple lines, accessories + activation combos — trigger higher payout rates.</p>
+<div style="background:#FFF0F5;border-left:3px solid #C8005E;border-radius:0 6px 6px 0;padding:10px 14px;margin:12px 0;font-size:12px;color:#9B1D5A;line-height:1.6;"><strong>COACH TIP →</strong> Walk reps through a stacked deal scenario on this tab. When they see the actual dollar difference between a basic activation and a fully stacked one, the conversation changes.</div>
+
+<div id="fg-playbook" style="margin-top:36px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+    <span style="color:#C8005E;font-size:18px;">◊</span>
+    <h2 style="font-size:17px;font-weight:700;color:#1a0a2e;margin:0;letter-spacing:0.3px;">WEEKLY PLAYBOOK</h2>
   </div>
-  <div style="height:2px;background:linear-gradient(90deg,#C8005E,transparent);margin-bottom:20px;"></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #C8005E;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.7;">Updated weekly by management. This is the bridge between company priorities and what reps should focus on at floor level. Open this at the start of every coaching visit and anchor your conversation around what’s highlighted.</div></div><div style="background:rgba(200,0,94,0.08);border:1px solid rgba(200,0,94,0.2);border-radius:6px;padding:10px 14px;margin-top:10px;font-size:12px;color:#e879a0;line-height:1.6;"><b style="letter-spacing:1px;">COACH TIP →</b> Don’t just review the playbook — ask reps to tell you what they already know about this week’s focus. If they haven’t read it, that’s your first coaching moment of the visit.</div></div><div id="guide-training" style="margin-top:40px;">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
-    <span style="font-size:24px;">🎓</span>
-    <div>
-      <div style="font-family:'Bebas Neue';font-size:28px;color:#fff;letter-spacing:1px;">TRAINING PRIORITIES</div>
-      <div style="font-size:12px;color:#9095b0;">Open Metro U flags by rep</div>
-    </div>
+  <div style="font-style:italic;color:#6B7280;font-size:12px;margin-bottom:6px;">This week’s focus areas and priorities</div>
+  <div style="height:1px;background:#C8005E;margin-bottom:16px;"></div>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;">Updated weekly by management. This is the bridge between company priorities and what reps should focus on at the floor level. Open this at the start of every coaching visit and anchor your entire conversation around what’s highlighted.</p>
+<div style="background:#FFF0F5;border-left:3px solid #C8005E;border-radius:0 6px 6px 0;padding:10px 14px;margin:12px 0;font-size:12px;color:#9B1D5A;line-height:1.6;"><strong>COACH TIP →</strong> Don’t just review the playbook — ask reps to tell you what they already know about this week’s focus. If they haven’t read it, that’s your first coaching moment of the visit.</div>
+
+<div id="fg-training" style="margin-top:36px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+    <span style="color:#C8005E;font-size:18px;">♣</span>
+    <h2 style="font-size:17px;font-weight:700;color:#1a0a2e;margin:0;letter-spacing:0.3px;">TRAINING PRIORITIES</h2>
   </div>
-  <div style="height:2px;background:linear-gradient(90deg,#C8005E,transparent);margin-bottom:20px;"></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #C8005E;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.7;">Every open or overdue Metro University training flag surfaced in one place. Shows the rep’s name, the specific module, and the RDM assigned. Pulled nightly and updated as flags are resolved.</div></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #dc2626;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';letter-spacing:2px;color:#dc2626;">WHY THIS MATTERS</b><div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6;">Incomplete certifications affect the store’s T-Mobile compliance score. Some modules are required for specific transaction types — a rep with an overdue cert may be unknowingly at risk of losing transaction privileges. Flags compound. One overdue module becomes five if not addressed immediately.</div></div><div style="background:rgba(200,0,94,0.08);border:1px solid rgba(200,0,94,0.2);border-radius:6px;padding:10px 14px;margin-top:10px;font-size:12px;color:#e879a0;line-height:1.6;"><b style="letter-spacing:1px;">COACH TIP →</b> Walk through this list in every territory check-in. Make it a standing agenda item. The conversation is simple: “Here are your open flags. These need to be done by [date]. What time this week works?”</div></div><div id="guide-tru" style="margin-top:40px;">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
-    <span style="font-size:24px;">📊</span>
-    <div>
-      <div style="font-family:'Bebas Neue';font-size:28px;color:#fff;letter-spacing:1px;">TRU REPORT</div>
-      <div style="font-size:12px;color:#9095b0;">T-Mobile Retail Unified — rep-level performance data</div>
-    </div>
+  <div style="font-style:italic;color:#6B7280;font-size:12px;margin-bottom:6px;">Open Metro U flags by rep</div>
+  <div style="height:1px;background:#C8005E;margin-bottom:16px;"></div>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;">Every open or overdue Metro University training flag in one place. Shows the rep’s name, the specific module, and the RDM assigned. Updated nightly as flags are resolved.</p>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;"><strong>Why this matters:</strong> Incomplete certifications affect the store’s T-Mobile compliance score. Some modules are required for specific transaction types — a rep with an overdue cert may unknowingly be at risk of losing transaction privileges. Flags compound. One overdue module becomes five if not addressed immediately.</p>
+<div style="background:#FFF0F5;border-left:3px solid #C8005E;border-radius:0 6px 6px 0;padding:10px 14px;margin:12px 0;font-size:12px;color:#9B1D5A;line-height:1.6;"><strong>COACH TIP →</strong> Make this a standing agenda item in every territory check-in. The conversation is simple: “Here are your open flags. These need to be done by [date]. What time this week works?”</div>
+</div><div style="max-width:820px;margin:0 auto;padding:0 28px;">
+
+<div id="fg-tru" style="margin-top:36px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+    <span style="color:#C8005E;font-size:18px;">|||</span>
+    <h2 style="font-size:17px;font-weight:700;color:#1a0a2e;margin:0;letter-spacing:0.3px;">TRU REPORT</h2>
   </div>
-  <div style="height:2px;background:linear-gradient(90deg,#C8005E,transparent);margin-bottom:20px;"></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #C8005E;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.7;">TRU is T-Mobile’s internal performance database. It surfaces rep-level data across five categories. <b style="color:#fff;">This is what T-Mobile uses to evaluate store health.</b> Understanding it is non-negotiable for any coach or manager.</div></div><div style="margin:16px 0 8px;font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:#C8005E;">📈 GROWTH & REVENUE</div><div style="background:var(--bg2);border:1px solid var(--b);border-radius:8px;padding:4px 16px 8px;margin-bottom:8px;"><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#C8005E;letter-spacing:1px;min-width:140px;flex-shrink:0;">ACT KPI</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">T-Mobile’s composite quality score. Below 2.0 = problem. Negative = more bad activations than good. 3.5+ = strong. This is the #1 number to watch.</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">TXN</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Total transactions including upgrades and non-activation interactions</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">ACTS / PHONE / BTS / HSI</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Breakdown of what types of activations the rep is producing</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">UPGRADES</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Existing customer retention activity — shows the rep is taking care of the base</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">FEAT REV</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Feature revenue per box. Target is as close to 10.0 as possible</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">ACC $</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Total accessory revenue for the period</div>
-  </div></div><div style="background:rgba(200,0,94,0.08);border:1px solid rgba(200,0,94,0.2);border-radius:6px;padding:10px 14px;margin-top:10px;font-size:12px;color:#e879a0;line-height:1.6;"><b style="letter-spacing:1px;">COACH TIP →</b> Sort mentally by ACT KPI. Anyone below 2.0 needs a direct conversation. Negative KPI means T-Mobile is flagging their activations as low quality — that’s a compliance conversation, not just a performance one.</div><div style="margin:16px 0 8px;font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:#dc2626;">🚨 FLAGGED ACTS</div><div style="background:var(--bg2);border:1px solid var(--b);border-radius:8px;padding:4px 16px 8px;margin-bottom:8px;"><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#dc2626;letter-spacing:1px;min-width:140px;flex-shrink:0;">Device Moves / %</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Activations where the device transferred shortly after — primary fraud indicator. Even one is a conversation.</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">High Risk / %</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Activations T-Mobile scored as potentially fraudulent</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">35D Down / %</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Lines that went unpaid within 35 days of activation</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">35D Inactive / %</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">Lines completely inactive within 35 days — strongest chargeback signal</div>
-  </div></div><div style="background:rgba(200,0,94,0.08);border:1px solid rgba(200,0,94,0.2);border-radius:6px;padding:10px 14px;margin-top:10px;font-size:12px;color:#e879a0;line-height:1.6;"><b style="letter-spacing:1px;">COACH TIP →</b> Any rep with 1+ device moves or 10%+ high risk rate needs an immediate conversation. High 35D inactive rates often mean the rep is activating lines for people who don’t intend to keep service — a fraud risk that affects the whole store.</div><div style="margin:16px 0 8px;font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:#34d399;">🔄 RETENTION (95-DAY FEATURE)</div><div style="background:var(--bg2);border:1px solid var(--b);border-radius:8px;padding:4px 16px 8px;margin-bottom:8px;"><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#34d399;letter-spacing:1px;min-width:140px;flex-shrink:0;">FTR Retained</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">How many customers still have premium features 95 days after activation</div>
-  </div><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#a78bfa;letter-spacing:1px;min-width:140px;flex-shrink:0;">95D FTR %</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">95%+ = excellent. 80–94% = acceptable. Below 80% = concern</div>
-  </div></div><div style="background:rgba(200,0,94,0.08);border:1px solid rgba(200,0,94,0.2);border-radius:6px;padding:10px 14px;margin-top:10px;font-size:12px;color:#e879a0;line-height:1.6;"><b style="letter-spacing:1px;">COACH TIP →</b> Low retention is a compliance risk. Walk through their activation script: "When you set up Home Protection, what do you tell the customer it does and what it costs?" If they can’t answer confidently, that’s your training gap.</div><div style="margin:16px 0 8px;font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:#60a5fa;">🛡️ VOICE PROTECTION</div><div style="background:var(--bg2);border:1px solid var(--b);border-radius:8px;padding:4px 16px 8px;margin-bottom:8px;"><div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:'Bebas Neue';font-size:13px;color:#60a5fa;letter-spacing:1px;min-width:140px;flex-shrink:0;">Attach %</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;">How often the rep attaches protection when eligible. Target: 80%+. Below 60% = urgent coaching needed</div>
-  </div></div><div style="background:rgba(200,0,94,0.08);border:1px solid rgba(200,0,94,0.2);border-radius:6px;padding:10px 14px;margin-top:10px;font-size:12px;color:#e879a0;line-height:1.6;"><b style="letter-spacing:1px;">COACH TIP →</b> Role-play this one. The most common cause of low attach is fear of the "no." Coach on when to bring it up, how to frame the value, and how to handle objections. A short confident script changes attach rates fast.</div><div style="margin:16px 0 8px;font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;color:#f59e0b;">📱 SUBSCRIBER MOVES</div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #f59e0b;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.6;">Tracks when a customer’s line moves from one store’s portfolio to another. High move counts should be investigated to confirm they’re legitimate walk-ins and not inter-store customer poaching. Most reps should have low or zero moves.</div></div><div style="background:rgba(200,0,94,0.08);border:1px solid rgba(200,0,94,0.2);border-radius:6px;padding:10px 14px;margin-top:10px;font-size:12px;color:#e879a0;line-height:1.6;"><b style="letter-spacing:1px;">COACH TIP →</b> Use the search box to pull any specific rep’s data across all 5 TRU tabs at once. Useful for 1-on-1 coaching conversations.</div></div><div id="guide-72hr" style="margin-top:40px;">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
-    <span style="font-size:24px;">🚨</span>
-    <div>
-      <div style="font-family:'Bebas Neue';font-size:28px;color:#fff;letter-spacing:1px;">72-HR REPORT</div>
-      <div style="font-size:12px;color:#9095b0;">Rolling 3-day store accountability window — PIN required</div>
-    </div>
+  <div style="font-style:italic;color:#6B7280;font-size:12px;margin-bottom:6px;">T-Mobile Retail Unified — rep-level performance data</div>
+  <div style="height:1px;background:#C8005E;margin-bottom:16px;"></div>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;">TRU is T-Mobile’s internal performance database. It surfaces rep-level data across five categories. <strong>This is what T-Mobile uses to evaluate store health.</strong> Understanding it is non-negotiable for any coach or manager.</p>
+
+<h3 style="font-size:13px;font-weight:700;color:#C8005E;margin:16px 0 6px;">📈 Growth &amp; Revenue</h3>
+<div style="margin-bottom:10px;"><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">ACT KPI</div>
+  <div style="color:#374151;line-height:1.5;">T-Mobile’s composite quality score. Below 2.0 = concern. Negative = more bad activations than good. 3.5+ = strong. This is the #1 number to watch.</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">TXN</div>
+  <div style="color:#374151;line-height:1.5;">Total transactions including upgrades and non-activation interactions</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">ACTS / PHONE / BTS / HSI</div>
+  <div style="color:#374151;line-height:1.5;">Breakdown of what types of activations the rep is producing</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">UPGRADES</div>
+  <div style="color:#374151;line-height:1.5;">Existing customer retention activity — shows the rep is working the base</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">FEAT REV</div>
+  <div style="color:#374151;line-height:1.5;">Feature revenue per box — target is as close to 10.0 as possible</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">ACC $</div>
+  <div style="color:#374151;line-height:1.5;">Total accessory revenue for the period</div></div></div>
+<div style="background:#FFF0F5;border-left:3px solid #C8005E;border-radius:0 6px 6px 0;padding:10px 14px;margin:12px 0;font-size:12px;color:#9B1D5A;line-height:1.6;"><strong>COACH TIP →</strong> Sort mentally by ACT KPI. Anyone below 2.0 needs a direct conversation. Negative KPI means T-Mobile is flagging their activations as low quality — that’s a compliance conversation, not just a performance one.</div>
+
+<h3 style="font-size:13px;font-weight:700;color:#dc2626;margin:16px 0 6px;">🚨 Flagged Acts</h3>
+<div style="margin-bottom:10px;"><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">Device Moves / %</div>
+  <div style="color:#374151;line-height:1.5;">Activations where the device transferred shortly after — primary fraud indicator. Even one is a conversation.</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">High Risk / %</div>
+  <div style="color:#374151;line-height:1.5;">Activations T-Mobile scored as potentially fraudulent</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">35D Down / %</div>
+  <div style="color:#374151;line-height:1.5;">Lines that went unpaid within 35 days of activation</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">35D Inactive / %</div>
+  <div style="color:#374151;line-height:1.5;">Lines completely inactive within 35 days — strongest chargeback signal</div></div></div>
+<div style="background:#FFF0F5;border-left:3px solid #C8005E;border-radius:0 6px 6px 0;padding:10px 14px;margin:12px 0;font-size:12px;color:#9B1D5A;line-height:1.6;"><strong>COACH TIP →</strong> Any rep with 1+ device moves or 10%+ high risk rate needs an immediate conversation. High 35D inactive rates often mean the rep is activating lines for customers who don’t intend to keep service — a fraud risk that affects the whole store.</div>
+
+<h3 style="font-size:13px;font-weight:700;color:#065F46;margin:16px 0 6px;">🔄 Retention (95-Day Feature)</h3>
+<div style="margin-bottom:10px;"><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">FTR Retained</div>
+  <div style="color:#374151;line-height:1.5;">How many customers still have premium features 95 days after activation</div></div><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">95D FTR %</div>
+  <div style="color:#374151;line-height:1.5;">95%+ = excellent. 80–94% = acceptable. Below 80% = concern — often signals features were added without proper consent.</div></div>  </div>
+<div style="background:#FFF0F5;border-left:3px solid #C8005E;border-radius:0 6px 6px 0;padding:10px 14px;margin:12px 0;font-size:12px;color:#9B1D5A;line-height:1.6;"><strong>COACH TIP →</strong> Low retention is a compliance risk. Walk through their script: “When you set up Home Protection, what do you tell the customer it costs?” If they can’t answer confidently, that’s your training gap.</div>
+
+<h3 style="font-size:13px;font-weight:700;color:#1E40AF;margin:16px 0 6px;">🛡️ Voice Protection</h3>
+<div style="margin-bottom:10px;"><div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;">
+  <div style="font-weight:600;color:#C8005E;min-width:145px;flex-shrink:0;">Attach %</div>
+  <div style="color:#374151;line-height:1.5;">How often the rep attaches protection when eligible. Target: 80%+. Below 60% = urgent coaching needed.</div></div></div>
+<div style="background:#FFF0F5;border-left:3px solid #C8005E;border-radius:0 6px 6px 0;padding:10px 14px;margin:12px 0;font-size:12px;color:#9B1D5A;line-height:1.6;"><strong>COACH TIP →</strong> Role-play this one. The most common cause of low attach is fear of the “no.” Coach on when to bring it up, how to frame the value, and how to handle objections. A short confident script changes attach rates fast.</div>
+
+<h3 style="font-size:13px;font-weight:700;color:#92400E;margin:16px 0 6px;">📱 Subscriber Moves</h3>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;">Tracks when a customer’s line moves from one store’s portfolio to another. High move counts should be investigated to confirm they’re legitimate walk-ins and not inter-store poaching. Most reps should have low or zero moves. Use the search box to pull any rep’s data across all 5 TRU tabs at once.</p>
+</div><div style="max-width:820px;margin:0 auto;padding:0 28px;">
+
+<div id="fg-72hr" style="margin-top:36px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+    <span style="color:#C8005E;font-size:18px;">⚠</span>
+    <h2 style="font-size:17px;font-weight:700;color:#1a0a2e;margin:0;letter-spacing:0.3px;">72-HR REPORT (PIN Required)</h2>
   </div>
-  <div style="height:2px;background:linear-gradient(90deg,#C8005E,transparent);margin-bottom:20px;"></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #C8005E;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.7;">Shows each store’s performance across the last three days broken down by PPD, Voice, BTS, HSI, MIM, and ACC. Updated nightly. The window shifts each day — Day 10, 11, 12 today becomes Day 11, 12, 13 tomorrow.</div></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #dc2626;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';letter-spacing:2px;color:#dc2626;">WHAT TO LOOK FOR</b>
-<div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:8px;line-height:1.8;">
-• &nbsp;Any store with <b>2+ consecutive zero days</b> on any metric<br>
-• &nbsp;Stores where today’s count is dramatically <b>lower than their 3-day average</b><br>
-• &nbsp;<b>HSI and BTS specifically</b> — these are the first metrics reps drop when they’re only focused on voice<br>
-• &nbsp;Stores with strong voice counts but <b>zero accessories</b> — rep is activating but not completing the sale
-</div></div><div style="background:rgba(200,0,94,0.08);border:1px solid rgba(200,0,94,0.2);border-radius:6px;padding:10px 14px;margin-top:10px;font-size:12px;color:#e879a0;line-height:1.6;"><b style="letter-spacing:1px;">COACH TIP →</b> This is your daily accountability tool. Walk through your territory at the end of every day. If a store is zero on HSI for two straight days, that’s a same-day call — not something you bring up at your next visit.</div></div><div id="guide-locked" style="margin-top:40px;">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
-    <span style="font-size:24px;">🔒</span>
-    <div>
-      <div style="font-family:'Bebas Neue';font-size:28px;color:#fff;letter-spacing:1px;">LOCKED TABS</div>
-      <div style="font-size:12px;color:#9095b0;">Management-layer data requiring PIN authentication</div>
-    </div>
+  <div style="font-style:italic;color:#6B7280;font-size:12px;margin-bottom:6px;">Rolling 3-day store accountability window</div>
+  <div style="height:1px;background:#C8005E;margin-bottom:16px;"></div>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;">Shows each store’s performance across the last three days broken down by PPD, Voice, BTS, HSI, MIM, and ACC. Updated nightly. The window shifts each day — always showing the most recent 3-day period.</p>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;"><strong>What to look for:</strong> Any store with 2+ consecutive zero days on any metric. Stores where today’s count is dramatically lower than their 3-day average. HSI and BTS specifically — the first metrics reps drop when only focused on voice. Stores with strong voice counts but zero accessories.</p>
+<div style="background:#FFF0F5;border-left:3px solid #C8005E;border-radius:0 6px 6px 0;padding:10px 14px;margin:12px 0;font-size:12px;color:#9B1D5A;line-height:1.6;"><strong>COACH TIP →</strong> This is your daily accountability tool. Walk through your territory at the end of every day. If a store is zero on HSI for two straight days, that’s a same-day call — not something you bring up at your next visit.</div>
+
+<div id="fg-locked" style="margin-top:36px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+    <span style="color:#C8005E;font-size:18px;">🔒</span>
+    <h2 style="font-size:17px;font-weight:700;color:#1a0a2e;margin:0;letter-spacing:0.3px;">LOCKED TABS (PIN Required)</h2>
   </div>
-  <div style="height:2px;background:linear-gradient(90deg,#C8005E,transparent);margin-bottom:20px;"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;"><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #a78bfa;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';letter-spacing:2px;color:#a78bfa;">🏢 COMPANY TOTAL</b><div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6;">All 34 stores rolled into one view. Total MTD PPD, Voice, BTS, HSI, MIM, and ACC vs. monthly goals. Used for director-level conversations about company pace.</div></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #34d399;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';letter-spacing:2px;color:#34d399;">📊 STATS & FACTS</b><div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6;">Store-by-store ranked performance. Identifies which stores are ahead of pace, at pace, or behind. Use to direct coaching energy for the rest of the month.</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;"><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #fbbf24;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';letter-spacing:2px;color:#fbbf24;">📅 FINAL NUMBERS</b><div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6;">Official end-of-period closing numbers. The source of truth for compensation calculations and payout verification.</div></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #f87171;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';letter-spacing:2px;color:#f87171;">⚡ NON-NEGOTIABLES</b><div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6;">Floor-level compliance standards every store must meet. These are minimums, not goals. Reference directly in performance improvement conversations.</div></div></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #60a5fa;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';letter-spacing:2px;color:#60a5fa;">👥 COACHES / 📋 MANAGERS</b><div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.6;"><b style="color:rgba(255,255,255,0.9);">Coaches tab:</b> Territory-level rollup showing how each coach’s portfolio of stores performs as a group. <b style="color:rgba(255,255,255,0.9);">Managers tab:</b> RDM / Director accountability view for identifying which territories need intervention vs. which are self-sustaining.</div></div></div><div id="guide-convo" style="margin-top:40px;">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
-    <span style="font-size:24px;">💬</span>
-    <div>
-      <div style="font-family:'Bebas Neue';font-size:28px;color:#fff;letter-spacing:1px;">RUNNING YOUR COACH CONVERSATIONS</div>
-      <div style="font-size:12px;color:#9095b0;">A suggested flow using the Command Center</div>
-    </div>
+  <div style="font-style:italic;color:#6B7280;font-size:12px;margin-bottom:6px;">Management-layer data requiring authentication</div>
+  <div style="height:1px;background:#C8005E;margin-bottom:16px;"></div>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;"><strong>Company Total:</strong> All 34 stores rolled into one view. Total MTD PPD, Voice, BTS, HSI, MIM, and ACC vs. monthly goals. Used for director-level conversations about company pace.</p>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;"><strong>Stats &amp; Facts:</strong> Store-by-store ranked performance. Identifies which stores are ahead, at pace, or behind. Use to direct coaching energy for the rest of the month.</p>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;"><strong>Final Numbers:</strong> Official end-of-period closing numbers. The source of truth for compensation calculations and payout verification.</p>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;"><strong>Non-Negotiables:</strong> Floor-level compliance standards every store must meet. These are minimums, not goals. Reference directly in performance improvement conversations.</p>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;"><strong>Coaches / Managers:</strong> Coaches tab shows territory-level rollup by coach. Managers tab is the RDM / Director accountability view for identifying which managers are driving results vs. which territories need intervention.</p>
+
+<div id="fg-convo" style="margin-top:36px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+    <span style="color:#C8005E;font-size:18px;">💬</span>
+    <h2 style="font-size:17px;font-weight:700;color:#1a0a2e;margin:0;letter-spacing:0.3px;">RUNNING YOUR COACH CONVERSATIONS</h2>
   </div>
-  <div style="height:2px;background:linear-gradient(90deg,#C8005E,transparent);margin-bottom:20px;"></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #C8005E;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:12px;">This is the recommended sequence for any coaching visit or weekly territory check-in. Follow this flow and you’ll cover performance, quality, compliance, and alignment in one conversation.</div><div style="display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
-    <div style="font-family:'Bebas Neue';font-size:28px;color:#C8005E;min-width:32px;line-height:1;">1</div>
-    <div style="flex:1;">
-      <div style="font-size:13px;color:#fff;font-weight:500;margin-bottom:3px;">Check where every store stands vs. monthly pace</div>
-      <div style="font-size:11px;color:#9095b0;font-family:'Bebas Neue';letter-spacing:1px;">🎯 Goals → Month to Date sub-tab</div>
-    </div>
-  </div><div style="display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
-    <div style="font-family:'Bebas Neue';font-size:28px;color:#dc2626;min-width:32px;line-height:1;">2</div>
-    <div style="flex:1;">
-      <div style="font-size:13px;color:#fff;font-weight:500;margin-bottom:3px;">Identify rep-level quality and risk</div>
-      <div style="font-size:11px;color:#9095b0;font-family:'Bebas Neue';letter-spacing:1px;">📊 TRU → Growth & Revenue + Flagged Acts</div>
-    </div>
-  </div><div style="display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
-    <div style="font-family:'Bebas Neue';font-size:28px;color:#34d399;min-width:32px;line-height:1;">3</div>
-    <div style="flex:1;">
-      <div style="font-size:13px;color:#fff;font-weight:500;margin-bottom:3px;">Check if reps are selling correctly (quality, not just volume)</div>
-      <div style="font-size:11px;color:#9095b0;font-family:'Bebas Neue';letter-spacing:1px;">📊 TRU → Retention + Voice Protection</div>
-    </div>
-  </div><div style="display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
-    <div style="font-family:'Bebas Neue';font-size:28px;color:#f59e0b;min-width:32px;line-height:1;">4</div>
-    <div style="flex:1;">
-      <div style="font-size:13px;color:#fff;font-weight:500;margin-bottom:3px;">Review the last 3 days of store activity</div>
-      <div style="font-size:11px;color:#9095b0;font-family:'Bebas Neue';letter-spacing:1px;">🚨 72-HR Report (PIN)</div>
-    </div>
-  </div><div style="display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
-    <div style="font-family:'Bebas Neue';font-size:28px;color:#a78bfa;min-width:32px;line-height:1;">5</div>
-    <div style="flex:1;">
-      <div style="font-size:13px;color:#fff;font-weight:500;margin-bottom:3px;">Action any open training flags</div>
-      <div style="font-size:11px;color:#9095b0;font-family:'Bebas Neue';letter-spacing:1px;">🎓 Training Priorities</div>
-    </div>
-  </div><div style="display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
-    <div style="font-family:'Bebas Neue';font-size:28px;color:#60a5fa;min-width:32px;line-height:1;">6</div>
-    <div style="flex:1;">
-      <div style="font-size:13px;color:#fff;font-weight:500;margin-bottom:3px;">Align on this week’s priority focus</div>
-      <div style="font-size:11px;color:#9095b0;font-family:'Bebas Neue';letter-spacing:1px;">📋 Weekly Playbook</div>
-    </div>
-  </div></div><div style="background:var(--bg2);border:1px solid var(--b);border-left:3px solid #C8005E;border-radius:8px;padding:16px 20px;margin-bottom:12px;"><b style="font-family:'Bebas Neue';letter-spacing:2px;color:#fff;font-size:14px;">THE CORE MESSAGE FOR YOUR COACHES</b>
-<div style="font-size:13px;color:rgba(255,255,255,0.8);margin-top:10px;line-height:1.8;">
-TRU isn’t just a report — it’s T-Mobile watching every activation in real time. The reps who understand this and build clean activation habits are the ones who stay out of trouble, keep their commissions, and build long-term customer relationships.<br><br>
-The ones who don’t are a liability to the store’s scorecard.<br><br>
-<b style="color:#C8005E;">Volume alone doesn’t protect you. Quality does.</b>
-</div></div></div></div>
+  <div style="font-style:italic;color:#6B7280;font-size:12px;margin-bottom:6px;">A suggested flow using the Command Center</div>
+  <div style="height:1px;background:#C8005E;margin-bottom:16px;"></div>
+<p style="font-size:13px;color:#374151;line-height:1.7;margin:0 0 12px;">This is the recommended sequence for any coaching visit or weekly territory check-in. Follow this flow and you’ll cover performance, quality, compliance, and alignment in one conversation.</p>
+<div style="overflow-x:auto;margin:0 0 16px;">
+<table style="width:100%;border-collapse:collapse;font-size:12px;">
+<thead><tr style="background:#1a0a2e;">
+  <th style="padding:9px 10px;text-align:center;color:#fff;border:1px solid #374151;width:40px;">#</th>
+  <th style="padding:9px 10px;text-align:left;color:#fff;border:1px solid #374151;">ACTION</th>
+  <th style="padding:9px 10px;text-align:left;color:#fff;border:1px solid #374151;">TAB TO USE</th>
+</tr></thead>
+<tbody><tr style="background:#fff;">
+    <td style="padding:8px 10px;font-size:14px;font-weight:700;color:#C8005E;text-align:center;border:1px solid #e5e7eb;width:40px;">1</td>
+    <td style="padding:8px 10px;font-size:12px;font-weight:500;color:#1a0a2e;border:1px solid #e5e7eb;">Check where every store stands vs. monthly pace</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">🎯 Goals → Month to Date sub-tab</td>
+  </tr><tr style="background:#fafafa;">
+    <td style="padding:8px 10px;font-size:14px;font-weight:700;color:#C8005E;text-align:center;border:1px solid #e5e7eb;width:40px;">2</td>
+    <td style="padding:8px 10px;font-size:12px;font-weight:500;color:#1a0a2e;border:1px solid #e5e7eb;">Identify rep-level quality and fraud risk</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">📊 TRU → Growth & Revenue + Flagged Acts</td>
+  </tr><tr style="background:#fff;">
+    <td style="padding:8px 10px;font-size:14px;font-weight:700;color:#C8005E;text-align:center;border:1px solid #e5e7eb;width:40px;">3</td>
+    <td style="padding:8px 10px;font-size:12px;font-weight:500;color:#1a0a2e;border:1px solid #e5e7eb;">Check if reps are selling correctly (quality, not just volume)</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">📊 TRU → Retention + Voice Protection</td>
+  </tr><tr style="background:#fafafa;">
+    <td style="padding:8px 10px;font-size:14px;font-weight:700;color:#C8005E;text-align:center;border:1px solid #e5e7eb;width:40px;">4</td>
+    <td style="padding:8px 10px;font-size:12px;font-weight:500;color:#1a0a2e;border:1px solid #e5e7eb;">Review the last 3 days of store activity</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">🚨 72-HR Report (PIN)</td>
+  </tr><tr style="background:#fff;">
+    <td style="padding:8px 10px;font-size:14px;font-weight:700;color:#C8005E;text-align:center;border:1px solid #e5e7eb;width:40px;">5</td>
+    <td style="padding:8px 10px;font-size:12px;font-weight:500;color:#1a0a2e;border:1px solid #e5e7eb;">Action any open training flags</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">🎓 Training Priorities</td>
+  </tr><tr style="background:#fafafa;">
+    <td style="padding:8px 10px;font-size:14px;font-weight:700;color:#C8005E;text-align:center;border:1px solid #e5e7eb;width:40px;">6</td>
+    <td style="padding:8px 10px;font-size:12px;font-weight:500;color:#1a0a2e;border:1px solid #e5e7eb;">Align on this week’s priority focus</td>
+    <td style="padding:8px 10px;font-size:12px;color:#6B7280;border:1px solid #e5e7eb;">📋 Weekly Playbook</td>
+  </tr></tbody>
+</table></div>
+<div style="background:#FFF0F5;border:1px solid #f9a8d4;border-radius:8px;padding:16px 20px;margin-bottom:24px;">
+  <div style="font-size:13px;font-weight:700;color:#1a0a2e;margin-bottom:8px;">THE CORE MESSAGE FOR YOUR COACHES</div>
+  <div style="font-size:13px;color:#374151;line-height:1.8;">TRU isn’t just a report — it’s T-Mobile watching every activation in real time. The reps who understand this and build clean activation habits are the ones who stay out of trouble, keep their commissions, and build long-term customer relationships.<br><br>The ones who don’t are a liability to the store’s scorecard.<br><br><strong style="color:#C8005E;">Volume alone doesn’t protect you. Quality does.</strong></div>
+</div>
+</div></div>
+
 <!-- 🏪 STORE INTEL MODAL (from Manager/Coach/RDM views)     -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div id="store-intel-modal" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.85);align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;">
