@@ -1766,13 +1766,13 @@ function render(){
           <div id="spanel_${sid}_mtd" style="display:none;background:#fff;padding:16px 18px;">
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px;">
               ${[
-                {icon:'📦',label:'PPD',       mtd:s.mtd,                goal:s.monthly,   pct:Math.round(s.mtd/s.monthly*100),                                   color:'#C8005E'},
-                {icon:'📞',label:'VOICE',     mtd:s.mtdVoice,           goal:s.voiceGoal, pct:s.voicePct,                                                        color:'#a78bfa'},
-                {icon:'📲',label:'TABLETS',   mtd:s.mtdTablet||0,       goal:s.btsTgt,    pct:Math.round((s.mtdTablet||0)/Math.max(s.btsTgt,1)*100),              color:'#34d399'},
-                {icon:'🌐',label:'HSI',       mtd:s.mtdHint,            goal:s.hsiTgt,    pct:s.hsiPct,                                                          color:'#60a5fa'},
-                {icon:'💜',label:'MIM LINES', mtd:s.mtdMIM,             goal:s.mimTgt,    pct:Math.round(s.mtdMIM/Math.max(s.mimTgt,1)*100),                     color:'#f472b6'},
-                {icon:'💰',label:'ACC $',     mtd:'$'+Math.round(s.mtdAcc).toLocaleString(), goal:'$'+Math.round(s.accTgt/1000)+'K', pct:Math.round(s.mtdAcc/Math.max(s.accTgt,1)*100), color:'#fbbf24'},
-              ].map(r=>`
+                {icon:'📦',label:'PPD',       mtd:s.mtd,       goal:s.monthly,  pct:Math.round(s.mtd/s.monthly*100),             exp:Math.round(s.monthly*TODAY/DAYS),      mtdN:s.mtd,               expN:Math.round(s.monthly*TODAY/DAYS),             color:'#C8005E'},
+        {icon:'📞',label:'VOICE',     mtd:s.mtdVoice,  goal:s.voiceGoal,pct:s.voicePct,                                  exp:Math.round(s.voiceGoal*TODAY/DAYS),    mtdN:s.mtdVoice,          expN:Math.round(s.voiceGoal*TODAY/DAYS),           color:'#a78bfa'},
+        {icon:'📲',label:'TABLETS',   mtd:s.mtdTablet||0,goal:s.btsTgt, pct:Math.round((s.mtdTablet||0)/Math.max(s.btsTgt,1)*100), exp:Math.round(Math.max(s.btsTgt,1)*TODAY/DAYS), mtdN:s.mtdTablet||0, expN:Math.round(Math.max(s.btsTgt,1)*TODAY/DAYS), color:'#34d399'},
+        {icon:'🌐',label:'HSI',       mtd:s.mtdHint,   goal:s.hsiTgt,   pct:s.hsiPct,                                   exp:Math.round(s.hsiTgt*TODAY/DAYS),       mtdN:s.mtdHint,           expN:Math.round(s.hsiTgt*TODAY/DAYS),              color:'#60a5fa'},
+        {icon:'💜',label:'MIM',       mtd:s.mtdMIM,    goal:s.mimTgt,   pct:Math.round(s.mtdMIM/Math.max(s.mimTgt,1)*100), exp:Math.round(s.mimTgt*TODAY/DAYS),    mtdN:s.mtdMIM,            expN:Math.round(s.mimTgt*TODAY/DAYS),              color:'#f472b6'},
+        {icon:'💰',label:'ACC $',     mtd:'$'+(Math.round(s.mtdAcc)).toLocaleString(), goal:'$'+Math.round(s.accTgt/1000)+'K', pct:Math.round(s.mtdAcc/Math.max(s.accTgt,1)*100), exp:'$'+Math.round(s.accTgt*TODAY/DAYS).toLocaleString(), mtdN:Math.round(s.mtdAcc), expN:Math.round(s.accTgt*TODAY/DAYS), color:'#fbbf24'},
+      ].map(r=>`
                 <div style="text-align:center;padding:14px 8px;border:1px solid var(--b);border-top:3px solid ${r.color};border-radius:8px;background:#fafbff;">
                   <div style="font-size:18px;margin-bottom:4px;">${r.icon}</div>
                   <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:2px;color:var(--td);margin-bottom:4px;">${r.label}</div>
@@ -6555,7 +6555,7 @@ function openStoreIntel(storeName){
           <div style="height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;margin:4px 8px 2px;">
             <div style="height:100%;width:${Math.min(100,r.pct)}%;background:${r.color};border-radius:2px;"></div>
           </div>
-          <div style="font-size:8px;color:${r.pct>=100?'#00875a':r.pct>=85?'#f59e0b':'#dc2626'};">${r.pct}% of ${r.goal}</div>
+          <div style="font-size:8px;color:${r.mtdN>=r.expN?'#00875a':r.mtdN>=Math.floor(r.expN*0.85)?'#f59e0b':'#dc2626'};">${r.mtd} of ${r.exp}</div>
         </div>`).join('')}
     </div>
 
