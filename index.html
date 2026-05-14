@@ -6633,67 +6633,63 @@ const FA_DATA=[{"name":"Abel Burgos","id":"niv04273","rpd":0,"rpdElig":14,"rpdPc
 let _faSort='hri', _faDir=1, _faQ='';
 function renderFlaggedActs(){
   const RPD_MAX=7.5,DEV_MAX=1.5,HRI_MAX=3.5;
-  const rpdFlagged=FA_DATA.filter(r=>r.rpdPct>RPD_MAX).length;
-  const devFlagged=FA_DATA.filter(r=>r.devPct!=null&&r.devPct>DEV_MAX).length;
-  const hriFlagged=FA_DATA.filter(r=>r.hriPct>HRI_MAX).length;
-  const accFlagged=FA_DATA.filter(r=>r.accPct!=null&&r.accPct>0).length;
-  const rpdAvg=(FA_DATA.reduce((s,r)=>s+r.rpdPct,0)/FA_DATA.length).toFixed(1);
-  const hriAvg=(FA_DATA.reduce((s,r)=>s+r.hriPct,0)/FA_DATA.length).toFixed(1);
-  const el=document.getElementById('tab-tru')||document.querySelector('[data-tab="tru"]');
+  const reps=FA_DATA;
+  const rpdFlagged=reps.filter(r=>r.rpdPct>RPD_MAX).length;
+  const devFlagged=reps.filter(r=>r.devPct!=null&&r.devPct>DEV_MAX).length;
+  const hriFlagged=reps.filter(r=>r.hriPct>HRI_MAX).length;
+  const accFlagged=reps.filter(r=>r.accPct!=null&&r.accPct>0).length;
+  const rpdAvg=(reps.reduce((s,r)=>s+r.rpdPct,0)/reps.length).toFixed(1);
+  const devAvg=(reps.filter(r=>r.devPct!=null).reduce((s,r)=>s+(r.devPct||0),0)/reps.filter(r=>r.devPct!=null).length).toFixed(1);
+  const hriAvg=(reps.reduce((s,r)=>s+r.hriPct,0)/reps.length).toFixed(1);
+  const el=document.getElementById('tab-tru');
   if(!el)return;
-  el.innerHTML=`
-<div style="background:linear-gradient(135deg,#0a1628 0%,#0f1e3d 50%,#0a1628 100%);border-bottom:3px solid #C8005E;padding:20px 32px;">
-  <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.5);margin-bottom:4px;">35-DAY ACTIVATION WINDOW — DATA THROUGH MAY 13, 2026</div>
-  <div style="font-family:'Bebas Neue';font-size:28px;color:#fff;letter-spacing:2px;">⚠️ FLAGGED ACTIVATIONS <span style="color:#C8005E;font-size:18px;">| REP LEVEL</span></div>
+  el.innerHTML=`<div style="background:#0a0e1a;min-height:100%;padding-bottom:60px;">
+<div style="background:linear-gradient(135deg,#0d1225 0%,#0a0e1a 100%);border-bottom:3px solid #C8005E;padding:18px 28px 14px;">
+  <div style="font-family:'Bebas Neue';font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.35);margin-bottom:3px;">35-DAY ACTIVATION WINDOW — DATA THROUGH MAY 13, 2026 — MAY 2026 NOT FINALIZED</div>
+  <div style="font-family:'Bebas Neue';font-size:26px;color:#fff;letter-spacing:2px;">⚠️ FLAGGED ACTIVATIONS <span style="color:#C8005E;">| REP LEVEL</span></div>
 </div>
-<div style="padding:20px 24px 0;">
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;">
+<div style="padding:16px 20px 0;">
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;">
     ${[
-      {label:'Rate Plan Downgrade',key:'rpd',pct:rpdAvg,flagged:rpdFlagged,thresh:'7.5%',color:'#f87171',bg:'rgba(248,113,113,0.1)'},
-      {label:'Device Movement',key:'dev',pct:(FA_DATA.filter(r=>r.devPct!=null).reduce((s,r)=>s+(r.devPct||0),0)/FA_DATA.filter(r=>r.devPct!=null).length).toFixed(1),flagged:devFlagged,thresh:'1.5%',color:'#fb923c',bg:'rgba(251,146,60,0.1)'},
-      {label:'High-Risk Activations',key:'hri',pct:hriAvg,flagged:hriFlagged,thresh:'3.5%',color:'#C8005E',bg:'rgba(200,0,94,0.1)'},
-      {label:'Accessory Overcharge',key:'acc',pct:'N/A',flagged:accFlagged,thresh:'>0%',color:'#a78bfa',bg:'rgba(167,139,250,0.1)'},
-    ].map(m=>`
-    <div onclick="_faSort='${m.key}';_faDir=1;renderFlaggedActs()" style="background:${m.bg};border:1px solid ${m.color}40;border-top:3px solid ${m.color};border-radius:8px;padding:14px 16px;cursor:pointer;transition:all 0.2s;${_faSort===m.key?'box-shadow:0 0 0 2px '+m.color:''}" onmouseover="this.style.background='${m.bg.replace('0.1','0.18')}'" onmouseout="this.style.background='${m.bg}'">
-      <div style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.5);font-family:'Bebas Neue';margin-bottom:6px;">${m.label}</div>
-      <div style="font-family:'Bebas Neue';font-size:32px;color:${m.color};line-height:1;">${m.flagged}</div>
-      <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px;">reps above ${m.thresh} threshold</div>
-      <div style="font-size:9px;color:rgba(255,255,255,0.3);margin-top:2px;">Avg: ${m.pct}% ${_faSort===m.key?'▼ sorted':''}</div>
+      {label:'Rate Plan Downgrade',key:'rpd',flagged:rpdFlagged,avg:rpdAvg,thresh:'> 7.5%',color:'#f87171',glow:'rgba(248,113,113,0.15)'},
+      {label:'Device Movement',key:'dev',flagged:devFlagged,avg:devAvg,thresh:'> 1.5%',color:'#fb923c',glow:'rgba(251,146,60,0.15)'},
+      {label:'High-Risk Activations',key:'hri',flagged:hriFlagged,avg:hriAvg,thresh:'> 3.5%',color:'#C8005E',glow:'rgba(200,0,94,0.18)'},
+      {label:'Accessory Overcharge',key:'acc',flagged:accFlagged,avg:'N/A',thresh:'> 0%',color:'#a78bfa',glow:'rgba(167,139,250,0.15)'},
+    ].map(m=>`<div onclick="_faSort='${m.key}';_faDir=1;renderFlaggedActs()" style="background:#111827;border:1px solid ${_faSort===m.key?m.color+'99':'rgba(255,255,255,0.07)'};border-top:3px solid ${m.color};border-radius:8px;padding:14px 16px;cursor:pointer;${_faSort===m.key?'box-shadow:0 0 16px '+m.glow:''}">
+      <div style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.4);font-family:'Bebas Neue';margin-bottom:8px;">${m.label}</div>
+      <div style="font-family:'Bebas Neue';font-size:38px;color:${m.color};line-height:1;">${m.flagged}</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:6px;">reps ${m.thresh} threshold</div>
+      <div style="font-size:9px;color:rgba(255,255,255,0.2);margin-top:3px;">Avg: ${m.avg}% ${_faSort===m.key?'<span style="color:'+m.color+';">▼ sorted</span>':''}</div>
     </div>`).join('')}
   </div>
-  <div style="display:flex;gap:10px;margin-bottom:12px;align-items:center;">
-    <input id="fa-search" placeholder="🔍 Search rep..." oninput="_faQ=this.value;renderFlaggedActs()" value="${_faQ}" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:8px 12px;color:#fff;font-size:12px;outline:none;">
-    <div style="font-size:10px;color:rgba(255,255,255,0.4);white-space:nowrap;">84 reps • 35-day window • Click metric card to sort</div>
-    <div style="display:flex;gap:6px;">
+  <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;">
+    <input id="fa-search" placeholder="🔍 Search rep..." oninput="_faQ=this.value;renderFlaggedActs()" value="${_faQ}" style="flex:1;background:#111827;border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:8px 12px;color:#fff;font-size:12px;outline:none;">
+    <span style="font-size:10px;color:rgba(255,255,255,0.25);white-space:nowrap;">84 reps &bull; 35-day window</span>
+    <div style="display:flex;gap:5px;">
       ${['rpd','dev','hri','acc'].map((k,i)=>{
-        const lbl=['RPD','DEV','HRI','ACC'][i];
-        const colors=['#f87171','#fb923c','#C8005E','#a78bfa'];
-        return `<button onclick="_faSort='${k}';_faDir=_faSort==='${k}'?-_faDir:1;renderFlaggedActs()" style="background:${_faSort===k?colors[i]+'33':'rgba(255,255,255,0.06)'};border:1px solid ${_faSort===k?colors[i]:'rgba(255,255,255,0.1)'};border-radius:4px;color:${_faSort===k?colors[i]:'rgba(255,255,255,0.5)'};font-size:10px;padding:4px 10px;cursor:pointer;font-family:'Bebas Neue';letter-spacing:1px;">${lbl} ${_faSort===k?(_faDir>0?'▼':'▲'):''}</button>`;
+        const cols=['#f87171','#fb923c','#C8005E','#a78bfa'];
+        const lbls=['RPD','DEV','HRI','ACC'];
+        const active=_faSort===k;
+        return `<button onclick="_faSort='${k}';_faDir=_faSort==='${k}'?-_faDir:1;renderFlaggedActs()" style="background:${active?cols[i]+'22':'#111827'};border:1px solid ${active?cols[i]:'rgba(255,255,255,0.1)'};border-radius:4px;color:${active?cols[i]:'rgba(255,255,255,0.4)'};font-size:10px;padding:5px 12px;cursor:pointer;font-family:'Bebas Neue';letter-spacing:1px;">${lbls[i]}${active?(' '+(_faDir>0?'▼':'▲')):''}</button>`;
       }).join('')}
     </div>
   </div>
-  <div style="overflow-x:auto;">
+  <div style="background:#0d1117;border:1px solid rgba(255,255,255,0.06);border-radius:8px;overflow:hidden;">
   <table style="width:100%;border-collapse:collapse;font-size:11px;">
     <thead>
-      <tr style="background:rgba(255,255,255,0.04);text-align:center;">
-        <th style="padding:8px 12px;text-align:left;font-family:'Bebas Neue';letter-spacing:1px;color:rgba(255,255,255,0.5);font-size:10px;border-bottom:1px solid rgba(255,255,255,0.08);">REP</th>
-        <th style="padding:8px 8px;font-family:'Bebas Neue';letter-spacing:1px;color:#f87171;font-size:10px;border-bottom:1px solid rgba(255,255,255,0.08);" colspan="3">RATE PLAN DOWNGRADE <span style="color:rgba(255,255,255,0.3);font-size:8px;">&gt;7.5%</span></th>
-        <th style="padding:8px 8px;font-family:'Bebas Neue';letter-spacing:1px;color:#fb923c;font-size:10px;border-bottom:1px solid rgba(255,255,255,0.08);" colspan="3">DEVICE MOVEMENT <span style="color:rgba(255,255,255,0.3);font-size:8px;">&gt;1.5%</span></th>
-        <th style="padding:8px 8px;font-family:'Bebas Neue';letter-spacing:1px;color:#C8005E;font-size:10px;border-bottom:1px solid rgba(255,255,255,0.08);" colspan="3">HIGH-RISK ACTIVATIONS <span style="color:rgba(255,255,255,0.3);font-size:8px;">&gt;3.5%</span></th>
-        <th style="padding:8px 8px;font-family:'Bebas Neue';letter-spacing:1px;color:#a78bfa;font-size:10px;border-bottom:1px solid rgba(255,255,255,0.08);">ACCESSORY <span style="color:rgba(255,255,255,0.3);font-size:8px;">OVERCHARGE</span></th>
+      <tr style="background:#111827;">
+        <th style="padding:10px 14px;text-align:left;font-family:'Bebas Neue';letter-spacing:1px;color:rgba(255,255,255,0.35);font-size:10px;border-bottom:1px solid rgba(255,255,255,0.06);">REP</th>
+        <th colspan="3" style="padding:10px 8px;text-align:center;font-family:'Bebas Neue';letter-spacing:1px;color:#f87171;font-size:10px;border-bottom:1px solid rgba(248,113,113,0.25);border-left:1px solid rgba(248,113,113,0.15);">RATE PLAN DOWNGRADE &nbsp;<span style="color:rgba(255,255,255,0.2);font-size:8px;">&gt;7.5%</span></th>
+        <th colspan="3" style="padding:10px 8px;text-align:center;font-family:'Bebas Neue';letter-spacing:1px;color:#fb923c;font-size:10px;border-bottom:1px solid rgba(251,146,60,0.25);border-left:1px solid rgba(251,146,60,0.15);">DEVICE MOVEMENT &nbsp;<span style="color:rgba(255,255,255,0.2);font-size:8px;">&gt;1.5%</span></th>
+        <th colspan="3" style="padding:10px 8px;text-align:center;font-family:'Bebas Neue';letter-spacing:1px;color:#ff6b9d;font-size:10px;border-bottom:1px solid rgba(200,0,94,0.35);border-left:1px solid rgba(200,0,94,0.2);">HIGH-RISK ACTIVATIONS &nbsp;<span style="color:rgba(255,255,255,0.2);font-size:8px;">&gt;3.5%</span></th>
+        <th style="padding:10px 8px;text-align:center;font-family:'Bebas Neue';letter-spacing:1px;color:#a78bfa;font-size:10px;border-bottom:1px solid rgba(167,139,250,0.25);border-left:1px solid rgba(167,139,250,0.15);">ACC OVERCHARGE &nbsp;<span style="color:rgba(255,255,255,0.2);font-size:8px;">&gt;0%</span></th>
       </tr>
-      <tr style="background:rgba(255,255,255,0.02);text-align:center;">
-        <th style="padding:4px 12px;border-bottom:2px solid rgba(255,255,255,0.12);"></th>
-        <th style="padding:4px 6px;color:rgba(255,255,255,0.3);font-size:9px;font-weight:400;border-bottom:2px solid rgba(248,113,113,0.3);">ACTUAL</th>
-        <th style="padding:4px 6px;color:rgba(255,255,255,0.3);font-size:9px;font-weight:400;border-bottom:2px solid rgba(248,113,113,0.3);">ELIG</th>
-        <th style="padding:4px 6px;color:rgba(255,255,255,0.3);font-size:9px;font-weight:400;border-bottom:2px solid rgba(248,113,113,0.3);">%</th>
-        <th style="padding:4px 6px;color:rgba(255,255,255,0.3);font-size:9px;font-weight:400;border-bottom:2px solid rgba(251,146,60,0.3);">ACTUAL</th>
-        <th style="padding:4px 6px;color:rgba(255,255,255,0.3);font-size:9px;font-weight:400;border-bottom:2px solid rgba(251,146,60,0.3);">ELIG</th>
-        <th style="padding:4px 6px;color:rgba(255,255,255,0.3);font-size:9px;font-weight:400;border-bottom:2px solid rgba(251,146,60,0.3);">%</th>
-        <th style="padding:4px 6px;color:rgba(255,255,255,0.3);font-size:9px;font-weight:400;border-bottom:2px solid rgba(200,0,94,0.3);">ACTUAL</th>
-        <th style="padding:4px 6px;color:rgba(255,255,255,0.3);font-size:9px;font-weight:400;border-bottom:2px solid rgba(200,0,94,0.3);">ELIG</th>
-        <th style="padding:4px 6px;color:rgba(255,255,255,0.3);font-size:9px;font-weight:400;border-bottom:2px solid rgba(200,0,94,0.3);">%</th>
-        <th style="padding:4px 6px;color:rgba(255,255,255,0.3);font-size:9px;font-weight:400;border-bottom:2px solid rgba(167,139,250,0.3);">%</th>
+      <tr style="background:#0d1117;">
+        <th style="padding:5px 14px;border-bottom:1px solid rgba(255,255,255,0.05);"></th>
+        ${['ACT','ELIG','%','ACT','ELIG','%','ACT','ELIG','%','%'].map((h,i)=>{
+          const borders=['rgba(248,113,113,0.15)','','rgba(248,113,113,0.15)','rgba(251,146,60,0.15)','','rgba(251,146,60,0.15)','rgba(200,0,94,0.2)','','rgba(200,0,94,0.2)','rgba(167,139,250,0.15)'];
+          return `<th style="padding:5px 8px;text-align:center;color:rgba(255,255,255,0.2);font-size:9px;font-weight:400;border-bottom:1px solid rgba(255,255,255,0.05);${i%3===0||i===9?'border-left:1px solid '+borders[i]:''}">${h}</th>`;
+        }).join('')}
       </tr>
     </thead>
     <tbody>
@@ -6709,32 +6705,32 @@ function renderFlaggedActs(){
         return _faDir*(bv-av);
       });
       return rows.map((r,i)=>{
-        const rFlag=r.rpdPct>7.5,dFlag=r.devPct!=null&&r.devPct>1.5,hFlag=r.hriPct>3.5,aFlag=r.accPct!=null&&r.accPct>0;
-        const anyFlag=rFlag||dFlag||hFlag||aFlag;
-        const rowBg=anyFlag?'rgba(200,0,94,0.04)':'transparent';
-        const rpd=(v,flag)=>flag?`<span style="background:rgba(248,113,113,0.2);color:#f87171;padding:2px 6px;border-radius:3px;font-weight:600;">${v}</span>`:`<span style="color:rgba(255,255,255,0.35);">${v}</span>`;
-        const dev=(v,flag)=>flag?`<span style="background:rgba(251,146,60,0.2);color:#fb923c;padding:2px 6px;border-radius:3px;font-weight:600;">${v}</span>`:`<span style="color:rgba(255,255,255,0.35);">${v}</span>`;
-        const hri=(v,flag)=>flag?`<span style="background:rgba(200,0,94,0.2);color:#ff6b9d;padding:2px 6px;border-radius:3px;font-weight:600;">${v}</span>`:`<span style="color:rgba(255,255,255,0.35);">${v}</span>`;
-        const acc=(v,flag)=>flag?`<span style="background:rgba(167,139,250,0.2);color:#a78bfa;padding:2px 6px;border-radius:3px;font-weight:600;">${v}</span>`:`<span style="color:rgba(255,255,255,0.35);">${v}</span>`;
-        return `<tr style="background:${rowBg};border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='${rowBg}'">
-          <td style="padding:7px 12px;color:${anyFlag?'#fff':'rgba(255,255,255,0.6)'};white-space:nowrap;">${anyFlag?'⚠️ ':''}<span style="font-size:10px;">${r.name}</span> <span style="color:rgba(255,255,255,0.2);font-size:9px;">${r.id}</span></td>
-          <td style="padding:7px 8px;text-align:center;">${rpd(r.rpd,rFlag)}</td>
-          <td style="padding:7px 6px;text-align:center;color:rgba(255,255,255,0.25);font-size:10px;">${r.rpdElig}</td>
-          <td style="padding:7px 8px;text-align:center;">${rpd(r.rpdPct+'%',rFlag)}</td>
-          <td style="padding:7px 8px;text-align:center;">${dev(r.devMoved,dFlag)}</td>
-          <td style="padding:7px 6px;text-align:center;color:rgba(255,255,255,0.25);font-size:10px;">${r.devElig}</td>
-          <td style="padding:7px 8px;text-align:center;">${dev(r.devPct!=null?r.devPct+'%':'—',dFlag)}</td>
-          <td style="padding:7px 8px;text-align:center;">${hri(r.hri,hFlag)}</td>
-          <td style="padding:7px 6px;text-align:center;color:rgba(255,255,255,0.25);font-size:10px;">${r.hriElig}</td>
-          <td style="padding:7px 8px;text-align:center;">${hri(r.hriPct+'%',hFlag)}</td>
-          <td style="padding:7px 8px;text-align:center;">${acc(r.accPct!=null?r.accPct+'%':'—',aFlag)}</td>
+        const rF=r.rpdPct>RPD_MAX, dF=r.devPct!=null&&r.devPct>DEV_MAX, hF=r.hriPct>HRI_MAX, aF=r.accPct!=null&&r.accPct>0;
+        const anyF=rF||dF||hF||aF;
+        const bg=i%2===0?'#0d1117':'#0f1520';
+        const flagBg=anyF?(i%2===0?'rgba(200,0,94,0.06)':'rgba(200,0,94,0.09)'):bg;
+        const f=(v,flag,col)=>flag
+          ?`<span style="background:${col}22;color:${col};padding:2px 7px;border-radius:3px;font-weight:700;">${v}</span>`
+          :`<span style="color:rgba(255,255,255,0.28);">${v}</span>`;
+        return `<tr style="background:${flagBg};border-bottom:1px solid rgba(255,255,255,0.04);" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='${flagBg}'">
+          <td style="padding:7px 14px;white-space:nowrap;"><span style="color:${anyF?'#fff':'rgba(255,255,255,0.55)'};">${anyF?'⚠️ ':''}${r.name}</span> <span style="color:rgba(255,255,255,0.18);font-size:9px;">${r.id}</span></td>
+          <td style="padding:7px 8px;text-align:center;border-left:1px solid rgba(248,113,113,0.08);">${f(r.rpd,rF,'#f87171')}</td>
+          <td style="padding:7px 6px;text-align:center;color:rgba(255,255,255,0.2);font-size:10px;">${r.rpdElig}</td>
+          <td style="padding:7px 8px;text-align:center;">${f(r.rpdPct+'%',rF,'#f87171')}</td>
+          <td style="padding:7px 8px;text-align:center;border-left:1px solid rgba(251,146,60,0.08);">${f(r.devMoved,dF,'#fb923c')}</td>
+          <td style="padding:7px 6px;text-align:center;color:rgba(255,255,255,0.2);font-size:10px;">${r.devElig}</td>
+          <td style="padding:7px 8px;text-align:center;">${f(r.devPct!=null?r.devPct+'%':'—',dF,'#fb923c')}</td>
+          <td style="padding:7px 8px;text-align:center;border-left:1px solid rgba(200,0,94,0.12);">${f(r.hri,hF,'#ff6b9d')}</td>
+          <td style="padding:7px 6px;text-align:center;color:rgba(255,255,255,0.2);font-size:10px;">${r.hriElig}</td>
+          <td style="padding:7px 8px;text-align:center;">${f(r.hriPct+'%',hF,'#ff6b9d')}</td>
+          <td style="padding:7px 8px;text-align:center;border-left:1px solid rgba(167,139,250,0.1);">${f(r.accPct!=null?r.accPct+'%':'—',aF,'#a78bfa')}</td>
         </tr>`;
       }).join('');
     })()}
     </tbody>
   </table>
   </div>
-</div>`;
+</div></div>`;
 }
 </script>
 function openStoreIntel(storeName){
