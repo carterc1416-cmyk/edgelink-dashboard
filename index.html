@@ -6632,6 +6632,7 @@ const FA_DATA=[{"name":"Abel Burgos","id":"niv04273","rpd":0,"rpdElig":14,"rpdPc
 
 let _faSort='hri', _faDir=1, _faQ='';
 function faCloseModal(){var ov=document.getElementById('fa-modal-overlay');if(ov)ov.style.display='none';}
+function faCloseModal(){var ov=document.getElementById('fa-modal-overlay');if(ov)ov.style.display='none';}
 function faOpenRep(name){
   var d=FA_DATA.filter(function(x){return x.name===name;})[0];
   if(!d)return;
@@ -6642,24 +6643,24 @@ function faOpenRep(name){
   var sl=nf===0?'ALL CLEAR':'FLAGGED: '+nf+' METRIC'+(nf>1?'S':'');
   var ov=document.getElementById('fa-modal-overlay');
   if(!ov){ov=document.createElement('div');ov.id='fa-modal-overlay';document.body.appendChild(ov);}
-  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.82);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
   ov.onclick=function(e){if(e.target===ov)ov.style.display='none';};
   var card=document.createElement('div');
   card.id='fa-rep-card';
-  card.style.cssText='background:#13141a;border:1px solid rgba(255,255,255,0.08);border-radius:16px;width:500px;max-width:96vw;max-height:88vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,0.9);';
+  card.style.cssText='background:#13141a;border:1px solid rgba(255,255,255,0.08);border-radius:16px;width:520px;max-width:96vw;max-height:90vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,0.9);';
   var head=document.createElement('div');
   head.style.cssText='padding:22px 26px 18px;background:linear-gradient(160deg,#1c1d28,#13141a);border-radius:16px 16px 0 0;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:flex-start;';
   var closeBtn=document.createElement('button');
   closeBtn.textContent='CLOSE x';
-  closeBtn.style.cssText='background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer;';
+  closeBtn.style.cssText='background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer;margin-top:4px;';
   closeBtn.onclick=function(){ov.style.display='none';};
   var statusBadge=document.createElement('div');
   statusBadge.textContent=sl;
-  statusBadge.style.cssText='background:'+sc+'18;border:1px solid '+sc+'44;color:'+sc+';font-size:11px;padding:5px 14px;border-radius:20px;letter-spacing:2px;';
+  statusBadge.style.cssText='color:'+sc+';font-size:11px;padding:5px 14px;border-radius:20px;letter-spacing:2px;border:1px solid '+sc+'44;';
   var leftDiv=document.createElement('div');
   leftDiv.innerHTML='<div style="font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.28);margin-bottom:5px;">FLAGGED ACTIVATIONS - REP DETAIL</div>'
     +'<div style="font-size:24px;font-weight:700;color:#fff;">'+d.name+'</div>'
-    +'<div style="font-size:10px;color:rgba(255,255,255,0.22);margin-top:4px;">ID: '+d.id+' 35-DAY WINDOW THRU MAY 13, 2026</div>';
+    +'<div style="font-size:10px;color:rgba(255,255,255,0.22);margin-top:4px;">ID: '+d.id+' | 35-DAY WINDOW | THRU MAY 13, 2026</div>';
   var rightDiv=document.createElement('div');
   rightDiv.style.cssText='display:flex;flex-direction:column;align-items:flex-end;gap:8px;';
   rightDiv.appendChild(statusBadge);
@@ -6667,31 +6668,67 @@ function faOpenRep(name){
   head.appendChild(leftDiv);
   head.appendChild(rightDiv);
   card.appendChild(head);
-  function mrow(icon,label,actual,elig,pct,max,col,flag){
+  var glossary={
+    rpd:{
+      what:'A Rate Plan Downgrade occurs when a customer is activated on a plan, then switched to a lower-priced plan within the 35-day window. This reduces Metro revenue and rep payout.',
+      why:'It suggests a rep may have activated a customer on a plan they cannot afford, then downgraded it shortly after to retain them.',
+      threshold:'Reps above 7.5% of eligible activations are flagged.',
+      col:'#ef4444'
+    },
+    dev:{
+      what:'Device Movement tracks when a device activated under a promotion is moved from its original line to a different line or account within the review window.',
+      why:'This can indicate gaming of promotional pricing by activating a discounted device on one line and immediately transferring it to another to bypass promo rules.',
+      threshold:'Reps above 1.5% of eligible device transactions are flagged.',
+      col:'#f97316'
+    },
+    hri:{
+      what:'High-Risk Activations are new activations matching T-Mobile risk patterns: accounts with very short tenure, same-day multiple activations, suspicious ESNs, or other fraud indicators.',
+      why:'These activations are more likely to result in chargebacks, account closures, or fraud losses. A high rate may indicate a rep is not verifying customer identity or account legitimacy.',
+      threshold:'Reps above 3.5% of eligible activations are flagged.',
+      col:'#C8005E'
+    },
+    acc:{
+      what:'Accessory Overcharge measures the difference between what a customer was charged for accessories versus the Suggested Retail Price (SRP) on file.',
+      why:'A positive percentage means the customer was charged MORE than the listed retail price. This is a compliance issue that can result in customer complaints and clawbacks.',
+      threshold:'Any positive percentage (above 0%) triggers a flag.',
+      col:'#8b5cf6'
+    }
+  };
+  function mrow(key,icon,label,actual,elig,pct,max,col,flag){
+    var g=glossary[key];
     var row=document.createElement('div');
-    row.style.cssText='padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.05);';
+    row.style.cssText='border-bottom:1px solid rgba(255,255,255,0.05);';
     var pv=pct!=null?pct+'%':'N/A';
     var pc=flag?col:'rgba(255,255,255,0.3)';
-    var rc=flag?col:'rgba(255,255,255,0.18)';
     var eligHtml=elig!=null?' | Eligible: <b style="color:rgba(255,255,255,0.5);">'+elig+'</b>':'';
     var barW=pct!=null?Math.min((pct/Math.max(max*2.5,0.1))*100,100):0;
     var barCol=pct!=null&&pct>max?col:'rgba(255,255,255,0.15)';
-    var barHtml=pct!=null?'<div style="background:rgba(255,255,255,0.05);border-radius:3px;height:5px;overflow:hidden;margin-top:8px;"><div style="width:'+barW+'%;height:100%;background:'+barCol+';border-radius:3px;"></div></div>':'';
-    row.innerHTML='<div style="display:flex;justify-content:space-between;align-items:flex-start;">'
+    var barHtml=pct!=null?'<div style="background:rgba(255,255,255,0.05);border-radius:3px;height:4px;overflow:hidden;margin-top:6px;"><div style="width:'+barW+'%;height:100%;background:'+barCol+';border-radius:3px;"></div></div>':'';
+    row.innerHTML='<div style="padding:13px 0 10px;">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;">'
       +'<div style="display:flex;gap:10px;"><span style="font-size:16px;">'+icon+'</span>'
       +'<div><div style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:3px;">'+label+'</div>'
       +'<div style="font-size:10px;color:rgba(255,255,255,0.22);">Actual: <b style="color:rgba(255,255,255,0.5);">'+actual+'</b>'+eligHtml+' | Max: <span style="color:'+col+'90;">'+max+'%</span></div>'
       +'</div></div>'
       +'<div style="text-align:right;"><div style="font-size:28px;font-weight:700;color:'+pc+';line-height:1;">'+pv+'</div>'
-      +'<div style="font-size:9px;color:'+rc+';margin-top:2px;">'+(flag?'ABOVE':'WITHIN')+'</div></div></div>'+barHtml;
+      +'<div style="font-size:9px;color:'+(flag?col:'rgba(255,255,255,0.18)')+';margin-top:2px;">'+(flag?'ABOVE THRESHOLD':'WITHIN RANGE')+'</div></div></div>'
+      +barHtml
+      +'</div>'
+      +'<div style="background:rgba(255,255,255,0.025);border-left:2px solid '+col+'40;padding:10px 14px;margin-bottom:12px;border-radius:0 6px 6px 0;">'
+      +'<div style="font-size:9px;letter-spacing:1px;color:'+col+'bb;margin-bottom:5px;font-weight:600;">WHAT IS THIS?</div>'
+      +'<div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:1.65;margin-bottom:8px;">'+g.what+'</div>'
+      +'<div style="font-size:9px;letter-spacing:1px;color:'+col+'bb;margin-bottom:4px;font-weight:600;">WHY IT MATTERS</div>'
+      +'<div style="font-size:11px;color:rgba(255,255,255,0.38);line-height:1.55;margin-bottom:7px;">'+g.why+'</div>'
+      +'<div style="font-size:9px;color:rgba(255,255,255,0.22);border-top:1px solid rgba(255,255,255,0.06);padding-top:6px;">'+g.threshold+'</div>'
+      +'</div>';
     return row;
   }
   var body=document.createElement('div');
-  body.style.cssText='padding:4px 26px 6px;';
-  body.appendChild(mrow('&#128200;','RATE PLAN DOWNGRADE',d.rpd,d.rpdElig,d.rpdPct,7.5,'#ef4444',rF));
-  body.appendChild(mrow('&#128230;','DEVICE MOVEMENT',d.devMoved,d.devElig,d.devPct,1.5,'#f97316',dF));
-  body.appendChild(mrow('&#9888;','HIGH-RISK ACTIVATIONS',d.hri,d.hriElig,d.hriPct,3.5,'#C8005E',hF));
-  body.appendChild(mrow('&#128179;','ACCESSORY OVERCHARGE',d.accPct!=null?d.accPct+'%':'--',null,d.accPct,0,'#8b5cf6',aF));
+  body.style.cssText='padding:4px 26px 0;';
+  body.appendChild(mrow('rpd','&#128200;','RATE PLAN DOWNGRADE',d.rpd,d.rpdElig,d.rpdPct,7.5,'#ef4444',rF));
+  body.appendChild(mrow('dev','&#128230;','DEVICE MOVEMENT',d.devMoved,d.devElig,d.devPct,1.5,'#f97316',dF));
+  body.appendChild(mrow('hri','&#9888;','HIGH-RISK ACTIVATIONS',d.hri,d.hriElig,d.hriPct,3.5,'#C8005E',hF));
+  body.appendChild(mrow('acc','&#128179;','ACCESSORY OVERCHARGE',d.accPct!=null?d.accPct+'%':'--',null,d.accPct,0,'#8b5cf6',aF));
   card.appendChild(body);
   var copyBtn=document.createElement('button');
   copyBtn.id='fa-copy-btn';
@@ -6780,7 +6817,7 @@ function renderFlaggedActs(){
       +'<div style="font-size:10px;color:rgba(255,255,255,0.22);margin-top:6px;">reps above '+m.thresh+'</div>'
       +'<div style="display:flex;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);">'
       +'<span style="font-size:9px;color:rgba(255,255,255,0.18);">Avg '+m.avg+'%</span>'
-      +'<span style="font-size:9px;color:'+(active?m.col:'rgba(255,255,255,0.18)')+'">SORT'+(active?(_faDir>0?' v':' ^'):'')+'</span>'
+      +'<span style="font-size:9px;color:'+(active?m.col:'rgba(255,255,255,0.18)')+';">SORT'+(active?(_faDir>0?' v':' ^'):'')+'</span>'
       +'</div></div>';
   }
   function mkBtn(k,i){
@@ -6830,7 +6867,7 @@ function renderFlaggedActs(){
   out+='<div style="background:#13141a;border-bottom:1px solid rgba(255,255,255,0.06);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;">';
   out+='<div><div style="font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.28);">35-DAY WINDOW - THRU MAY 13, 2026 - NOT FINALIZED</div>';
   out+='<div style="font-size:24px;font-weight:700;color:#fff;letter-spacing:2px;margin-top:2px;">FLAGGED ACTIVATIONS <span style="color:#C8005E;">| REP LEVEL</span></div></div>';
-  out+='<div style="font-size:10px;color:rgba(255,255,255,0.18);text-align:right;">84 REPS - CLICK NAME FOR DETAIL</div></div>';
+  out+='<div style="font-size:10px;color:rgba(255,255,255,0.18);text-align:right;">84 REPS - CLICK NAME FOR DETAIL + GLOSSARY</div></div>';
   out+='<div style="padding:18px 24px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">';
   for(var ci=0;ci<cards.length;ci++)out+=mkCard(cards[ci]);
   out+='</div>';
