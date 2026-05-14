@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Z<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -4728,7 +4728,7 @@ function screenshotStore72(){
 
     <!-- T-MOBILE RESOURCES -->
     <div style="background:#fff;border:1px solid var(--b);border-top:4px solid #C8005E;border-radius:10px;padding:18px;">
-      <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:4px;color:#C8005E;margin-bottom:14px;" data-pb-label="documents">📎 T-MOBILE OFFICIAL DOCUMENTS — MAY 5–11 UPDATE PACK</div>
+      <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:4px;color:#C8005E;margin-bottom:14px;" data-pb-label="documents">📎 T-MOBILE OFFICIAL DOCUMENTS — MAY 12–18 UPDATE PACK</div>
       <div id="pb-resources" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(200px,100%),1fr));gap:10px;"></div>
       <div style="margin-top:12px;font-size:10px;color:var(--tm);text-align:center;">
         📌 All documents available on T-Mobile Portal: MBTM → Reference → PDF Guide &amp; Promotional PDFs
@@ -5335,17 +5335,16 @@ function renderPlaybook(){
   document.getElementById('pb-notes').textContent = pb.notes;
 
   // T-Mobile resources
-  const resources = [
-    {icon:'📋', title:'Weekly Promo Overview',   sub:'All offers Apr 28–May 6',     color:'#C8005E', bg:'rgba(200,0,94,0.06)',   bd:'rgba(200,0,94,0.2)'},
-    {icon:'💰', title:'Metro Price Grid',        sub:'Full device pricing 4/30/26', color:'#a78bfa', bg:'rgba(167,139,250,0.06)', bd:'rgba(167,139,250,0.2)'},
-    {icon:'📏', title:'Business Rules',          sub:'Offer limits & eligibility',  color:'#f59e0b', bg:'rgba(245,158,11,0.06)',  bd:'rgba(245,158,11,0.2)'},
-    {icon:'🌐', title:'HSI $0 Gateway Promo',    sub:'$40 plan flyer — display now',color:'#60a5fa', bg:'rgba(96,165,250,0.06)',  bd:'rgba(96,165,250,0.2)'},
-    {icon:'🌎', title:'Mexico Unlimited Flyer',  sub:'LATAM offer — Spanish',       color:'#34d399', bg:'rgba(52,211,153,0.06)',  bd:'rgba(52,211,153,0.2)'},
-    {icon:'💜', title:'MIM Rate Plan Benefits',  sub:'T-Mobile focus plans',        color:'#f472b6', bg:'rgba(244,114,182,0.06)', bd:'rgba(244,114,182,0.2)'},
-    {icon:'📱', title:'Features One Pager',      sub:'Add-ons & feature pricing',   color:'#fb923c', bg:'rgba(251,146,60,0.06)',  bd:'rgba(251,146,60,0.2)'},
-    {icon:'🏷️', title:'Price Card Validation',   sub:'Device price cards 4/30/26',  color:'#9095b0', bg:'rgba(144,149,176,0.06)', bd:'rgba(144,149,176,0.2)'},
-    {icon:'🖼️', title:'Merch PDF Display Guide', sub:'Required in-store displays',  color:'#fbbf24', bg:'rgba(251,191,36,0.06)',  bd:'rgba(251,191,36,0.2)'},
-  ];
+ const resources = [
+    {icon:'📄', title:'Weekly Promo Overview',   sub:'All offers May 12–18, 2026',     color:'#C8005E', bg:'rgba(200,0,94,0.06)',   bd:'rgba(200,0,94,0.2)'},
+    {icon:'📄', title:'Metro Price Grid',        sub:'Full device pricing 5/16/26', color:'#a78bfa', bg:'rgba(167,139,250,0.06)', bd:'rgba(167,139,250,0.2)'},
+    {icon:'📄', title:'Business Rules',          sub:'Offer limits & eligibility',  color:'#fb923c', bg:'rgba(251,146,60,0.06)',  bd:'rgba(251,146,60,0.2)'},
+    {icon:'🌐', title:'HSI $9.99 Gateway Promo', sub:'Existing AAL — new pricing 5/7', color:'#34d399', bg:'rgba(52,211,153,0.06)',  bd:'rgba(52,211,153,0.2)'},
+    {icon:'🌎', title:'Mexico Unlimited Flyer',  sub:'LATAM offer — Spanish (M-9633)',  color:'#60a5fa', bg:'rgba(96,165,250,0.06)',  bd:'rgba(96,165,250,0.2)'},
+    {icon:'💻', title:'Annual Upgrade Guide',    sub:'L3 launches 5/16 — 24+ months',  color:'#e879f9', bg:'rgba(232,121,249,0.06)', bd:'rgba(232,121,249,0.2)'},
+    {icon:'📅', title:'EOL Device List',         sub:'Sell-through by 7/8/26',       color:'#f87171', bg:'rgba(248,113,113,0.06)', bd:'rgba(248,113,113,0.2)'},
+    {icon:'💳', title:'Price Card Validation',   sub:'Device price cards 5/7/26',    color:'#fbbf24', bg:'rgba(251,191,36,0.06)',  bd:'rgba(251,191,36,0.2)'},
+  ];;
   const resEl = document.getElementById('pb-resources');
   if(resEl){
     const DOC_CONTENT = {
