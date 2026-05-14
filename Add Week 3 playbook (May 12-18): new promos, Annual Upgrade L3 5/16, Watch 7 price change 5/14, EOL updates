@@ -4836,7 +4836,7 @@ const PLAYBOOKS = {
     label: 'MAY 5–11, 2026',
     badge: '🆕 LIVE NOW — EFFECTIVE MAY 7',
     pending: false,
-    expired: false,
+    expired: true,
     theme: '🔥 $40 PERIOD IS YOUR DOOR OPENER. STACK EVERY DEAL.',
     message: `New week, new opportunities. Key change effective May 7: HSI gateway for existing AAL customers moves from $0 to $9.99 — still a strong pitch. Moto G '26 is removed from 4 for $100. Metro Annual Upgrade is live with Samsung A15 and Moto razr 2024 FREE on $50+ plans. Activation fees are still waived on everything. Push LATAM on every port-in. Tablets are free for existing customers — there is no excuse for zero BTS days. Every transaction is a stacking opportunity.`,
     focusMetrics: [
@@ -4937,6 +4937,97 @@ const PLAYBOOKS = {
 • Limit 2 highlighted devices per BAN
 • Always verify promo period & account history before completing transaction
 • PLATAM SOC MUST be added manually — verify every time`,
+  },
+  3: {
+    label: 'MAY 12–18, 2026',
+    badge: '🟢 LIVE NOW — EFFECTIVE MAY 12',
+    pending: false,
+    expired: false,
+    theme: '💪 $40 PERIOD + SAMSUNG A17 FREE. ANNUAL UPGRADES START 5/16.',
+    message: `Big week with two date-triggered changes: Samsung Galaxy Watch 7 drops to $99.99 for existing AAL customers starting 5/14. Metro Annual Upgrade Level 3 launches 5/16 — customers on eligible plans for 24+ months qualify for an instant rebate upgrade. Know the rules, check tenure in-system, collect the $25 device change fee.`,
+    greeting: '"Thank you for calling Metro by T-Mobile, this is [NAME] — are you calling to learn more about $40 PERIOD?"',
+    sections: [
+      {
+        title: '🔔 WHAT’S NEW THIS WEEK',
+        color: '#E20074',
+        items: [
+          { label: 'Starting 5/14', detail: 'Samsung Galaxy Watch 7 → $99.99 for existing customers (30+ days) adding a line (AAL)' },
+          { label: 'Starting 5/16', detail: 'Metro Annual Upgrade Level 3 — 24+ months on eligible plans. $25 device change fee. System auto-flags eligibility. See price grid for device pricing.' },
+        ]
+      },
+      {
+        title: '🚀 BIGGEST DRIVERS',
+        color: '#5B2D8E',
+        items: [
+          { label: 'Waived Activation Fees', detail: 'ALL activation & reactivation fees waived — Voice, HINT, BTS. Auto-applied in EDGE.' },
+          { label: 'Affirm', detail: '0% APR for well-qualified customers on devices $150+' },
+          { label: 'LATAM ILD Promo', detail: '$0 Latin America calling for new ports. Must manually select PLATAM SOC — NOT automatic.' },
+        ]
+      },
+      {
+        title: '📱 SINGLE LINE OFFERS',
+        color: '#0078D4',
+        items: [
+          { label: '6-Month Unlimited', detail: 'New BAN only. BYOD required. $120 upfront. SOC: 40L1WEB + coupon NEU3F3.' },
+          { label: 'Samsung — $40 PERIOD w/ Port', detail: 'Samsung Galaxy A17 FREE with ID only. Port required.' },
+          { label: 'Apple — iPhone 16e On Us', detail: '$99.99 upfront w/ Port + ID on $50+ plan. $100 Virtual Prepaid Mastercard after 3 months = iPhone 16e On Us. Limit 2/household.' },
+        ]
+      },
+      {
+        title: '👨‍👩‍👧‍👦 MULTILINE OFFERS',
+        color: '#107C10',
+        items: [
+          { label: '4 for $100 Non-Port Unlimited', detail: 'See price grid for full details' },
+          { label: '$10 Add-a-Line (AAL)', detail: 'Existing customers + used BYOD/Metro phone (must be in store). PROMO10 SOC. Bills $15/mo; $5 off primary starts month 2. Limit 1 per BAN.' },
+        ]
+      },
+      {
+        title: '🏠 HSI OFFERS',
+        color: '#00B294',
+        items: [
+          { label: 'New Customer', detail: '$49.99 5G Gateway + $40/mo w/AutoPay Home Internet Promo Plan' },
+          { label: 'Existing Customer AAL', detail: '$9.99 Gateway when adding HSI to existing account' },
+          { label: 'Contract Freedom', detail: 'Up to $750 VPM to cover ISP ETFs. New: coupon NEUHCF. Existing (30+ days): NEUCFH. Paid after 3rd month.' },
+        ]
+      },
+      {
+        title: '💻 TABLET OFFERS',
+        color: '#FF8C00',
+        items: [
+          { label: 'Revvl Tab 2', detail: 'New: $29.99 ($20 plan) | Existing: FREE ($20 plan)' },
+          { label: 'Samsung Galaxy Tab A9+', detail: 'New: $99.99 ($20 plan) | Existing: FREE ($20 plan)' },
+          { label: 'TCL Tab 8', detail: 'New: FREE ($20 plan) | Existing: FREE ($15 plan)' },
+        ]
+      },
+      {
+        title: '⬇️ EOL / NEARING EOL (as of 5/12)',
+        color: '#D83B01',
+        items: [
+          { label: 'EOL — Sell Through by 7/8/26', detail: 'Samsung A36 5G, iPhone 14 Series, Motorola RAZR 2024, REVVL Tab 5G, Samsung S24 FE, Samsung Watch 4 & FE, TCL Tab 8, Timex FamilyConnect, JEXtream Hotspot, T-Mobile Hotspot, Samsung Chromebook Go, iPhone 15/16 series, Apple Watch S10/SE2/Ultra 2' },
+          { label: 'Nearing EOL', detail: 'Samsung A15 5G 64GB, Motorola G 5G 2025' },
+        ]
+      },
+      {
+        title: '📌 KEY BUSINESS RULES',
+        color: '#5B2D8E',
+        items: [
+          { label: 'Household Limits', detail: 'Voice: 4 | BTS: 3 (excl. watches) | Watches: 4 | HSI: 1' },
+          { label: 'Rebate Intent', detail: 'Customer must be ADDING a line. Never offer promos to customers canceling a line same day.' },
+          { label: 'Annual Upgrade Levels', detail: 'L1: 12+ mo (BFLX50) | L2: 12+ mo (BFLX60, FLEX series) | L3 NEW 5/16: 24+ mo (same plans as L2). All: $25 device change fee.' },
+          { label: 'Flip Phone', detail: 'TCL Flip 4 5G at $29.99 on $30 AutoPay or $25 T&T. No ID required. Limit 4.' },
+          { label: 'Rate Plan Downgrade Fee', detail: '$10 charge if downgrade within 90 days of activation' },
+        ]
+      },
+      {
+        title: '🛏️ REQUIRED PDFs (5.7.26)',
+        color: '#555',
+        items: [
+          { label: 'Display at POS', detail: 'Rate Plan (M-9233/9234) • 50% Off Unlimited Data (M-9599/9600) • Affirm (M-9601) • Premium Unlimited (M-9629/9230) • ⚠️ NEW: Mexico Unlimited $40 Period (M-9633)' },
+          { label: 'Next to Product', detail: 'HSI $9.99 Gateway/$40 Promo (M-9343/9344)' },
+          { label: 'Takeaway (behind counter)', detail: 'Internet Lite (M-9305/9306) • National Referral (M-9307/9308) • Fees Flyer (M-9564/9565)' },
+        ]
+      },
+    ]
   },
 };
 
