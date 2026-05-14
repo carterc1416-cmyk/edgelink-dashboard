@@ -6636,85 +6636,105 @@ function faOpenRep(name){
   if(!r)return;
   const RPD_MAX=7.5,DEV_MAX=1.5,HRI_MAX=3.5;
   const rF=r.rpdPct>RPD_MAX,dF=r.devPct!=null&&r.devPct>DEV_MAX,hF=r.hriPct>HRI_MAX,aF=r.accPct!=null&&r.accPct>0;
-  const bar=(pct,max,col)=>{
-    const w=Math.min((pct/Math.max(max*2,pct+1))*100,100);
-    const over=pct>max;
-    return `<div style="background:rgba(255,255,255,0.06);border-radius:4px;height:8px;overflow:hidden;margin-top:6px;">
-      <div style="width:${w}%;height:100%;background:${over?col:'rgba(255,255,255,0.2)'};border-radius:4px;transition:width 0.4s;"></div>
+  const flags=[rF,dF,hF,aF].filter(Boolean).length;
+  const sc=flags===0?'#10b981':flags<=2?'#f59e0b':'#ef4444';
+  const sl=flags===0?'ALL CLEAR':'FLAG: '+flags+' METRIC'+(flags>1?'S':'');
+  const metric=(icon,label,actual,elig,pct,max,col,flag)=>{
+    const barW=pct!=null?Math.min((pct/Math.max(max*2.5,0.1))*100,100):0;
+    return `<div style="padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:16px;">${icon}</span>
+          <div>
+            <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.35);font-family:'Bebas Neue';">${label}</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.25);margin-top:1px;">Actual: <span style="color:rgba(255,255,255,0.55);">${actual}</span>${elig!=null?' &nbsp;&bull;&nbsp; Eligible: <span style="color:rgba(255,255,255,0.55);">'+elig+'</span>':''} &nbsp;&bull;&nbsp; Threshold: <span style="color:${col}99;">${max}%</span></div>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:'Bebas Neue';font-size:28px;color:${flag?col:'rgba(255,255,255,0.35)';line-height:1;">${pct!=null?pct+'%':'N/A'}</div>
+          ${flag?'<div style="font-size:9px;letter-spacing:1px;color:'+col+';opacity:0.8;">ABOVE THRESHOLD</div>':'<div style="font-size:9px;letter-spacing:1px;color:rgba(255,255,255,0.2);">WITHIN RANGE</div>'}
+        </div>
+      </div>
+      ${pct!=null?`<div style="background:rgba(255,255,255,0.05);border-radius:3px;height:5px;overflow:hidden;"><div style="width:${barW}%;height:100%;background:${flag?col:'rgba(255,255,255,0.2)'};border-radius:3px;"></div></div>`:''}
     </div>`;
   };
-  const metric=(label,actual,elig,pct,max,col,flag)=>`
-    <div style="background:${flag?col+'11':'rgba(255,255,255,0.04)'};border:1px solid ${flag?col+'44':'rgba(255,255,255,0.08)'};border-left:3px solid ${flag?col:'rgba(255,255,255,0.1)'};border-radius:6px;padding:12px 14px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-family:'Bebas Neue';font-size:11px;letter-spacing:1px;color:rgba(255,255,255,0.4);">${label}</span>
-        <span style="font-family:'Bebas Neue';font-size:22px;color:${flag?col:'rgba(255,255,255,0.5)'};">${pct!=null?pct+'%':'N/A'}${flag?' ⚠️':''}</span>
-      </div>
-      <div style="display:flex;gap:16px;margin-top:4px;">
-        <span style="font-size:10px;color:rgba(255,255,255,0.3);">Actual: <b style="color:rgba(255,255,255,0.6);">${actual}</b></span>
-        ${elig!=null?'<span style="font-size:10px;color:rgba(255,255,255,0.3);">Eligible: <b style="color:rgba(255,255,255,0.6);">'+elig+'</b></span>':''}
-        <span style="font-size:10px;color:${flag?col+'cc':'rgba(255,255,255,0.25)'};">Threshold: ${max}%</span>
-      </div>
-      ${pct!=null?bar(pct,max,col):''}
-    </div>`;
-  const totalFlags=[rF,dF,hF,aF].filter(Boolean).length;
-  const statusColor=totalFlags===0?'#34d399':totalFlags<=2?'#fb923c':'#f87171';
-  const statusLabel=totalFlags===0?'CLEAN':'FLAGGED ('+totalFlags+' METRIC'+(totalFlags>1?'S':'')+')';
-  
-  // Build modal
-  let overlay=document.getElementById('fa-modal-overlay');
-  if(!overlay){overlay=document.createElement('div');overlay.id='fa-modal-overlay';document.body.appendChild(overlay);}
-  overlay.innerHTML=`
-<div onclick="if(event.target===this)this.style.display='none'" style="position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
-  <div id="fa-rep-card" style="background:#0d1117;border:1px solid rgba(255,255,255,0.1);border-top:3px solid ${statusColor};border-radius:12px;width:480px;max-width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,0.8);">
-    <div style="background:#111827;padding:16px 20px;border-radius:9px 9px 0 0;display:flex;justify-content:space-between;align-items:flex-start;">
-      <div>
-        <div style="font-family:'Bebas Neue';font-size:22px;color:#fff;letter-spacing:1px;">${r.name}</div>
-        <div style="font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:1px;margin-top:2px;">ID: ${r.id} &bull; 35-DAY WINDOW &bull; DATA THRU MAY 13, 2026</div>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
-        <span style="background:${statusColor}22;color:${statusColor};font-family:'Bebas Neue';font-size:11px;padding:3px 10px;border-radius:4px;letter-spacing:1px;border:1px solid ${statusColor}44;">${statusLabel}</span>
-        <button onclick="document.getElementById('fa-modal-overlay').style.display='none'" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);font-size:11px;padding:3px 10px;border-radius:4px;cursor:pointer;">CLOSE ✕</button>
+  let ov=document.getElementById('fa-modal-overlay');
+  if(!ov){ov=document.createElement('div');ov.id='fa-modal-overlay';document.body.appendChild(ov);}
+  ov.innerHTML=`<div onclick="if(event.target===this)this.style.display='none'" style="position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(4px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
+  <div id="fa-rep-card" style="background:#13141a;border:1px solid rgba(255,255,255,0.08);border-radius:16px;width:500px;max-width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,0.9);">
+
+    <!-- Header -->
+    <div style="padding:24px 28px 20px;background:linear-gradient(160deg,#1a1b24 0%,#13141a 100%);border-radius:16px 16px 0 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div style="font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.3);font-family:'Bebas Neue';margin-bottom:6px;">FLAGGED ACTIVATIONS &mdash; REP REPORT</div>
+          <div style="font-family:'Bebas Neue';font-size:30px;color:#fff;letter-spacing:1px;line-height:1;">${r.name}</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.25);margin-top:4px;letter-spacing:1px;">ID: ${r.id} &bull; 35-DAY WINDOW &bull; THRU MAY 13, 2026</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+          <div style="background:${sc}15;border:1px solid ${sc}40;color:${sc};font-family:'Bebas Neue';font-size:12px;padding:5px 14px;border-radius:20px;letter-spacing:2px;">${sl}</div>
+          <button onclick="document.getElementById('fa-modal-overlay').style.display='none'" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer;letter-spacing:1px;">CLOSE ✕</button>
+        </div>
       </div>
     </div>
-    <div style="padding:16px 20px;display:flex;flex-direction:column;gap:10px;">
-      ${metric('RATE PLAN DOWNGRADE',r.rpd,r.rpdElig,r.rpdPct,7.5,'#f87171',rF)}
-      ${metric('DEVICE MOVEMENT',r.devMoved,r.devElig,r.devPct,1.5,'#fb923c',dF)}
-      ${metric('HIGH-RISK ACTIVATIONS',r.hri,r.hriElig,r.hriPct,3.5,'#ff6b9d',hF)}
-      ${metric('ACCESSORY OVERCHARGE','-',null,r.accPct,0,'#a78bfa',aF)}
+
+    <!-- Metrics -->
+    <div style="padding:4px 28px 8px;">
+      ${metric('📉','RATE PLAN DOWNGRADE',r.rpd,r.rpdElig,r.rpdPct,7.5,'#ef4444',rF)}
+      ${metric('📦','DEVICE MOVEMENT',r.devMoved,r.devElig,r.devPct,1.5,'#f97316',dF)}
+      ${metric('⚠️','HIGH-RISK ACTIVATIONS',r.hri,r.hriElig,r.hriPct,3.5,'#C8005E',hF)}
+      <div style="padding:14px 0 0;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:16px;">💳</span>
+            <div>
+              <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.35);font-family:'Bebas Neue';">ACCESSORY OVERCHARGE</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.25);margin-top:1px;">Threshold: <span style="color:#8b5cf699;">0%</span></div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Bebas Neue';font-size:28px;color:${aF?'#8b5cf6':'rgba(255,255,255,0.35)'};line-height:1;">${r.accPct!=null?r.accPct+'%':'N/A'}</div>
+            ${aF?'<div style="font-size:9px;letter-spacing:1px;color:#8b5cf6;opacity:0.8;">OVERCHARGING</div>':'<div style="font-size:9px;letter-spacing:1px;color:rgba(255,255,255,0.2);">WITHIN RANGE</div>'}
+          </div>
+        </div>
+      </div>
     </div>
-    <div style="padding:0 20px 16px;display:flex;gap:8px;">
-      <button onclick="faScreenshot()" style="flex:1;background:#C8005E;border:none;color:#fff;font-family:'Bebas Neue';font-size:14px;letter-spacing:1px;padding:10px;border-radius:6px;cursor:pointer;">📸 SCREENSHOT &amp; COPY</button>
-      <button onclick="faPrint()" style="flex:1;background:#111827;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);font-family:'Bebas Neue';font-size:14px;letter-spacing:1px;padding:10px;border-radius:6px;cursor:pointer;">🖨️ PRINT / SAVE PDF</button>
+
+    <!-- Actions -->
+    <div style="padding:16px 28px 24px;display:flex;gap:10px;margin-top:4px;">
+      <button id="fa-copy-btn" onclick="faScreenshot()" style="flex:1;background:linear-gradient(135deg,#C8005E,#a8004e);border:none;color:#fff;font-family:'Bebas Neue';font-size:14px;letter-spacing:2px;padding:12px;border-radius:10px;cursor:pointer;box-shadow:0 4px 20px rgba(200,0,94,0.3);">📸 SCREENSHOT &amp; COPY</button>
+      <button onclick="faPrint()" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);font-family:'Bebas Neue';font-size:14px;letter-spacing:2px;padding:12px;border-radius:10px;cursor:pointer;">🖨️ PRINT / PDF</button>
     </div>
+
   </div>
 </div>`;
-  overlay.style.display='block';
+  ov.style.display='block';
 }
 
 function faScreenshot(){
   const card=document.getElementById('fa-rep-card');
   if(!card)return;
+  const btn=document.getElementById('fa-copy-btn');
   if(typeof html2canvas==='undefined'){
+    if(btn)btn.innerHTML='⏳ LOADING...';
     const s=document.createElement('script');
     s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-    s.onload=()=>_faDoScreenshot(card);
+    s.onload=()=>_faDoScreenshot(card,btn);
     document.head.appendChild(s);
-  } else { _faDoScreenshot(card); }
+  } else { _faDoScreenshot(card,btn); }
 }
 
-function _faDoScreenshot(card){
-  html2canvas(card,{backgroundColor:'#0d1117',scale:2,useCORS:true,logging:false}).then(canvas=>{
+function _faDoScreenshot(card,btn){
+  if(btn)btn.innerHTML='⏳ CAPTURING...';
+  html2canvas(card,{backgroundColor:'#13141a',scale:2,useCORS:true,logging:false}).then(canvas=>{
     canvas.toBlob(blob=>{
       const item=new ClipboardItem({'image/png':blob});
       navigator.clipboard.write([item]).then(()=>{
-        const btn=document.querySelector('#fa-rep-card button');
-        if(btn){const orig=btn.innerHTML;btn.innerHTML='✅ COPIED TO CLIPBOARD';setTimeout(()=>btn.innerHTML=orig,2500);}
+        if(btn){btn.innerHTML='✅ COPIED!';setTimeout(()=>btn.innerHTML='📸 SCREENSHOT & COPY',2500);}
       }).catch(()=>{
-        // Fallback: download
-        const a=document.createElement('a');
-        a.href=canvas.toDataURL();
-        a.download='flagged-rep-'+(Date.now())+'.png';
-        a.click();
+        const a=document.createElement('a');a.href=canvas.toDataURL();
+        a.download='flag-report-'+Date.now()+'.png';a.click();
+        if(btn){btn.innerHTML='💾 SAVED';setTimeout(()=>btn.innerHTML='📸 SCREENSHOT & COPY',2500);}
       });
     },'image/png');
   });
@@ -6724,69 +6744,87 @@ function faPrint(){
   const card=document.getElementById('fa-rep-card');
   if(!card)return;
   const w=window.open('','_blank');
-  w.document.write('<html><head><title>Flagged Rep Report</title><style>body{margin:0;background:#0d1117;}@media print{@page{margin:0;}}</style></head><body>'+card.outerHTML+'</body></html>');
-  w.document.close();
-  setTimeout(()=>w.print(),500);
+  w.document.write('<html><head><title>Flag Report</title><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box;}body{background:#13141a;display:flex;justify-content:center;padding:40px;}@media print{body{padding:0;}}</style></head><body>'+card.outerHTML+'</body></html>');
+  w.document.close();setTimeout(()=>w.print(),600);
 }
 
 function renderFlaggedActs(){
   const RPD_MAX=7.5,DEV_MAX=1.5,HRI_MAX=3.5;
   const reps=FA_DATA;
-  const rpdFlagged=reps.filter(r=>r.rpdPct>RPD_MAX).length;
-  const devFlagged=reps.filter(r=>r.devPct!=null&&r.devPct>DEV_MAX).length;
-  const hriFlagged=reps.filter(r=>r.hriPct>HRI_MAX).length;
-  const accFlagged=reps.filter(r=>r.accPct!=null&&r.accPct>0).length;
+  const rpdF=reps.filter(r=>r.rpdPct>RPD_MAX).length;
+  const devF=reps.filter(r=>r.devPct!=null&&r.devPct>DEV_MAX).length;
+  const hriF=reps.filter(r=>r.hriPct>HRI_MAX).length;
+  const accF=reps.filter(r=>r.accPct!=null&&r.accPct>0).length;
   const rpdAvg=(reps.reduce((s,r)=>s+r.rpdPct,0)/reps.length).toFixed(1);
   const devAvg=(reps.filter(r=>r.devPct!=null).reduce((s,r)=>s+(r.devPct||0),0)/reps.filter(r=>r.devPct!=null).length).toFixed(1);
   const hriAvg=(reps.reduce((s,r)=>s+r.hriPct,0)/reps.length).toFixed(1);
   const el=document.getElementById('tab-tru');
   if(!el)return;
-  el.innerHTML=`<div style="background:#0a0e1a;min-height:100%;padding-bottom:60px;">
-<div style="background:linear-gradient(135deg,#0d1225 0%,#0a0e1a 100%);border-bottom:3px solid #C8005E;padding:18px 28px 14px;">
-  <div style="font-family:'Bebas Neue';font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.35);margin-bottom:3px;">35-DAY ACTIVATION WINDOW — DATA THROUGH MAY 13, 2026 — MAY 2026 NOT FINALIZED</div>
-  <div style="font-family:'Bebas Neue';font-size:26px;color:#fff;letter-spacing:2px;">⚠️ FLAGGED ACTIVATIONS <span style="color:#C8005E;">| REP LEVEL</span></div>
-</div>
-<div style="padding:16px 20px 0;">
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;">
-    ${[
-      {label:'Rate Plan Downgrade',key:'rpd',flagged:rpdFlagged,avg:rpdAvg,thresh:'> 7.5%',color:'#f87171',glow:'rgba(248,113,113,0.15)'},
-      {label:'Device Movement',key:'dev',flagged:devFlagged,avg:devAvg,thresh:'> 1.5%',color:'#fb923c',glow:'rgba(251,146,60,0.15)'},
-      {label:'High-Risk Activations',key:'hri',flagged:hriFlagged,avg:hriAvg,thresh:'> 3.5%',color:'#C8005E',glow:'rgba(200,0,94,0.18)'},
-      {label:'Accessory Overcharge',key:'acc',flagged:accFlagged,avg:'N/A',thresh:'> 0%',color:'#a78bfa',glow:'rgba(167,139,250,0.15)'},
-    ].map(m=>`<div onclick="_faSort='${m.key}';_faDir=1;renderFlaggedActs()" style="background:#111827;border:1px solid ${_faSort===m.key?m.color+'99':'rgba(255,255,255,0.07)'};border-top:3px solid ${m.color};border-radius:8px;padding:14px 16px;cursor:pointer;${_faSort===m.key?'box-shadow:0 0 16px '+m.glow:''}">
-      <div style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.4);font-family:'Bebas Neue';margin-bottom:8px;">${m.label}</div>
-      <div style="font-family:'Bebas Neue';font-size:38px;color:${m.color};line-height:1;">${m.flagged}</div>
-      <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:6px;">reps ${m.thresh} threshold</div>
-      <div style="font-size:9px;color:rgba(255,255,255,0.2);margin-top:3px;">Avg: ${m.avg}% ${_faSort===m.key?'<span style="color:'+m.color+';">▼ sorted</span>':''}</div>
+
+  const cards=[
+    {label:'Rate Plan Downgrade',key:'rpd',n:rpdF,avg:rpdAvg,thresh:'7.5%',col:'#ef4444',icon:'📉'},
+    {label:'Device Movement',key:'dev',n:devF,avg:devAvg,thresh:'1.5%',col:'#f97316',icon:'📦'},
+    {label:'High-Risk Activations',key:'hri',n:hriF,avg:hriAvg,thresh:'3.5%',col:'#C8005E',icon:'⚠️'},
+    {label:'Accessory Overcharge',key:'acc',n:accF,avg:'—',thresh:'0%',col:'#8b5cf6',icon:'💳'},
+  ];
+
+  el.innerHTML=`<div style="background:#0f1017;min-height:100%;padding-bottom:80px;">
+
+  <!-- Header Bar -->
+  <div style="background:#13141a;border-bottom:1px solid rgba(255,255,255,0.06);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;">
+    <div>
+      <div style="font-family:'Bebas Neue';font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.3);">35-DAY WINDOW &mdash; DATA THRU MAY 13, 2026 &mdash; MAY 2026 NOT FINALIZED</div>
+      <div style="font-family:'Bebas Neue';font-size:24px;color:#fff;letter-spacing:2px;margin-top:2px;">FLAGGED ACTIVATIONS <span style="color:#C8005E;">| REP LEVEL</span></div>
+    </div>
+    <div style="font-size:10px;color:rgba(255,255,255,0.2);text-align:right;">84 REPS &bull; CLICK ANY NAME<br>FOR FULL DETAIL + SHARE</div>
+  </div>
+
+  <!-- Metric Cards -->
+  <div style="padding:20px 24px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+    ${cards.map(m=>`
+    <div onclick="_faSort='${m.key}';_faDir=1;renderFlaggedActs()" style="background:#13141a;border:1px solid ${_faSort===m.key?m.col+'60':'rgba(255,255,255,0.06)'};border-radius:12px;padding:18px 20px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:${m.col};opacity:${_faSort===m.key?'1':'0.4'};"></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+        <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.35);font-family:'Bebas Neue';">${m.label}</div>
+        <span style="font-size:18px;opacity:0.7;">${m.icon}</span>
+      </div>
+      <div style="font-family:'Bebas Neue';font-size:44px;color:${m.col};line-height:1;">${m.n}</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.25);margin-top:6px;">reps above ${m.thresh}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);">
+        <span style="font-size:9px;color:rgba(255,255,255,0.2);">Avg ${m.avg}%</span>
+        <span style="font-size:9px;color:${_faSort===m.key?m.col:'rgba(255,255,255,0.2)'};${_faSort===m.key?'':''}">SORT ${_faSort===m.key?(_faDir>0?'&#9660;':'&#9650;'):'&#8597;'}</span>
+      </div>
     </div>`).join('')}
   </div>
-  <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;">
-    <input id="fa-search" placeholder="🔍 Search rep..." oninput="_faQ=this.value;renderFlaggedActs()" value="${_faQ}" style="flex:1;background:#111827;border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:8px 12px;color:#fff;font-size:12px;outline:none;">
-    <span style="font-size:10px;color:rgba(255,255,255,0.25);white-space:nowrap;">84 reps &bull; Click name for detail</span>
-    <div style="display:flex;gap:5px;">
-      ${['rpd','dev','hri','acc'].map((k,i)=>{
-        const cols=['#f87171','#fb923c','#C8005E','#a78bfa'];
-        const lbls=['RPD','DEV','HRI','ACC'];
-        const active=_faSort===k;
-        return `<button onclick="_faSort='${k}';_faDir=_faSort==='${k}'?-_faDir:1;renderFlaggedActs()" style="background:${active?cols[i]+'22':'#111827'};border:1px solid ${active?cols[i]:'rgba(255,255,255,0.1)'};border-radius:4px;color:${active?cols[i]:'rgba(255,255,255,0.4)'};font-size:10px;padding:5px 12px;cursor:pointer;font-family:'Bebas Neue';letter-spacing:1px;">${lbls[i]}${active?(' '+(_faDir>0?'▼':'▲')):''}</button>`;
-      }).join('')}
+
+  <!-- Controls -->
+  <div style="padding:16px 24px 0;display:flex;gap:10px;align-items:center;">
+    <div style="flex:1;position:relative;">
+      <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.25);font-size:12px;">🔍</span>
+      <input id="fa-search" placeholder="Search rep name..." oninput="_faQ=this.value;renderFlaggedActs()" value="${_faQ}" style="width:100%;background:#13141a;border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:9px 12px 9px 32px;color:#fff;font-size:12px;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='rgba(200,0,94,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'">
+    </div>
+    <div style="display:flex;gap:6px;">
+      ${cards.map(m=>`<button onclick="_faSort='${m.key}';_faDir=_faSort==='${m.key}'?-_faDir:1;renderFlaggedActs()" style="background:${_faSort===m.key?m.col+'20':'transparent'};border:1px solid ${_faSort===m.key?m.col+'60':'rgba(255,255,255,0.08)'};border-radius:6px;color:${_faSort===m.key?m.col:'rgba(255,255,255,0.35)'};font-size:10px;padding:7px 14px;cursor:pointer;font-family:'Bebas Neue';letter-spacing:1px;">${m.key.toUpperCase()}${_faSort===m.key?(_faDir>0?' &#9660;':' &#9650;'):''}</button>`).join('')}
     </div>
   </div>
-  <div style="background:#0d1117;border:1px solid rgba(255,255,255,0.06);border-radius:8px;overflow:hidden;">
+
+  <!-- Table -->
+  <div style="padding:12px 24px 0;">
+  <div style="background:#13141a;border:1px solid rgba(255,255,255,0.06);border-radius:12px;overflow:hidden;">
   <table style="width:100%;border-collapse:collapse;font-size:11px;">
     <thead>
-      <tr style="background:#111827;">
-        <th style="padding:10px 14px;text-align:left;font-family:'Bebas Neue';letter-spacing:1px;color:rgba(255,255,255,0.35);font-size:10px;border-bottom:1px solid rgba(255,255,255,0.06);">REP <span style="color:rgba(255,255,255,0.18);font-size:8px;font-weight:400;">(click for detail)</span></th>
-        <th colspan="3" style="padding:10px 8px;text-align:center;font-family:'Bebas Neue';letter-spacing:1px;color:#f87171;font-size:10px;border-bottom:1px solid rgba(248,113,113,0.25);border-left:1px solid rgba(248,113,113,0.15);">RATE PLAN DOWNGRADE <span style="color:rgba(255,255,255,0.2);font-size:8px;">&gt;7.5%</span></th>
-        <th colspan="3" style="padding:10px 8px;text-align:center;font-family:'Bebas Neue';letter-spacing:1px;color:#fb923c;font-size:10px;border-bottom:1px solid rgba(251,146,60,0.25);border-left:1px solid rgba(251,146,60,0.15);">DEVICE MOVEMENT <span style="color:rgba(255,255,255,0.2);font-size:8px;">&gt;1.5%</span></th>
-        <th colspan="3" style="padding:10px 8px;text-align:center;font-family:'Bebas Neue';letter-spacing:1px;color:#ff6b9d;font-size:10px;border-bottom:1px solid rgba(200,0,94,0.35);border-left:1px solid rgba(200,0,94,0.2);">HIGH-RISK ACTIVATIONS <span style="color:rgba(255,255,255,0.2);font-size:8px;">&gt;3.5%</span></th>
-        <th style="padding:10px 8px;text-align:center;font-family:'Bebas Neue';letter-spacing:1px;color:#a78bfa;font-size:10px;border-bottom:1px solid rgba(167,139,250,0.25);border-left:1px solid rgba(167,139,250,0.15);">ACC OVERCHARGE <span style="color:rgba(255,255,255,0.2);font-size:8px;">&gt;0%</span></th>
+      <tr>
+        <th style="padding:12px 16px;text-align:left;font-family:'Bebas Neue';font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.25);border-bottom:1px solid rgba(255,255,255,0.06);">REP NAME</th>
+        <th colspan="3" style="padding:12px 8px;text-align:center;font-family:'Bebas Neue';font-size:9px;letter-spacing:2px;color:#ef4444;border-bottom:1px solid rgba(255,255,255,0.06);border-left:1px solid rgba(239,68,68,0.12);">RATE PLAN DOWNGRADE &gt;7.5%</th>
+        <th colspan="3" style="padding:12px 8px;text-align:center;font-family:'Bebas Neue';font-size:9px;letter-spacing:2px;color:#f97316;border-bottom:1px solid rgba(255,255,255,0.06);border-left:1px solid rgba(249,115,22,0.12);">DEVICE MOVEMENT &gt;1.5%</th>
+        <th colspan="3" style="padding:12px 8px;text-align:center;font-family:'Bebas Neue';font-size:9px;letter-spacing:2px;color:#C8005E;border-bottom:1px solid rgba(255,255,255,0.06);border-left:1px solid rgba(200,0,94,0.12);">HIGH-RISK ACTIVATIONS &gt;3.5%</th>
+        <th style="padding:12px 8px;text-align:center;font-family:'Bebas Neue';font-size:9px;letter-spacing:2px;color:#8b5cf6;border-bottom:1px solid rgba(255,255,255,0.06);border-left:1px solid rgba(139,92,246,0.12);">ACC OVERCHARGE</th>
       </tr>
-      <tr style="background:#0d1117;">
-        <th style="padding:5px 14px;border-bottom:1px solid rgba(255,255,255,0.05);"></th>
+      <tr style="background:rgba(255,255,255,0.02);">
+        <th style="padding:5px 16px;border-bottom:1px solid rgba(255,255,255,0.04);"></th>
         ${['ACT','ELIG','%','ACT','ELIG','%','ACT','ELIG','%','%'].map((h,i)=>{
-          const bl=['rgba(248,113,113,0.15)',null,null,'rgba(251,146,60,0.15)',null,null,'rgba(200,0,94,0.2)',null,null,'rgba(167,139,250,0.15)'];
-          return `<th style="padding:5px 8px;text-align:center;color:rgba(255,255,255,0.2);font-size:9px;font-weight:400;border-bottom:1px solid rgba(255,255,255,0.05);${bl[i]?'border-left:1px solid '+bl[i]:''}">${h}</th>`;
+          const bl=[0,3,6,9];
+          return `<th style="padding:5px 6px;text-align:center;font-size:9px;font-weight:400;color:rgba(255,255,255,0.18);letter-spacing:1px;border-bottom:1px solid rgba(255,255,255,0.04);${bl.includes(i)?'border-left:1px solid rgba(255,255,255,0.04)':''}">${h}</th>`;
         }).join('')}
       </tr>
     </thead>
@@ -6795,42 +6833,45 @@ function renderFlaggedActs(){
       const q=_faQ.toLowerCase();
       let rows=[...FA_DATA].filter(r=>!q||r.name.toLowerCase().includes(q));
       rows.sort((a,b)=>{
-        let av,bv;
-        if(_faSort==='rpd'){av=a.rpdPct;bv=b.rpdPct;}
-        else if(_faSort==='dev'){av=a.devPct??-1;bv=b.devPct??-1;}
-        else if(_faSort==='hri'){av=a.hriPct;bv=b.hriPct;}
-        else{av=a.accPct??-999;bv=b.accPct??-999;}
+        const vals={rpd:[a.rpdPct,b.rpdPct],dev:[a.devPct??-1,b.devPct??-1],hri:[a.hriPct,b.hriPct],acc:[a.accPct??-999,b.accPct??-999]};
+        const [av,bv]=vals[_faSort]||vals.hri;
         return _faDir*(bv-av);
       });
       return rows.map((r,i)=>{
         const rF=r.rpdPct>RPD_MAX,dF=r.devPct!=null&&r.devPct>DEV_MAX,hF=r.hriPct>HRI_MAX,aF=r.accPct!=null&&r.accPct>0;
         const anyF=rF||dF||hF||aF;
-        const bg=i%2===0?'#0d1117':'#0f1520';
-        const flagBg=anyF?(i%2===0?'rgba(200,0,94,0.06)':'rgba(200,0,94,0.09)'):bg;
-        const f=(v,flag,col)=>flag?`<span style="background:${col}22;color:${col};padding:2px 7px;border-radius:3px;font-weight:700;">${v}</span>`:`<span style="color:rgba(255,255,255,0.28);">${v}</span>`;
-        const nameEncoded=r.name.replace(/'/g,"\\'");
-        return `<tr style="background:${flagBg};border-bottom:1px solid rgba(255,255,255,0.04);" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='${flagBg}'">
-          <td style="padding:7px 14px;white-space:nowrap;cursor:pointer;" onclick="faOpenRep('${nameEncoded}')">
-            <span style="color:${anyF?'#C8005E':'#60a5fa'};text-decoration:underline;text-decoration-style:dotted;font-size:11px;">${anyF?'⚠️ ':''}${r.name}</span>
-            <span style="color:rgba(255,255,255,0.18);font-size:9px;margin-left:4px;">${r.id}</span>
+        const rowBg=i%2===0?'transparent':'rgba(255,255,255,0.015)';
+        const pill=(v,flag,col)=>flag
+          ?`<span style="display:inline-block;background:${col}18;color:${col};padding:2px 8px;border-radius:4px;font-weight:600;font-size:11px;">${v}</span>`
+          :`<span style="color:rgba(255,255,255,0.22);font-size:11px;">${v}</span>`;
+        const nm=r.name.replace(/'/g,"\\'");
+        return `<tr style="background:${rowBg};border-bottom:1px solid rgba(255,255,255,0.03);cursor:pointer;" onclick="faOpenRep('${nm}')" onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='${rowBg}'">
+          <td style="padding:9px 16px;white-space:nowrap;">
+            <span style="color:${anyF?'#fff':'rgba(255,255,255,0.5)'};font-size:11px;${anyF?'':''}">
+              ${anyF?'<span style="color:#C8005E;margin-right:4px;font-size:10px;">●</span>':'<span style="color:rgba(255,255,255,0.15);margin-right:4px;font-size:10px;">○</span>'}
+              ${r.name}
+            </span>
+            <span style="color:rgba(255,255,255,0.15);font-size:9px;margin-left:5px;">${r.id}</span>
           </td>
-          <td style="padding:7px 8px;text-align:center;border-left:1px solid rgba(248,113,113,0.08);">${f(r.rpd,rF,'#f87171')}</td>
-          <td style="padding:7px 6px;text-align:center;color:rgba(255,255,255,0.2);font-size:10px;">${r.rpdElig}</td>
-          <td style="padding:7px 8px;text-align:center;">${f(r.rpdPct+'%',rF,'#f87171')}</td>
-          <td style="padding:7px 8px;text-align:center;border-left:1px solid rgba(251,146,60,0.08);">${f(r.devMoved,dF,'#fb923c')}</td>
-          <td style="padding:7px 6px;text-align:center;color:rgba(255,255,255,0.2);font-size:10px;">${r.devElig}</td>
-          <td style="padding:7px 8px;text-align:center;">${f(r.devPct!=null?r.devPct+'%':'—',dF,'#fb923c')}</td>
-          <td style="padding:7px 8px;text-align:center;border-left:1px solid rgba(200,0,94,0.12);">${f(r.hri,hF,'#ff6b9d')}</td>
-          <td style="padding:7px 6px;text-align:center;color:rgba(255,255,255,0.2);font-size:10px;">${r.hriElig}</td>
-          <td style="padding:7px 8px;text-align:center;">${f(r.hriPct+'%',hF,'#ff6b9d')}</td>
-          <td style="padding:7px 8px;text-align:center;border-left:1px solid rgba(167,139,250,0.1);">${f(r.accPct!=null?r.accPct+'%':'—',aF,'#a78bfa')}</td>
+          <td style="padding:9px 8px;text-align:center;border-left:1px solid rgba(239,68,68,0.06);">${pill(r.rpd,rF,'#ef4444')}</td>
+          <td style="padding:9px 6px;text-align:center;color:rgba(255,255,255,0.18);font-size:10px;">${r.rpdElig}</td>
+          <td style="padding:9px 8px;text-align:center;">${pill(r.rpdPct+'%',rF,'#ef4444')}</td>
+          <td style="padding:9px 8px;text-align:center;border-left:1px solid rgba(249,115,22,0.06);">${pill(r.devMoved,dF,'#f97316')}</td>
+          <td style="padding:9px 6px;text-align:center;color:rgba(255,255,255,0.18);font-size:10px;">${r.devElig}</td>
+          <td style="padding:9px 8px;text-align:center;">${pill(r.devPct!=null?r.devPct+'%':'—',dF,'#f97316')}</td>
+          <td style="padding:9px 8px;text-align:center;border-left:1px solid rgba(200,0,94,0.06);">${pill(r.hri,hF,'#C8005E')}</td>
+          <td style="padding:9px 6px;text-align:center;color:rgba(255,255,255,0.18);font-size:10px;">${r.hriElig}</td>
+          <td style="padding:9px 8px;text-align:center;">${pill(r.hriPct+'%',hF,'#C8005E')}</td>
+          <td style="padding:9px 8px;text-align:center;border-left:1px solid rgba(139,92,246,0.06);">${pill(r.accPct!=null?r.accPct+'%':'—',aF,'#8b5cf6')}</td>
         </tr>`;
       }).join('');
     })()}
     </tbody>
   </table>
   </div>
-</div></div>`;
+  </div>
+
+</div>`;
 }
 </script>
 function openStoreIntel(storeName){
