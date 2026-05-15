@@ -1759,29 +1759,37 @@ function render(){
               </div>
               <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
 ${(()=>{
-  const _DE=DAYS-DE||1;
-  const _pc=(a,g)=>g>0?Math.round(a/g*100):0;
-  const _c=p=>p>=100?"#059669":p>=85?"#d97706":"#dc2626";
-  const _n=(a,g)=>Math.max(0,Math.ceil(Math.max(0,g-a)/_DE));
-  const tiles=[
-    {lbl:"PPD",mtd:s.mtd,goal:s.monthly,unit:"acts"},
-    {lbl:"VOICE",mtd:s.mtdVoice,goal:s.voiceGoal,unit:"lines"},
-    {lbl:"BTS",mtd:s.mtdBTS,goal:s.btsTgt,unit:"acts"},
-    {lbl:"HSI",mtd:s.mtdHSI,goal:s.hsiTgt,unit:"acts"},
-    {lbl:"MIM",mtd:s.mtdMIM,goal:s.mimTgt,unit:"lines"},
-    {lbl:"ACC/BOX",mtd:null,goal:null,unit:"",accBox:true},
-  ];
-  return tiles.map(t=>{
-    if(t.accBox){
-      const ab=s.accBox||0;
-      const ac=ab>=50?"#059669":ab>=30?"#d97706":"#dc2626";
-      return `<div style="background:#fff;border-top:3px solid ${ac};border-radius:8px;padding:10px 8px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.06);"><div style="font-size:8px;letter-spacing:2px;color:#888;margin-bottom:4px;">ACC/BOX</div><div style="font-size:24px;font-weight:700;color:${ac};">$${Math.round(ab)}</div><div style="font-size:9px;color:#aaa;margin-top:2px;">MTD: $${Math.round(s.mtdAcc||0).toLocaleString()}</div><div style="background:#eee;border-radius:2px;height:3px;margin-top:6px;overflow:hidden;"><div style="width:${Math.min(ab/50*100,100)}%;height:100%;background:${ac};border-radius:2px;"></div></div><div style="font-size:8px;color:#bbb;margin-top:4px;">Target $50+</div></div>`;
-    }
-    const p=_pc(t.mtd,t.goal);
-    const c=_c(p);
-    const n=_n(t.mtd,t.goal);
-    return `<div style="background:#fff;border-top:3px solid ${c};border-radius:8px;padding:10px 8px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.06);"><div style="font-size:8px;letter-spacing:2px;color:#888;margin-bottom:4px;">${t.lbl}</div><div style="font-size:26px;font-weight:700;color:${c};">${p}%</div><div style="font-size:9px;color:#999;margin-top:1px;">${t.mtd} / ${t.goal} ${t.unit}</div><div style="background:#eee;border-radius:2px;height:3px;margin-top:5px;overflow:hidden;"><div style="width:${_w(p)}%;height:100%;background:${c};border-radius:2px;"></div></div><div style="font-size:9px;font-weight:600;color:${c};margin-top:4px;">Need ${n}/day</div></div>`;
-  }).join("");
+  var _de=DAYS-DE||1;
+  var _pc=function(a,g){return g>0?Math.round(a/g*100):0;};
+  var _cl=function(p){return p>=100?"#059669":p>=85?"#d97706":"#dc2626";};
+  var _nd=function(a,g){return Math.max(0,Math.ceil(Math.max(0,g-a)/_de));};
+  var _bw=function(p){return Math.min(p,100);};
+  var _tile=function(nm,a,g,unit){
+    var p=_pc(a,g),c=_cl(p),n=_nd(a,g),w=_bw(p);
+    return '<div style="background:#fff;border-top:3px solid '+c+';border-radius:8px;padding:10px 8px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.06);">'
+      +'<div style="font-size:8px;letter-spacing:2px;color:#888;margin-bottom:3px;">'+nm+'</div>'
+      +'<div style="font-size:26px;font-weight:700;color:'+c+';">'+p+'%</div>'
+      +'<div style="font-size:9px;color:#999;margin-top:1px;">'+a+' / '+g+' '+unit+'</div>'
+      +'<div style="background:#eee;border-radius:2px;height:3px;margin-top:5px;overflow:hidden;"><div style="width:'+w+'%;height:100%;background:'+c+';border-radius:2px;"></div></div>'
+      +'<div style="font-size:9px;font-weight:600;color:'+c+';margin-top:4px;">Need '+n+'/day</div>'
+      +'</div>';
+  };
+  var ab=s.accBox||0;
+  var ac=ab>=50?"#059669":ab>=30?"#d97706":"#dc2626";
+  var abw=Math.min(ab/50*100,100);
+  var accTile='<div style="background:#fff;border-top:3px solid '+ac+';border-radius:8px;padding:10px 8px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.06);">'
+    +'<div style="font-size:8px;letter-spacing:2px;color:#888;margin-bottom:3px;">ACC/BOX</div>'
+    +'<div style="font-size:26px;font-weight:700;color:'+ac+';">$'+Math.round(ab)+'</div>'
+    +'<div style="font-size:9px;color:#999;margin-top:1px;">MTD $'+Math.round(s.mtdAcc||0).toLocaleString()+'</div>'
+    +'<div style="background:#eee;border-radius:2px;height:3px;margin-top:5px;overflow:hidden;"><div style="width:'+abw+'%;height:100%;background:'+ac+';border-radius:2px;"></div></div>'
+    +'<div style="font-size:9px;color:#bbb;margin-top:4px;">Target $50+</div>'
+    +'</div>';
+  return _tile("PPD",s.mtd,s.monthly,"acts")
+    +_tile("VOICE",s.mtdVoice,s.voiceGoal,"lines")
+    +_tile("BTS",s.mtdBTS,s.btsTgt,"acts")
+    +_tile("HSI",s.mtdHSI,s.hsiTgt,"acts")
+    +_tile("MIM",s.mtdMIM,s.mimTgt,"lines")
+    +accTile;
 })()}
 </div>
                     <div style="font-family:'Bebas Neue';font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.4);margin-bottom:2px;">NATL RANK</div>
