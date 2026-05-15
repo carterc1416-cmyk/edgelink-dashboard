@@ -2015,8 +2015,7 @@ function generateMultiWin(sid, storeName){
 
 function toggleWinSelect(){}
 
-function storeTab(sid, tab, btn){
-  // D
+
 function patchGoalsGrid(sid){
   var panel=document.getElementById('spanel_'+sid+'_goals');
   if(!panel)return;
@@ -2057,6 +2056,8 @@ function patchGoalsGrid(sid){
     +'</div>';
   grid.innerHTML=html;
 }
+function storeTab(sid, tab, btn){
+  // D
 eactivate all 3 tab buttons
   ['goals','mtd','share'].forEach(t=>{
     const b = document.getElementById(`stab_${sid}_${t}`);
