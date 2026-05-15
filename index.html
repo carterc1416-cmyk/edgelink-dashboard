@@ -2016,7 +2016,48 @@ function generateMultiWin(sid, storeName){
 function toggleWinSelect(){}
 
 function storeTab(sid, tab, btn){
-  // Deactivate all 3 tab buttons
+  // D
+function patchGoalsGrid(sid){
+  var panel=document.getElementById('spanel_'+sid+'_goals');
+  if(!panel)return;
+  var s=STORES.find(function(x){return x.name.replace(/[\s-]/g,'_')===sid;});
+  if(!s)return;
+  var grid=panel.querySelector('[style*="repeat(3,1fr)"]');
+  if(!grid||grid.getAttribute('data-patched'))return;
+  grid.setAttribute('data-patched','1');
+  var rem=(typeof REM!=='undefined'?REM:17);
+  function pc(a,g){return g>0?Math.round(a/g*100):0;}
+  function cl(p){return p>=100?'#059669':p>=85?'#d97706':'#dc2626';}
+  function nd(a,g){return Math.max(0,Math.ceil(Math.max(0,g-a)/Math.max(rem,1)));}
+  var metrics=[
+    {nm:'PPD',a:s.mtd,g:s.monthly,unit:'acts'},
+    {nm:'VOICE',a:s.mtdVoice,g:s.voiceGoal,unit:'lines'},
+    {nm:'BTS',a:s.mtdBTS,g:s.btsTgt,unit:'acts'},
+    {nm:'HSI',a:s.mtdHSI,g:s.hsiTgt,unit:'acts'},
+    {nm:'MIM',a:s.mtdMIM,g:s.mimTgt,unit:'lines'},
+  ];
+  function makeTile(nm,a,g,unit){
+    var p=pc(a,g),c=cl(p),n=nd(a,g),w=Math.min(p,100);
+    return '<div style="background:#fff;border-top:3px solid '+c+';border-radius:8px;padding:10px 8px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.06);">'
+      +'<div style="font-size:8px;letter-spacing:2px;color:#888;margin-bottom:3px;">'+nm+'</div>'
+      +'<div style="font-size:26px;font-weight:700;color:'+c+';">'+p+'%</div>'
+      +'<div style="font-size:9px;color:#999;margin-top:1px;">'+a+' / '+g+' '+unit+'</div>'
+      +'<div style="background:#eee;border-radius:2px;height:3px;margin-top:5px;overflow:hidden;"><div style="width:'+w+'%;height:100%;background:'+c+';border-radius:2px;"></div></div>'
+      +'<div style="font-size:9px;font-weight:600;color:'+c+';margin-top:4px;">Need '+n+'/day</div>'
+      +'</div>';
+  }
+  var html=metrics.map(function(m){return makeTile(m.nm,m.a,m.g,m.unit);}).join('');
+  var ab=s.accBox||0,ac=ab>=50?'#059669':ab>=30?'#d97706':'#dc2626',abw=Math.min(ab/50*100,100);
+  html+='<div style="background:#fff;border-top:3px solid '+ac+';border-radius:8px;padding:10px 8px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.06);">'
+    +'<div style="font-size:8px;letter-spacing:2px;color:#888;margin-bottom:3px;">ACC/BOX</div>'
+    +'<div style="font-size:26px;font-weight:700;color:'+ac+';">$'+Math.round(ab)+'</div>'
+    +'<div style="font-size:9px;color:#999;margin-top:1px;">MTD $'+Math.round(s.mtdAcc||0).toLocaleString()+'</div>'
+    +'<div style="background:#eee;border-radius:2px;height:3px;margin-top:5px;overflow:hidden;"><div style="width:'+abw+'%;height:100%;background:'+ac+';border-radius:2px;"></div></div>'
+    +'<div style="font-size:9px;color:#bbb;margin-top:4px;">Target $50+</div>'
+    +'</div>';
+  grid.innerHTML=html;
+}
+eactivate all 3 tab buttons
   ['goals','mtd','share'].forEach(t=>{
     const b = document.getElementById(`stab_${sid}_${t}`);
     const p = document.getElementById(`spanel_${sid}_${t}`);
@@ -2027,6 +2068,7 @@ function storeTab(sid, tab, btn){
   if(btn){ btn.style.background='#fff'; btn.style.color='#C8005E'; btn.style.borderBottom='3px solid #C8005E'; }
   const panel = document.getElementById(`spanel_${sid}_${tab}`);
   if(panel) panel.style.display='block';
+  if(tab==='goals') patchGoalsGrid(sid);
 }
 
 function toggleStore(sid){
