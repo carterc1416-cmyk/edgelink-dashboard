@@ -2,7 +2,7 @@ Z<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <title>EDGE LINK — May 2026 Command Center</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>@font-face{font-family:"Bebas Neue";font-display:swap;}</style>
 <style>
@@ -123,7 +123,7 @@ if(window.innerWidth < 768){
     <div style="font-family:'Bebas Neue';font-size:10px;letter-spacing:7px;color:rgba(255,255,255,0.3);">EDGE LINK INC &middot; METRO BY T-MOBILE &middot; MAY 2026</div>
     <div style="display:flex;gap:16px;justify-content:center;margin-top:14px;" id="gm-day-counter">
       <div style="background:rgba(200,0,94,0.15);border:1px solid rgba(200,0,94,0.4);border-radius:12px;padding:10px 22px;text-align:center;">
-        <div style="font-family:'Bebas Neue';font-size:36px;color:#C8005E;line-height:1;" id="gm-day-num">1</div>
+        <div style="font-family:'Bebas Neue';font-size:36px;color:#C8005E;line-height:1;" id="gm-day-num">17</div>
         <div style="font-family:'Bebas Neue';font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.4);">DAY OF MAY</div>
       </div>
       <div style="background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.35);border-radius:12px;padding:10px 22px;text-align:center;">
@@ -1443,7 +1443,7 @@ const STORES = [
 {name:"RI-NEWPORT AVE",monthly:76,flatDaily:2.5,apr13Goal:3,voiceGoal:47,btsTgt:24,hsiTgt:7,mimTgt:5,accTgt:3660,mtd:28,remaining:46,pacePct:37,d11:0,d12:0,v12:0,mtdTablet:7,todayBTS:0,btsPct:13,mtdHint:2,todayHSI:0,hsiPct:29,mtdMIM:2,mtdAcc:2487.3,todayAcc:1,btsAttach:10,accBox:88.83,mtdVoice:15,todayVoice:1,voicePct:40,mtdBoxes:10,mlbRank:2409,featRev:4.54,csat:9.67},
 {name:"MA-EXCHANGE ST",monthly:100,flatDaily:3.2,apr13Goal:4,voiceGoal:72,btsTgt:26,hsiTgt:4,mimTgt:7,accTgt:4620,mtd:50,remaining:58,pacePct:50,d11:2,d12:0,v12:0,mtdTablet:9,todayBTS:1,btsPct:23,mtdHint:4,todayHSI:0,hsiPct:50,mtdMIM:2,mtdAcc:2519.42,todayAcc:2,btsAttach:14,accBox:50.39,mtdVoice:34,todayVoice:1,voicePct:40,mtdBoxes:15,mlbRank:3069}
 ];
-// ── STORE META: coach, coachColor, market ─────────────────────────────────
+ // ── STORE META: coach, coachColor, market ─────────────────────────────────
 // market auto-derived from store name prefix; coach assignments below
 const COACH_COLORS = {
   'Rose Perez':    '#f472b6',
@@ -1497,7 +1497,7 @@ STORES.forEach(s => {
   s.market     = s.name.split('-')[0]; // RI, MA, CT, TN, AR
 });
 
-const DAYS=31,DE=13,DAILY_GOAL=135,TODAY=14,REM=17;
+const DAYS=31,DE=17,DAILY_GOAL=155,TODAY=18,REM=13;
 const MLB_DATE='May 12';
 // ── MAY 2026 WEIGHTED DAILY TARGETS (EdgeLink · sourced from T-Mobile allocation report) ──
 // perf=PerfBonus(totact) · voice=VoiceActs · bts=Tablets · hsi=HomeInternet · mim=MIMLines
