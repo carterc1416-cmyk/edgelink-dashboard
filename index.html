@@ -1557,6 +1557,124 @@ function pC(p){return p>=120?'var(--cyan)':p>=100?'var(--green)':p>=85?'var(--ye
 function pL(p){return p>=120?'🚀 AHEAD':p>=100?'✅ ON PACE':p>=85?'⚠️ CLOSE':'🔴 BEHIND';}
 function pBg(p){return p>=120?'bg-neutral':p>=100?'bg-green':p>=85?'bg-yellow':'bg-red';}
 function metC(p){return p>=100?'#00875a':p>=85?'#FFD600':'#dc2626';}
+let cur72Filter = 'ALL';
+
+function normalizeWinData(d){
+  if(!d) return {voice:0,bts:0,hsi:0,acc:0,mim:0};
+  const sum = v => Array.isArray(v) ? v.reduce((a,b)=>a+b,0) : (v||0);
+  return {
+    voice: sum(d.voice), bts: sum(d.bts), hsi: sum(d.hsi), acc: sum(d.acc), mim: sum(d.mim),
+    _days: Array.isArray(d.voice) ? d.voice : null
+  };
+}
+
+function getZeros(rawD){
+  const nd = normalizeWinData(rawD);
+  const z = [];
+  if(nd.voice===0) z.push('VOICE');
+  if(nd.bts===0)   z.push('TABLETS');
+  if(nd.hsi===0)   z.push('HSI');
+  if(nd.mim===0)   z.push('MAGENTA');
+  if(nd.acc===0)   z.push('ACC');
+  return z;
+}
+
+function set72Filter(coach, btn){
+  cur72Filter = coach;
+  document.querySelectorAll('.fb').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  render72Grid();
+}
+
+function render72(){
+  try {
+    render72Calendar();
+    render72Grid();
+  } catch(e) {
+    console.error('render72 error:', e);
+  }
+}
+
+function switchWin72(id){
+  active72Win = id;
+  render72Calendar();
+  render72Grid();
+}
+
+function render72Calendar(){
+  const today = new Date().getDate();
+  const calEl = document.getElementById('cal-72');
+  if(!calEl) return;
+  const winStatus = w => {
+    const lastDay = w.days[w.days.length-1];
+    const firstDay = w.days[0];
+    if(WINDOW_STORE_DATA[w.id]) return 'complete';
+    if(firstDay <= today && today <= lastDay) return 'active';
+    if(firstDay > today) return 'upcoming';
+    return 'pending';
+  };
+  let html = '<div style="display:flex;flex-wrap:wrap;gap:8px;padding:16px 32px;">';
+  WINDOWS_72.forEach(w => {
+    const status  = winStatus(w);
+    const isActive = w.id === active72Win;
+    const hasData  = !!WINDOW_STORE_DATA[w.id];
+    const bg = isActive ? '#C8005E' : hasData ? '#1a472a' : status==='active' ? '#2d1060' : '#1a1a2e';
+    const border = isActive ? '2px solid #ff69b4' : hasData ? '2px solid #00875a' : status==='active' ? '2px solid #9333ea' : '2px solid #333';
+    const tag = hasData ? '✅' : status==='active' ? '🔴 LIVE' : status==='upcoming' ? '⏳' : '—';
+    html += `<div onclick="switchWin72(${w.id})" style="cursor:pointer;background:${bg};border:${border};border-radius:8px;padding:10px 16px;min-width:100px;text-align:center;">
+      <div style="font-family:'Bebas Neue';font-size:11px;letter-spacing:3px;color:#aaa;">${tag}</div>
+      <div style="font-family:'Bebas Neue';font-size:18px;color:#fff;">${w.label}</div>
+    </div>`;
+  });
+  html += '</div>';
+  calEl.innerHTML = html;
+}
+
+function render72Grid(){
+  const wData   = WINDOW_STORE_DATA[active72Win];
+  const gridEl  = document.getElementById('grid-72');
+  const alertEl = document.getElementById('alert-strip-72');
+  if(!gridEl) return;
+  if(!wData){
+    alertEl.innerHTML = '';
+    gridEl.innerHTML = '<div style="padding:60px;text-align:center;font-family:\'Bebas Neue\';font-size:24px;color:#555;">No data yet for this window</div>';
+    return;
+  }
+  const storeList = STORES.filter(s => cur72Filter === 'ALL' || s.coach === cur72Filter);
+  const metricCell = (label, val, icon, isMoney) => {
+    const isZero = val === 0;
+    const disp = isMoney ? '$' + val.toFixed(2) : val;
+    return `<div style="text-align:center;padding:6px 4px;background:${isZero?'rgba(220,38,38,0.15)':'rgba(255,255,255,0.03)'};border-radius:6px;flex:1;min-width:55px;">
+      <div style="font-size:8px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;">${icon} ${label}</div>
+      <div style="font-family:'Bebas Neue';font-size:${isZero?'20px':'18px'};color:${isZero?'#dc2626':'#fff'};line-height:1;">${isZero?'ZERO':disp}</div>
+    </div>`;
+  };
+  const critStores = [];
+  storeList.forEach(s => { if(getZeros(wData[s.name]||{}).length >= 3) critStores.push(s.name); });
+  alertEl.innerHTML = critStores.length > 0 ? `<div style="background:rgba(220,38,38,0.15);border:1px solid #dc2626;border-radius:8px;padding:12px 20px;margin:0 32px 16px;"><span style="font-family:'Bebas Neue';font-size:14px;color:#dc2626;">🚨 ${critStores.length} store${critStores.length>1?'s':''} zeroed on 3+ metrics — CALL NOW: ${critStores.join(' · ')}</span></div>` : '';
+  let html = '<div style="display:flex;flex-wrap:wrap;gap:12px;padding:0 32px 32px;">';
+  storeList.forEach(s => {
+    const rawD = wData[s.name] || {};
+    const nd   = normalizeWinData(rawD);
+    const zeros = getZeros(rawD);
+    const isCrit = zeros.length >= 3;
+    const bc = isCrit ? '#dc2626' : zeros.length > 0 ? '#f59e0b' : '#1f2937';
+    html += `<div style="background:#0f0f1a;border:2px solid ${bc};border-radius:10px;padding:14px;min-width:190px;flex:1;max-width:250px;">
+      <div style="font-family:'Bebas Neue';font-size:13px;color:#C8005E;letter-spacing:2px;margin-bottom:2px;">${s.name}</div>
+      <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-bottom:8px;">COACH: ${s.coach||'—'}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:3px;">
+        ${metricCell('VOICE',nd.voice,'📱',false)}
+        ${metricCell('TABLETS',nd.bts,'📟',false)}
+        ${metricCell('HSI',nd.hsi,'🏠',false)}
+        ${metricCell('MIM',nd.mim,'💜',false)}
+        ${metricCell('ACC',nd.acc,'💰',true)}
+      </div>
+    </div>`;
+  });
+  html += '</div>';
+  gridEl.innerHTML = html;
+}
+
 function switchTab(id,btn){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
