@@ -1755,7 +1755,7 @@ function render72Grid(){
     const isCrit = zeros.length >= 3;
     const bc = isCrit ? '#dc2626' : zeros.length > 0 ? '#f59e0b' : '#1f2937';
     html += `<div style="background:#0f0f1a;border:2px solid ${bc};border-radius:10px;padding:14px;min-width:190px;flex:1;max-width:250px;">
-      <div style="font-family:'Bebas Neue';font-size:13px;color:#C8005E;letter-spacing:2px;margin-bottom:2px;">${s.name}</div>
+      <div style="font-family:'Bebas Neue';font-size:13px;color:#C8005E;letter-spacing:2px;margin-bottom:2px;cursor:pointer;text-decoration:underline;" onclick="openStoreIntel('${s.name}')">${s.name}</div>
       <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-bottom:8px;">COACH: ${s.coach||'—'}</div>
       <div style="display:flex;flex-wrap:wrap;gap:3px;">
         ${metricCell('VOICE',nd.voice,'📱',false)}
